@@ -10,11 +10,27 @@
 
 .tree-image {
   position: absolute;
-  top: 35%; 
+  top: 7%;
   left: 50%; /* put in center of page */
-  width: 50%; /* scale it down */
-  height: 50%; /* scale it down */
+  width: 60%; /* scale it down */
+  height: 80%; /* scale it down */
   object-fit: cover; /* keep aspect ratio */
   z-index: -1;
   transform: translateX(-50%); /* center horizontally */
+}
+
+.wooden-sign {
+  position: absolute;
+  top: 24%;
+  left: 25%;
+  width: 30%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.add-branch-button {
+  position: absolute;
+  top: 50%;
+  left: 80%;
+  transform: translate(-50%, -50%);
 }
