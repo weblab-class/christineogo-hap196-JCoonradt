@@ -10,11 +10,11 @@
 
 .tree-image {
   position: absolute;
-  top: 35%;
-  left: 50%;
-  width: 50%;
-  height: 50%;
-  object-fit: cover;
+  top: 35%; 
+  left: 50%; /* put in center of page */
+  width: 50%; /* scale it down */
+  height: 50%; /* scale it down */
+  object-fit: cover; /* keep aspect ratio */
   z-index: -1;
   transform: translateX(-50%); /* center horizontally */
 }
