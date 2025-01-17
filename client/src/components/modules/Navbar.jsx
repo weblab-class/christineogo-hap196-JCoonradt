@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
-import "./Navbar.css";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { googleLogout } from "@react-oauth/google";
+import { UserContext } from "../App";
+import "./Navbar.css";
 
 const Navbar = () => {
+  const { userId, handleLogout } = useContext(UserContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
 
@@ -23,7 +26,15 @@ const Navbar = () => {
     };
   }, [isHovering]);
 
+  // close menu function. use when arrow is clicked
   const handleMenuClose = () => {
+    setIsMenuOpen(false);
+  };
+
+  // logout function
+  const handleLogoutClick = () => {
+    googleLogout();
+    handleLogout();
     setIsMenuOpen(false);
   };
 
@@ -41,7 +52,11 @@ const Navbar = () => {
             <div className="menu-links-div">
               <Link to="/my-tree">My Tree</Link>
               <Link to="/forest">Forest</Link>
-              <Link to="/logout">Logout</Link>
+              {userId && (
+                <Link to="/" onClick={handleLogoutClick}>
+                  Logout
+                </Link>
+              )}
               <img src="/chevronWhite.png" alt="Close menu" className="chevron-rotated" />
             </div>
           </div>
