@@ -13,6 +13,7 @@ import fourBranch from "/fourBranch.png";
 import fiveBranch from "/fiveBranch.png";
 import sixBranch from "/sixBranch.png";
 import CustomButton from "../modules/CustomButton";
+import Navbar from "../modules/Navbar";
 
 const branchImages = [noBranch, oneBranch, twoBranch, threeBranch, fourBranch, fiveBranch, sixBranch];
 
@@ -32,6 +33,7 @@ const Home = () => {
 
   return (
     <>
+      <Navbar />
       {userId ? (
         <button
           onClick={() => {

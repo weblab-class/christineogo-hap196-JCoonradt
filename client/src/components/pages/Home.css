@@ -10,7 +10,7 @@
 
 .tree-image {
   position: absolute;
-  top: 7%;
+  top: 8.5%;
   left: 50%; /* put in center of page */
   width: 60%; /* scale it down */
   height: 80%; /* scale it down */
@@ -28,9 +28,9 @@
   transform: translate(-50%, -50%);
 }
 
+/* this is not moving the button for some reason */
 .add-branch-button {
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 80%;
-  transform: translate(-50%, -50%);
 }

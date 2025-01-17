@@ -1,0 +1,78 @@
+.navbar {
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+  cursor: pointer;
+  transition: 0.3s ease-in-out; /* transition to slide menu in */
+  z-index: 1; /* put on top of other elements */
+}
+
+.navbar:hover {
+  /* height: 100vh; on hover, expand to full height */
+  height: 75vh; /* changed from 100vh to a fixed height */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.75));
+}
+
+.menu {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%); /* center the menu */
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-size: var(--xxxl);
+  width: 100%;
+}
+
+.close-button:hover {
+  color: #39ff14;
+}
+
+.menu-header h2 {
+  margin: 0;
+  display: inline-block;
+  width: 100%;
+  margin-top: var(--xxl);
+  margin-bottom: var(--xxxxl);
+}
+
+.menu-links-div {
+  margin-top: var(--xxxxl);
+  display: flex;
+  flex-direction: column; /* stack links vertically */
+  align-items: center;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  margin: 30px 0;
+  padding: 5px;
+}
+
+.menu a:hover {
+  color: #39ff14;
+}
+
+.chevron {
+  height: 24px;
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+  top: 18px; /* center vertically in the 60px navbar */
+  transform: translateX(-50%);
+}
+
+.chevron-rotated {
+  height: 24px;
+  transform: rotate(180deg);
+  cursor: pointer;
+  margin-top: var(--xxxxxl);
+}
+
+.navbar:hover .chevron {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}

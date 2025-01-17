@@ -1,19 +1,19 @@
 .custom-button {
-    background-color: rgba(0, 0, 0, 0.5); /* slightly transparent black */
-    border: none;
-    border-radius: 15px;
-    padding: 10px 20px;
-    display: inline-flex;
-    justify-content: center;
-    cursor: pointer;
-  }
-  
-  .custom-button span {
-    font-family: 'Pixelify Sans', sans-serif;
-    font-size: 32px;
-    color: #00ff00;
-  }
-  
-  .custom-button:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* more opaque black */
-  }
+  background-color: rgba(0, 0, 0, 0.5); /* slightly transparent black */
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  display: inline-flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.custom-button span {
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 32px;
+  color: #00ff00;
+}
+
+.custom-button:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* more opaque black */
+}
