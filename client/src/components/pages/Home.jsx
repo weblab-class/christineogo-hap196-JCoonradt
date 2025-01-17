@@ -1,10 +1,8 @@
 import React, { useContext, useState } from "react";
-import { googleLogout } from "@react-oauth/google";
 
 import "../../utilities.css";
 import "./Home.css";
 import { UserContext } from "../App";
-import background from "/background.png";
 import noBranch from "/noBranch.png";
 import oneBranch from "/oneBranch.png";
 import twoBranch from "/twoBranch.png";
@@ -38,7 +36,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <img className="background-image" src={background} alt="Background" />
+      <img className="background-image" src="/background.png" alt="Background" />
       <img className="tree-image" src={branchImages[currentImageIndex]} alt="Tree with branches" />
       <CustomButton text="Add Branch" onClick={handleAddBranch} className="add-branch-button"/>
     </>

@@ -9,6 +9,7 @@ const Login = () => {
   return (
     <div className="Login-container">
       {/* <Navbar /> */}
+      <img src="/loginBackground.png" alt="Background" className="login-background" />
       <div className="Login-googleButton">
         <GoogleLogin 
           onSuccess={handleLogin} 
