@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   name: String,
   googleid: String,
-  tree: TreeSchema,
+  tree: {
+    type: mongoose.Schema.Types.ObjectId,
+    // reference to the appropriate tree model
+    ref: 'tree'
+  },
   friends: [{
     userId: {
       type: mongoose.Schema.Types.ObjectId,
