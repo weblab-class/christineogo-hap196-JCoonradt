@@ -51,7 +51,7 @@ const Home = () => {
   useEffect(() => {
     const fetchTree = async () => {
       try {
-        const response = await fetch(`/api/tree/${userId}`);
+        const response = await fetch(`/apiHome/tree/${userId}`);
         if (response.ok) {
           const treeData = await response.json();
           // get the number of branches in the tree
@@ -96,7 +96,7 @@ const Home = () => {
 
       if (response.ok) {
         // get the updated tree
-        const treeResponse = await fetch(`/api/tree/${userId}`);
+        const treeResponse = await fetch(`/apiHome/tree/${userId}`);
         if (treeResponse.ok) {
           const treeData = await treeResponse.json();
           const numBranches = treeData.branches.length;
@@ -135,7 +135,7 @@ const Home = () => {
   // click handler for branches
   const handleBranchClick = (branchId) => {
     // navigate to the branch view
-    navigate(`/tree/${userId}/branch/${branchId}`);
+    navigate(`Home/tree/${userId}/branch/${branchId}`);
   };
 
   // if the user is not logged in, show the login page

@@ -50,13 +50,14 @@ const Navbar = () => {
           <div className="menu">
             <h2>MENU</h2>
             <div className="menu-links-div">
-              <Link to="/my-tree">My Tree</Link>
+              <Link to="/">My Tree</Link>
               <Link to="/forest">Forest</Link>
               {userId && (
                 <Link to="/" onClick={handleLogoutClick}>
                   Logout
                 </Link>
               )}
+              
               <img src="/chevronWhite.png" alt="Close menu" className="chevron-rotated" />
             </div>
           </div>

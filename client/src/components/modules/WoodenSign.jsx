@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./WoodenSign.css";
 import CustomButton from "./CustomButton";
 
-const WoodenSign = ({ title, description, onSubmit, onCancel, readOnly, initialEditMode = false }) => {
+const WoodenSign = ({ title, description, onSubmit, onDelete, onCancel, readOnly, initialEditMode = false }) => {
   const [isEditing, setIsEditing] = useState(initialEditMode);
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
@@ -17,6 +17,12 @@ const WoodenSign = ({ title, description, onSubmit, onCancel, readOnly, initialE
     setEditDescription(description);
     setIsEditing(false);
     if (onCancel) onCancel();
+  };
+
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this branch?")) {
+      onDelete();
+    }
   };
 
   return (
@@ -56,7 +62,7 @@ const WoodenSign = ({ title, description, onSubmit, onCancel, readOnly, initialE
           ) : (
             <>
               <CustomButton text="Edit" color="white" onClick={() => setIsEditing(true)} />
-              <CustomButton text="Delete" color="red" onClick={() => {}} />
+              <CustomButton text="Delete" color="red" onClick={handleDelete} />
               <CustomButton text="Add Twig" color="green" onClick={() => {}} />
             </>
           )}

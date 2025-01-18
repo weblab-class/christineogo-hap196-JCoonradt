@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../modules/Navbar";
 import "./Branch.css";
 import CustomButton from "../modules/CustomButton";
@@ -13,6 +13,7 @@ const Branch = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [branchName, setBranchName] = useState("");
   const [branchDescription, setBranchDescription] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBranch = async () => {
@@ -64,6 +65,26 @@ const Branch = () => {
     }
   };
 
+  const handleDeleteBranch = async () => {
+    try {
+      const response = await fetch(`/api/branch/${branchId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        navigate("/");
+      } else {
+        console.error("Failed to delete branch");
+      }
+    } catch (error) {
+      console.error("Failed to delete branch:", error);
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -80,6 +101,7 @@ const Branch = () => {
           title={branchName}
           description={branchDescription}
           onSubmit={handleSubmitBranch}
+          onDelete={handleDeleteBranch}
           onCancel={() => setIsEditMode(false)}
           readOnly={false}
           initialEditMode={isEditMode}

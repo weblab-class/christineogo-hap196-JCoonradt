@@ -72,7 +72,7 @@ router.post("/branch", async (req, res) => {
 });
 
 // get a user's tree
-router.get("/tree/:userId", async (req, res) => {
+router.get("/:userIdHome", async (req, res) => {
   try {
     const user = await User.findById(req.params.userId).populate({
       path: 'tree',
