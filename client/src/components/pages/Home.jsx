@@ -41,6 +41,7 @@ const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showWoodenSign, setShowWoodenSign] = useState(false);
   const [branches, setBranches] = useState([]);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   // states to manage what is displayed in the wooden sign
   const [branchName, setBranchName] = useState("");
@@ -71,6 +72,9 @@ const Home = () => {
   }, [userId]);
 
   const handleAddBranch = () => {
+    setIsEditMode(true);
+    setBranchName("");
+    setBranchDescription("");
     setShowWoodenSign(true);
   };
 
@@ -103,6 +107,7 @@ const Home = () => {
         setShowWoodenSign(false);
         setBranchName("");
         setBranchDescription("");
+        setIsEditMode(false);
       } else {
         const error = await response.json();
         console.error("Failed to save branch:", error);
@@ -114,6 +119,7 @@ const Home = () => {
 
   // handle the hover of a branch
   const handleBranchHover = (branch) => {
+    setIsEditMode(false);
     setBranchName(branch.name);
     setBranchDescription(branch.description);
     setShowWoodenSign(true);
@@ -150,16 +156,20 @@ const Home = () => {
           title={branchName}
           description={branchDescription}
           onSubmit={handleSubmitBranch}
-          onCancel={() => setShowWoodenSign(false)}
-          readOnly={true}
+          onCancel={() => {
+            setShowWoodenSign(false);
+            setIsEditMode(false);
+          }}
+          readOnly={!isEditMode}
+          initialEditMode={isEditMode}
         />
       )}
       <img className="tree-image" src={branchImages[currentImageIndex]} alt="Tree with branches" />
       {branchHitboxes.slice(0, currentImageIndex).map((hitbox, index) => (
         <div
           key={index}
-          className="branch-hitbox"
-          style={{ top: hitbox.top, left: hitbox.left }}
+          // when we're editing, we don't want to be able to click on the hitboxes so disable pointer events until we click submit
+          className={`branch-hitbox branch-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
           onMouseEnter={() => branches[index] && handleBranchHover(branches[index])}
           onMouseLeave={handleBranchHoverEnd}
           onClick={() => branches[index] && handleBranchClick(branches[index]._id)}

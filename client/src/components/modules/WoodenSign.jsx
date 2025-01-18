@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./WoodenSign.css";
 import CustomButton from "./CustomButton";
 
-const WoodenSign = ({ title, description, onSubmit, onCancel, readOnly }) => {
-  const [isEditing, setIsEditing] = useState(false);
+const WoodenSign = ({ title, description, onSubmit, onCancel, readOnly, initialEditMode = false }) => {
+  const [isEditing, setIsEditing] = useState(initialEditMode);
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
 

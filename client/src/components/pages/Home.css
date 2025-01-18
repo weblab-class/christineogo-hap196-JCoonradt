@@ -42,15 +42,28 @@
   border-radius: 50%;
   z-index: 1;
   display: flex;
-  justify-content: center; /* center vertically */
-  align-items: center; /* center horizontally */
+  justify-content: center;
+  align-items: center;
   color: white;
   text-align: center;
   font-size: var(--l);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   transition: color 0.3s ease;
   cursor: pointer;
+  pointer-events: auto; /* allow pointer events */
 }
+
+.branch-hitbox.edit-mode {
+  pointer-events: none; /* disable pointer events when editing the wooden sign */
+}
+
+/* classes for each branch hitbox position */
+.branch-hitbox-0 { top: 500px; left: 400px; }
+.branch-hitbox-1 { top: 610px; left: 1100px; }
+.branch-hitbox-2 { top: 250px; left: 350px; }
+.branch-hitbox-3 { top: 400px; left: 1150px; }
+.branch-hitbox-4 { top: 40px; left: 400px; }
+.branch-hitbox-5 { top: 50px; left: 1100px; }
 
 .branch-hitbox:hover {
   color: #39ff14;

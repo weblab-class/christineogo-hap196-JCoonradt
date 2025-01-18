@@ -67,6 +67,8 @@
   font-family: "Pixelify Sans", sans-serif;
   width: 100%;
   padding: 8px;
+  position: relative;
+  top: 30px;
 }
 
 .wooden-sign-content input.wooden-sign-title {
@@ -84,4 +86,8 @@
 .wooden-sign-content input.wooden-sign-title::placeholder,
 .wooden-sign-content textarea.wooden-sign-description::placeholder {
   color: rgba(255, 255, 255, 0.6);
+}
+
+.wooden-sign-content input.wooden-sign-title::placeholder {
+  font-size: var(--xl);
 }
