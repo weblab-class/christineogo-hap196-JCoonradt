@@ -88,6 +88,14 @@ const Branch = () => {
   return (
     <div>
       <Navbar />
+      <div className="back-to-tree" onClick={() => navigate("/")}>
+        <img 
+          src="/chevronGrey.png" 
+          alt="Back" 
+          className="back-chevron"
+        />
+        <span className="back-text">Back to Tree</span>
+      </div>
       <img
         src="/branchBackground.png"
         alt="Branch Background"

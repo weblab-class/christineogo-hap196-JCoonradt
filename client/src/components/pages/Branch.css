@@ -24,3 +24,29 @@
   top: 10%;
   left: 80%;
 }
+
+.back-to-tree {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.back-chevron {
+  width: var(--xxl);
+  transform: rotate(270deg);
+  margin-right: 8px;
+}
+
+.back-text {
+  color: rgb(81, 81, 81);
+  font-size: var(--xl);
+  /* transition: color 0.1s ease; */
+}
+
+.back-to-tree:hover .back-text {
+  color: #39ff14;
+}
