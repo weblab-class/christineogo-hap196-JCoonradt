@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "../../utilities.css";
 import "./Home.css";
@@ -24,10 +25,24 @@ const branchImages = [
   sixBranch,
 ];
 
+// when i hover over a branch, hitboxes will detect the hover and display the wooden sign
+const branchHitboxes = [
+  { top: "500px", left: "400px" },
+  { top: "610px", left: "1100px" },
+  { top: "250px", left: "350px" },
+  { top: "400px", left: "1150px" },
+  { top: "40px", left: "400px" },
+  { top: "50px", left: "1100px" },
+];
+
 const Home = () => {
   const { userId } = useContext(UserContext);
+  const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showWoodenSign, setShowWoodenSign] = useState(false);
+  const [branches, setBranches] = useState([]);
+
+  // states to manage what is displayed in the wooden sign
   const [branchName, setBranchName] = useState("");
   const [branchDescription, setBranchDescription] = useState("");
 
@@ -41,6 +56,7 @@ const Home = () => {
           // get the number of branches in the tree
           const numBranches = treeData.branches.length;
           setCurrentImageIndex(Math.min(numBranches, 6));
+          setBranches(treeData.branches);
         } else {
           console.error("Failed to fetch tree data");
         }
@@ -96,10 +112,32 @@ const Home = () => {
     }
   };
 
+  // handle the hover of a branch
+  const handleBranchHover = (branch) => {
+    setBranchName(branch.name);
+    setBranchDescription(branch.description);
+    setShowWoodenSign(true);
+  };
+
+  // handle when we stop hovering over a branch
+  const handleBranchHoverEnd = () => {
+    setShowWoodenSign(false);
+    setBranchName("");
+    setBranchDescription("");
+  };
+
+  // click handler for branches
+  const handleBranchClick = (branchId) => {
+    // navigate to the branch view
+    navigate(`/${userId}/tree/branch/${branchId}`);
+  };
+
+  // if the user is not logged in, show the login page
   if (!userId) {
     return <Login />;
   }
 
+  // if the user is logged in, show the home page
   return (
     <div>
       <Navbar />
@@ -113,9 +151,22 @@ const Home = () => {
           description={branchDescription}
           onSubmit={handleSubmitBranch}
           onCancel={() => setShowWoodenSign(false)}
+          readOnly={true}
         />
       )}
       <img className="tree-image" src={branchImages[currentImageIndex]} alt="Tree with branches" />
+      {branchHitboxes.slice(0, currentImageIndex).map((hitbox, index) => (
+        <div
+          key={index}
+          className="branch-hitbox"
+          style={{ top: hitbox.top, left: hitbox.left }}
+          onMouseEnter={() => branches[index] && handleBranchHover(branches[index])}
+          onMouseLeave={handleBranchHoverEnd}
+          onClick={() => branches[index] && handleBranchClick(branches[index]._id)}
+        >
+          {branches[index]?.name}
+        </div>
+      ))}
     </div>
   );
 };

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./WoodenSign.css";
 import CustomButton from "./CustomButton";
 
-const WoodenSign = ({ title, description, onSubmit, onCancel }) => {
-  const [isEditing, setIsEditing] = useState(true);
+const WoodenSign = ({ title, description, onSubmit, onCancel, readOnly }) => {
+  const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
 
@@ -46,20 +46,22 @@ const WoodenSign = ({ title, description, onSubmit, onCancel }) => {
           </>
         )}
       </div>
-      <div className="wooden-sign-buttons">
-        {isEditing ? (
-          <>
-            <CustomButton text="Submit" color="green" onClick={handleSubmit} />
-            <CustomButton text="Cancel" color="red" onClick={handleCancel} />
-          </>
-        ) : (
-          <>
-            <CustomButton text="Edit" color="white" onClick={() => setIsEditing(true)} />
-            <CustomButton text="Delete" color="red" onClick={() => {}} />
-            <CustomButton text="Add Twig" color="green" onClick={() => {}} />
-          </>
-        )}
-      </div>
+      {!readOnly && (
+        <div className="wooden-sign-buttons">
+          {isEditing ? (
+            <>
+              <CustomButton text="Submit" color="green" onClick={handleSubmit} />
+              <CustomButton text="Cancel" color="red" onClick={handleCancel} />
+            </>
+          ) : (
+            <>
+              <CustomButton text="Edit" color="white" onClick={() => setIsEditing(true)} />
+              <CustomButton text="Delete" color="red" onClick={() => {}} />
+              <CustomButton text="Add Twig" color="green" onClick={() => {}} />
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 };

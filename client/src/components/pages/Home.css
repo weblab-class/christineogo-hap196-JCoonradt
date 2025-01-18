@@ -33,3 +33,25 @@
   top: 10%;
   left: 80%;
 }
+
+.branch-hitbox {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  /* background-color: rgba(255, 0, 0, 0.5); */
+  border-radius: 50%;
+  z-index: 1;
+  display: flex;
+  justify-content: center; /* center vertically */
+  align-items: center; /* center horizontally */
+  color: white;
+  text-align: center;
+  font-size: var(--l);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.branch-hitbox:hover {
+  color: #39ff14;
+}

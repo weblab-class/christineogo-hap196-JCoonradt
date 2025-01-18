@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./components/App";
 import Home from "./components/pages/Home";
 import NotFound from "./components/pages/NotFound";
-
+import Branch from "./components/pages/Branch";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -18,7 +18,9 @@ const GOOGLE_CLIENT_ID = "1008460415148-6o42i6sdbcrpjn2skdf308i73hp57tmu.apps.go
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<NotFound />} element={<App />}>
-      <Route path="/" element={<Home />}/>
+      <Route path="/" element={<Home />} />
+      <Route path="/:userId/tree" element={<Home />} />
+      <Route path="/:userId/tree/branch/:branchId" element={<Branch />} />
     </Route>
   )
 )
