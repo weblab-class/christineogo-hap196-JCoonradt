@@ -3,7 +3,7 @@ import "./WoodenSign.css";
 import CustomButton from "./CustomButton";
 
 const WoodenSign = ({ title, description, onSubmit, onCancel }) => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(true);
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
 

@@ -71,6 +71,27 @@ router.post("/branch", async (req, res) => {
   }
 });
 
+// get a user's tree
+router.get("/tree/:userId", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId).populate({
+      path: 'tree',
+      populate: {
+        path: 'branches',
+        model: 'branch'
+      }
+    });
+    
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
+    }
+    
+    res.send(user.tree);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

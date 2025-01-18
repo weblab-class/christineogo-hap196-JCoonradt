@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import "../../utilities.css";
 import "./Home.css";
@@ -31,13 +31,37 @@ const Home = () => {
   const [branchName, setBranchName] = useState("");
   const [branchDescription, setBranchDescription] = useState("");
 
+  // hook to get the user's tree. use this to update the tree image with correct number of branches
+  useEffect(() => {
+    const fetchTree = async () => {
+      try {
+        const response = await fetch(`/api/tree/${userId}`);
+        if (response.ok) {
+          const treeData = await response.json();
+          // get the number of branches in the tree
+          const numBranches = treeData.branches.length;
+          setCurrentImageIndex(Math.min(numBranches, 6));
+        } else {
+          console.error("Failed to fetch tree data");
+        }
+      } catch (error) {
+        console.error("Failed to fetch tree data:", error);
+      }
+    };
+
+    if (userId) {
+      fetchTree();
+    }
+  }, [userId]);
+
   const handleAddBranch = () => {
     setShowWoodenSign(true);
   };
 
+  // handle the submit of a new branch
   const handleSubmitBranch = async (title, description) => {
     try {
-      // send post request to create new branch
+      // make a post request to the server to add a new branch
       const response = await fetch("/api/branch", {
         method: "POST",
         headers: {
@@ -51,24 +75,23 @@ const Home = () => {
       });
 
       if (response.ok) {
-        // increment tree image if not at max branches
-        setCurrentImageIndex((prevIndex) => {
-          if (prevIndex < branchImages.length - 1) {
-            return prevIndex + 1;
-          }
-          return prevIndex;
-        });
-        // reset form and hide wooden sign
+        // get the updated tree
+        const treeResponse = await fetch(`/api/tree/${userId}`);
+        if (treeResponse.ok) {
+          const treeData = await treeResponse.json();
+          const numBranches = treeData.branches.length;
+          // update the tree image with the correct number of branches
+          setCurrentImageIndex(Math.min(numBranches, 6));
+        }
+
         setShowWoodenSign(false);
         setBranchName("");
         setBranchDescription("");
       } else {
-        // handle error response
         const error = await response.json();
         console.error("Failed to save branch:", error);
       }
     } catch (error) {
-      // handle network/other errors
       console.error("Failed to save branch:", error);
     }
   };
