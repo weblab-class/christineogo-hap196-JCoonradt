@@ -41,7 +41,7 @@ router.post("/initsocket", (req, res) => {
 });
 
 // |------------------------------|
-// | write your API methods below!|
+// | Tree API Methods!|
 // |------------------------------|
 
 // create a new branch
@@ -87,6 +87,46 @@ router.get("/tree/:userId", async (req, res) => {
     }
     
     res.send(user.tree);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
+// get a single branch by id
+router.get("/branch/:branchId", async (req, res) => {
+  try {
+    const branch = await Branch.findById(req.params.branchId);
+    if (!branch) {
+      return res.status(404).send({ error: "Branch not found" });
+    }
+    res.send(branch);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
+// update a branch
+router.put("/branch/:branchId", async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send({ error: "Error: You must be logged in" });
+  }
+  try {
+    const branch = await Branch.findById(req.params.branchId);
+    
+    if (!branch) {
+      return res.status(404).send({ error: "Branch not found" });
+    }
+    
+    // // check if the user is the creator of the branch
+    // do later because we don't have a creator_id field yet **
+
+    branch.name = req.body.name;
+    branch.description = req.body.description;
+    await branch.save();
+    
+    res.send(branch);
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: `Error: ${err}` });

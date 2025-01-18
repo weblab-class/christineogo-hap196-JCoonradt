@@ -1,0 +1,26 @@
+.branch-background-image {
+  position: absolute; /* make background cover whole page */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* keep aspect ratio */
+  z-index: -1; /* put behind other content */
+}
+
+.branch-image {
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.add-twig-container {
+  position: absolute;
+  position: absolute;
+  top: 10%;
+  left: 80%;
+}
