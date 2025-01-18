@@ -1,6 +1,7 @@
 const { OAuth2Client } = require("google-auth-library");
 const User = require("./models/user");
 const socketManager = require("./server-socket");
+const Tree = require("./models/tree");
 
 // create a new OAuth client used to verify google sign-in
 const CLIENT_ID = "1008460415148-6o42i6sdbcrpjn2skdf308i73hp57tmu.apps.googleusercontent.com";
@@ -22,12 +23,25 @@ function getOrCreateUser(user) {
   return User.findOne({ googleid: user.sub }).then((existingUser) => {
     if (existingUser) return existingUser;
 
-    const newUser = new User({
-      name: user.name,
-      googleid: user.sub,
+    // create a new tree with no branches
+    const newTree = new Tree({
+      name: `${user.name}'s Tree`,
+      // initialize with empty branches array
+      branches: [],
     });
 
-    return newUser.save();
+    // save the tree to the database and create new user with reference to it
+    return newTree.save().then((tree) => {
+      const newUser = new User({
+        name: user.name,
+        googleid: user.sub,
+        // stores reference to the saved tree's ID
+        tree: tree._id,
+        friends: [],
+      });
+
+      return newUser.save();
+    });
   });
 }
 

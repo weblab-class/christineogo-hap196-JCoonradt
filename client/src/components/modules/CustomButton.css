@@ -3,15 +3,26 @@
   border: none;
   border-radius: 15px;
   padding: 10px 20px;
-  display: inline-flex;
   justify-content: center;
   cursor: pointer;
 }
 
-.custom-button span {
-  font-family: "Pixelify Sans", sans-serif;
-  font-size: 32px;
+.text-green {
   color: #00ff00;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: var(--xl);
+}
+
+.text-red {
+  color: #ff0000;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: var(--xl);
+}
+
+.text-white {
+  color: #ffffff;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: var(--xl);
 }
 
 .custom-button:hover {

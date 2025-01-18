@@ -1,10 +1,10 @@
-import React from 'react';
-import './CustomButton.css';
+import React from "react";
+import "./CustomButton.css";
 
-const CustomButton = ({ text, onClick }) => {
+const CustomButton = ({ text, onClick, color = "green" }) => {
   return (
     <button className="custom-button" onClick={onClick}>
-      <span>{text}</span>
+      <span className={`text-${color}`}>{text}</span>
     </button>
   );
 };

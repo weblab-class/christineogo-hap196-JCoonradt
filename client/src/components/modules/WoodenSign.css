@@ -1,0 +1,87 @@
+.wooden-sign-container {
+  position: absolute;
+  top: 0%;
+  left: 1%;
+  width: 400px;
+}
+
+.wooden-sign-image {
+  width: 100%;
+  height: auto;
+}
+
+.wooden-sign-content {
+  position: absolute;
+  top: 50%;
+  left: 48%; /* center the content */
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 80%; /* reduced from 100% to prevent text overflow */
+  word-wrap: break-word; /* allow text to wrap */
+  overflow-wrap: break-word;
+}
+
+.wooden-sign-title {
+  color: white;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: var(--xxl);
+  margin-bottom: var(--xs);
+  max-width: 100%; /* prevent title from overflowing */
+  overflow: hidden;
+  text-overflow: ellipsis; /* add ellipsis for overflowing text */
+}
+
+.wooden-sign-description {
+  color: white;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: var(--m);
+  margin-bottom: var(--m);
+  max-width: 100%; /* ensure description doesn't overflow */
+  white-space: pre-wrap; /* preserve line breaks while wrapping */
+}
+
+.wooden-sign-buttons {
+  position: absolute;
+  bottom: 15px;
+  left: 49%; /* center the buttons */
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row; /* put in a row */
+  gap: var(--xs);
+  justify-content: center;
+  width: 90%; /* reduced from 100% to prevent button overflow */
+  flex-wrap: wrap; /* allow buttons to wrap if needed */
+}
+
+/* override CustomButton styles for smaller font size */
+.wooden-sign-buttons .custom-button span {
+  font-size: var(--l);
+}
+
+.wooden-sign-content input.wooden-sign-title,
+.wooden-sign-content textarea.wooden-sign-description {
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  color: white;
+  font-family: "Pixelify Sans", sans-serif;
+  width: 100%;
+  padding: 8px;
+}
+
+.wooden-sign-content input.wooden-sign-title {
+  font-size: var(--xxl);
+  margin-bottom: var(--xs);
+}
+
+.wooden-sign-content textarea.wooden-sign-description {
+  font-size: var(--m);
+  min-height: 80px;
+  resize: vertical;
+  margin-bottom: var(--m);
+}
+
+.wooden-sign-content input.wooden-sign-title::placeholder,
+.wooden-sign-content textarea.wooden-sign-description::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}

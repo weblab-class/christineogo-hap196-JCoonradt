@@ -28,9 +28,8 @@
   transform: translate(-50%, -50%);
 }
 
-/* this is not moving the button for some reason */
-.add-branch-button {
+.add-branch-container {
   position: absolute;
-  top: 70%;
+  top: 10%;
   left: 80%;
 }
