@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./components/App";
 import Home from "./components/pages/Home";
 import NotFound from "./components/pages/NotFound";
-import Branch from "./components/pages/Branch";
+import BranchOne from "./components/pages/BranchOne";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -20,7 +20,7 @@ const router = createBrowserRouter(
     <Route errorElement={<NotFound />} element={<App />}>
       <Route path="/" element={<Home />} />
       <Route path="/tree/:userId" element={<Home />} />
-      <Route path="/tree/:userId/branch/:branchId" element={<Branch />} />
+      <Route path="/tree/:userId/branch/:branchId" element={<BranchOne />} />
     </Route>
   )
 )

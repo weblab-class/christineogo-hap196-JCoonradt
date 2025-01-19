@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./WoodenSign.css";
 import CustomButton from "./CustomButton";
 
-const WoodenSign = ({ title, description, onSubmit, onDelete, onCancel, readOnly, initialEditMode = false }) => {
+const WoodenSign = ({ title, description, onSubmit, onDelete, onCancel, onAddTwig, readOnly, initialEditMode = false }) => {
   const [isEditing, setIsEditing] = useState(initialEditMode);
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
@@ -63,7 +63,11 @@ const WoodenSign = ({ title, description, onSubmit, onDelete, onCancel, readOnly
             <>
               <CustomButton text="Edit" color="white" onClick={() => setIsEditing(true)} />
               <CustomButton text="Delete" color="red" onClick={handleDelete} />
-              <CustomButton text="Add Twig" color="green" onClick={() => {}} />
+              <CustomButton 
+                text="Add Twig" 
+                color="green" 
+                onClick={onAddTwig}
+              />
             </>
           )}
         </div>

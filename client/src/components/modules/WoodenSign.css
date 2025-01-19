@@ -3,6 +3,7 @@
   top: 0%;
   left: 1%;
   width: 400px;
+  z-index: 2;
 }
 
 .wooden-sign-image {

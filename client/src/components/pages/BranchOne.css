@@ -1,3 +1,10 @@
+html, body {
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .branch-background-image {
   position: absolute; /* make background cover whole page */
   top: 0;
@@ -10,11 +17,11 @@
 
 .branch-image {
   position: absolute;
-  top: 10%;
-  left: 30%;
-  width: 100%;
+  top: 8%;
+  right: -5%;
+  width: 55%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   z-index: -1;
 }
 
@@ -27,8 +34,8 @@
 
 .back-to-tree {
   position: absolute;
-  bottom: 50px;
-  right: 50px;
+  right: 130px;
+  bottom: 80px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -42,11 +49,18 @@
 }
 
 .back-text {
-  color: rgb(81, 81, 81);
+  color: rgb(71, 68, 68);
   font-size: var(--xl);
   /* transition: color 0.1s ease; */
 }
 
 .back-to-tree:hover .back-text {
   color: #39ff14;
+}
+
+.wooden-sign-container {
+  position: absolute;
+  right: 10px;
+  top:0%;
+  z-index: 2;
 }
