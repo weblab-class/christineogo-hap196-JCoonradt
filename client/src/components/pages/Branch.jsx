@@ -1,13 +1,16 @@
 import { React, useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../modules/Navbar";
-import "./BranchOne.css";
+import "./Branch.css";
 import WoodenSign from "../modules/WoodenSign";
 
 // component for displaying a single branch and its twigs
-const BranchOne = () => {
-
+// goal is to have a branch component that can be used for both left and right side branches
+const Branch = () => {
   const { branchId } = useParams();
+  const location = useLocation();
+  // default to 1 if not specified
+  const branchType = location.state?.branchType || 1;
   const [branch, setBranch] = useState(null);
   const [showWoodenSign, setShowWoodenSign] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -15,13 +18,25 @@ const BranchOne = () => {
   const [branchDescription, setBranchDescription] = useState("");
   const navigate = useNavigate();
   const [currentTwigIndex, setCurrentTwigIndex] = useState(0);
-  // images showing different numbers of twigs on the branch
-  const twigImages = [
-    "/branchOne/branchOneNoTwigs.png",
-    "/branchOne/branchOneTwigOne.png",
-    "/branchOne/branchOneTwigTwo.png",
-    "/branchOne/branchOneTwigThree.png"
-  ];
+
+  // image sets for different branch types
+  const branchImageSets = {
+    1: [
+      "/branchOne/branchOneNoTwigs.png",
+      "/branchOne/branchOneTwigOne.png",
+      "/branchOne/branchOneTwigTwo.png",
+      "/branchOne/branchOneTwigThree.png",
+    ],
+    2: [
+      "/branchTwo/branchTwoNoTwigs.png",
+      "/branchTwo/branchTwoTwigOne.png",
+      "/branchTwo/branchTwoTwigTwo.png",
+      "/branchTwo/branchTwoTwigThree.png",
+    ],
+  };
+
+  // get the correct image set based on branch type
+  const twigImages = branchImageSets[branchType || 1];
   const [isTwigMode, setIsTwigMode] = useState(false);
   const [twigs, setTwigs] = useState([]);
   const [twigName, setTwigName] = useState("");
@@ -153,49 +168,41 @@ const BranchOne = () => {
     }
   };
 
-// render component
-return (
-  <div>
-    <Navbar />
-    {/* back button to return to tree view */}
-    <div className="back-to-tree" onClick={() => navigate("/")}>
-      <img 
-        src="/chevronGrey.png" 
-        alt="Back" 
-        className="back-chevron"
-      />
-      <span className="back-text">Back to Tree</span>
-    </div>
-    {/* background image */}
-    <img
-      src="/branchBackground.png"
-      alt="Branch Background"
-      className="branch-background-image"
-    />
-    {/* wooden sign for displaying/editing branch or twig info */}
-    {showWoodenSign && (
-      <div className="wooden-sign-container">
-        <WoodenSign
-          title={isTwigMode ? twigName : branchName}
-          description={isTwigMode ? twigDescription : branchDescription}
-          onSubmit={handleSubmitBranch}
-          onDelete={handleDeleteBranch}
-          onCancel={handleCancel}
-          onAddTwig={handleAddTwig}
-          readOnly={false}
-          initialEditMode={isEditMode}
-          mode={isTwigMode ? "twig" : "branch"}
-        />
+  // render component
+  return (
+    <div className={`branch-type-${branchType}`}>
+      <Navbar />
+      {/* back button to return to tree view */}
+      <div className="back-to-tree" onClick={() => navigate("/")}>
+        <img src="/chevronGrey.png" alt="Back" className="back-chevron" />
+        <span className="back-text">Back to Tree</span>
       </div>
-    )}
-    {/* branch image showing current number of twigs */}
-    <img 
-      className="branch-image" 
-      src={twigImages[currentTwigIndex]} 
-      alt="Branch" 
-    />
-  </div>
-);
+      {/* background image */}
+      <img
+        src="/branchBackground.png"
+        alt="Branch Background"
+        className="branch-background-image"
+      />
+      {/* wooden sign for displaying/editing branch or twig info */}
+      {showWoodenSign && (
+        <div className="wooden-sign-container">
+          <WoodenSign
+            title={isTwigMode ? twigName : branchName}
+            description={isTwigMode ? twigDescription : branchDescription}
+            onSubmit={handleSubmitBranch}
+            onDelete={handleDeleteBranch}
+            onCancel={handleCancel}
+            onAddTwig={handleAddTwig}
+            readOnly={false}
+            initialEditMode={isEditMode}
+            mode={isTwigMode ? "twig" : "branch"}
+          />
+        </div>
+      )}
+      {/* branch image showing current number of twigs */}
+      <img className="branch-image" src={twigImages[currentTwigIndex]} alt="Branch" />
+    </div>
+  );
 };
 
-export default BranchOne;
+export default Branch;

@@ -15,7 +15,8 @@ html, body {
   z-index: -1; /* put behind other content */
 }
 
-.branch-image {
+/* branch one styles */
+.branch-type-1 .branch-image {
   position: absolute;
   top: 8%;
   right: -5%;
@@ -25,8 +26,32 @@ html, body {
   z-index: -1;
 }
 
-.add-twig-container {
+.branch-type-1 .wooden-sign-container {
   position: absolute;
+  left: 10px;
+  top: 0%;
+  z-index: 2;
+}
+
+/* branch two styles */
+.branch-type-2 .branch-image {
+  position: absolute;
+  top: 8%;
+  left: -5%;
+  width: 55%;
+  height: 100%;
+  object-fit: contain;
+  z-index: -1;
+}
+
+.branch-type-2 .wooden-sign-container {
+  position: absolute;
+  right: 10px;
+  top: 0%;
+  z-index: 2;
+}
+
+.add-twig-container {
   position: absolute;
   top: 10%;
   left: 80%;
@@ -48,6 +73,7 @@ html, body {
   margin-right: 8px;
 }
 
+/* back to tree text for left side branches */
 .back-text {
   color: rgb(71, 68, 68);
   font-size: var(--xl);
@@ -58,9 +84,19 @@ html, body {
   color: #39ff14;
 }
 
-.wooden-sign-container {
-  position: absolute;
-  right: 10px;
-  top:0%;
-  z-index: 2;
+/* back to tree text for right side branches */
+.branch-type-2 .back-to-tree {
+  left: 130px;
+  right: auto;
+  bottom: 80px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.branch-type-2 .back-chevron {
+  width: var(--xxl);
+  transform: rotate(90deg);
+  margin-right: 8px;
 }

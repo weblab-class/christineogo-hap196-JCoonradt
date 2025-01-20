@@ -3,27 +3,29 @@ import ReactDOM from "react-dom/client";
 import App from "./components/App";
 import Home from "./components/pages/Home";
 import NotFound from "./components/pages/NotFound";
-import BranchOne from "./components/pages/BranchOne";
+import Branch from "./components/pages/Branch";
+
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider
-} from 'react-router-dom'
+  RouterProvider,
+} from "react-router-dom";
 
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
-const GOOGLE_CLIENT_ID = "1008460415148-6o42i6sdbcrpjn2skdf308i73hp57tmu.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID =
+  "1008460415148-6o42i6sdbcrpjn2skdf308i73hp57tmu.apps.googleusercontent.com";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<NotFound />} element={<App />}>
       <Route path="/" element={<Home />} />
       <Route path="/tree/:userId" element={<Home />} />
-      <Route path="/tree/:userId/branch/:branchId" element={<BranchOne />} />
+      <Route path="/tree/:userId/branch/:branchId" element={<Branch />} />
     </Route>
   )
-)
+);
 
 // renders React Component "Root" into the DOM element with ID "root"
 ReactDOM.createRoot(document.getElementById("root")).render(

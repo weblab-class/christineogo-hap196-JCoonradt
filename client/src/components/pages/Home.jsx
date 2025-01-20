@@ -133,9 +133,9 @@ const Home = () => {
   };
 
   // click handler for branches
-  const handleBranchClick = (branchId) => {
+  const handleBranchClick = (branchId, index) => {
     // navigate to the branch view
-    navigate(`/tree/${userId}/branch/${branchId}`);
+    navigate(`/tree/${userId}/branch/${branchId}`, { state: { branchType: index + 1 } });
   };
 
   // if the user is not logged in, show the login page
@@ -151,28 +151,30 @@ const Home = () => {
       <div className="add-branch-container">
         <CustomButton text="Add Branch" onClick={handleAddBranch} />
       </div>
-      {showWoodenSign && (
-        <WoodenSign
-          title={branchName}
-          description={branchDescription}
-          onSubmit={handleSubmitBranch}
-          onCancel={() => {
-            setShowWoodenSign(false);
-            setIsEditMode(false);
-          }}
-          readOnly={!isEditMode}
-          initialEditMode={isEditMode}
-        />
-      )}
+      <div className="wooden-sign-container-home">
+        {showWoodenSign && (
+          <WoodenSign
+            title={branchName}
+            description={branchDescription}
+            onSubmit={handleSubmitBranch}
+            onCancel={() => {
+              setShowWoodenSign(false);
+              setIsEditMode(false);
+            }}
+            readOnly={!isEditMode}
+            initialEditMode={isEditMode}
+          />
+        )}
+      </div>
+
       <img className="tree-image" src={branchImages[currentImageIndex]} alt="Tree with branches" />
       {branchHitboxes.slice(0, currentImageIndex).map((hitbox, index) => (
         <div
           key={index}
-          // when we're editing, we don't want to be able to click on the hitboxes so disable pointer events until we click submit
           className={`branch-hitbox branch-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
           onMouseEnter={() => branches[index] && handleBranchHover(branches[index])}
           onMouseLeave={handleBranchHoverEnd}
-          onClick={() => branches[index] && handleBranchClick(branches[index]._id)}
+          onClick={() => branches[index] && handleBranchClick(branches[index]._id, index)}
         >
           {branches[index]?.name}
         </div>

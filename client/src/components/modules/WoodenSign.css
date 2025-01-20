@@ -1,7 +1,7 @@
 .wooden-sign-container {
   position: absolute;
   top: 0%;
-  left: 1%;
+  /* left: 1%; */
   width: 400px;
   z-index: 2;
 }
