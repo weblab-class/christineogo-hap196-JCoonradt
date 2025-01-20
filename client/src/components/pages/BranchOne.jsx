@@ -2,9 +2,9 @@ import { React, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../modules/Navbar";
 import "./BranchOne.css";
-import CustomButton from "../modules/CustomButton";
 import WoodenSign from "../modules/WoodenSign";
 
+// component for displaying a single branch and its twigs
 const BranchOne = () => {
 
   const { branchId } = useParams();
@@ -15,27 +15,33 @@ const BranchOne = () => {
   const [branchDescription, setBranchDescription] = useState("");
   const navigate = useNavigate();
   const [currentTwigIndex, setCurrentTwigIndex] = useState(0);
+  // images showing different numbers of twigs on the branch
   const twigImages = [
     "/branchOne/branchOneNoTwigs.png",
     "/branchOne/branchOneTwigOne.png",
     "/branchOne/branchOneTwigTwo.png",
     "/branchOne/branchOneTwigThree.png"
   ];
+  const [isTwigMode, setIsTwigMode] = useState(false);
   const [twigs, setTwigs] = useState([]);
+  const [twigName, setTwigName] = useState("");
+  const [twigDescription, setTwigDescription] = useState("");
 
+  // grab the branch info when we load the page
   useEffect(() => {
     const fetchBranch = async () => {
       try {
+        // get the api to get branch details
         const response = await fetch(`/api/branch/${branchId}`);
         if (response.ok) {
           const branchData = await response.json();
+          // update all our state with the branch info
           setBranch(branchData);
           setBranchName(branchData.name);
           setBranchDescription(branchData.description);
-          if (branchData.twigs) {
-            setTwigs(branchData.twigs);
-            setCurrentTwigIndex(Math.min(branchData.twigs.length, twigImages.length - 1));
-          }
+          setTwigs(branchData.twigs || []); // empty array if no twigs yet
+          // figure out which branch image to show based on number of twigs
+          setCurrentTwigIndex(Math.min(branchData.twigs?.length || 0, twigImages.length - 1));
         } else {
           console.error("Failed to fetch branch data");
         }
@@ -44,16 +50,24 @@ const BranchOne = () => {
       }
     };
 
+    // only try to fetch if we have a branch id
     if (branchId) {
       fetchBranch();
     }
   }, [branchId]);
 
-  // function to add a twig to the branch
-  const handleAddTwig = async () => {
-    if (currentTwigIndex < twigImages.length - 1) {
-      try {
-        // create new twig in database
+  // handler for adding a new twig
+  const handleAddTwig = () => {
+    setIsEditMode(true);
+    setTwigName("");
+    setTwigDescription("");
+    setIsTwigMode(true);
+  };
+
+  // handler for submitting branch or twig changes
+  const handleSubmitBranch = async (title, description) => {
+    try {
+      if (isTwigMode) {
         const response = await fetch("/api/twig", {
           method: "POST",
           headers: {
@@ -61,8 +75,8 @@ const BranchOne = () => {
           },
           credentials: "include",
           body: JSON.stringify({
-            name: "dummy name",
-            description: "dummy description",
+            name: title,
+            description: description,
             branchId: branchId,
           }),
         });
@@ -74,40 +88,36 @@ const BranchOne = () => {
         } else {
           console.error("Failed to create new twig");
         }
-      } catch (error) {
-        console.error("Failed to create new twig:", error);
-      }
-    }
-  };
-
-  const handleSubmitBranch = async (title, description) => {
-    try {
-      const response = await fetch(`/api/branch/${branchId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          name: title,
-          description: description,
-        }),
-      });
-
-      if (response.ok) {
-        const updatedBranch = await response.json();
-        setBranch(updatedBranch);
-        setBranchName(updatedBranch.name);
-        setBranchDescription(updatedBranch.description);
-        setIsEditMode(false);
       } else {
-        console.error("Failed to update branch");
+        const response = await fetch(`/api/branch/${branchId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            name: title,
+            description: description,
+          }),
+        });
+
+        if (response.ok) {
+          const updatedBranch = await response.json();
+          setBranch(updatedBranch);
+          setBranchName(updatedBranch.name);
+          setBranchDescription(updatedBranch.description);
+        } else {
+          console.error("Failed to update branch");
+        }
       }
+      setIsEditMode(false);
+      setIsTwigMode(false);
     } catch (error) {
-      console.error("Failed to update branch:", error);
+      console.error("Failed to submit:", error);
     }
   };
 
+  // handler for deleting a branch
   const handleDeleteBranch = async () => {
     try {
       const response = await fetch(`/api/branch/${branchId}`, {
@@ -128,9 +138,26 @@ const BranchOne = () => {
     }
   };
 
+  // handler for canceling the form
+  const handleCancel = () => {
+    setIsEditMode(false);
+    setIsTwigMode(false);
+    if (isTwigMode) {
+      // Reset twig form
+      setTwigName("");
+      setTwigDescription("");
+    } else {
+      // Reset branch form
+      setBranchName(branch?.name || "");
+      setBranchDescription(branch?.description || "");
+    }
+  };
+
+// render component
 return (
   <div>
     <Navbar />
+    {/* back button to return to tree view */}
     <div className="back-to-tree" onClick={() => navigate("/")}>
       <img 
         src="/chevronGrey.png" 
@@ -139,25 +166,29 @@ return (
       />
       <span className="back-text">Back to Tree</span>
     </div>
+    {/* background image */}
     <img
       src="/branchBackground.png"
       alt="Branch Background"
       className="branch-background-image"
     />
+    {/* wooden sign for displaying/editing branch or twig info */}
     {showWoodenSign && (
       <div className="wooden-sign-container">
         <WoodenSign
-          title={branchName}
-          description={branchDescription}
+          title={isTwigMode ? twigName : branchName}
+          description={isTwigMode ? twigDescription : branchDescription}
           onSubmit={handleSubmitBranch}
           onDelete={handleDeleteBranch}
-          onCancel={() => setIsEditMode(false)}
+          onCancel={handleCancel}
           onAddTwig={handleAddTwig}
           readOnly={false}
           initialEditMode={isEditMode}
+          mode={isTwigMode ? "twig" : "branch"}
         />
       </div>
     )}
+    {/* branch image showing current number of twigs */}
     <img 
       className="branch-image" 
       src={twigImages[currentTwigIndex]} 
