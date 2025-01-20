@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./WoodenSign.css";
 import CustomButton from "./CustomButton";
 
@@ -6,6 +6,10 @@ const WoodenSign = ({ title, description, onSubmit, onDelete, onCancel, onAddTwi
   const [isEditing, setIsEditing] = useState(initialEditMode);
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
+
+  useEffect(() => {
+    setIsEditing(initialEditMode);
+  }, [initialEditMode]);
 
   const handleSubmit = () => {
     onSubmit(editTitle, editDescription);

@@ -12,6 +12,7 @@ const express = require("express");
 // import models so we can interact with the database
 const User = require("./models/user");
 const Branch = require("./models/branch");
+const Twig = require("./models/twig");
 
 // import authentication library
 const auth = require("./auth");
@@ -155,6 +156,36 @@ router.delete("/branch/:branchId", async (req, res) => {
     await Branch.findByIdAndDelete(req.params.branchId);
     
     res.send({ message: "Branch deleted successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
+// create a new twig
+router.post("/twig", async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send({ error: "Error: You must be logged in" });
+  }
+  try {
+    // create a new twig
+    const newTwig = {
+      creator_id: req.user._id,
+      name: req.body.name,
+      description: req.body.description,
+      branchId: req.body.branchId,
+    };
+
+    // create it in the database
+    const twig = await Twig.create(newTwig);
+
+    // find branch and update its twigs by adding the new twig
+    await Branch.findById(req.body.branchId).then(async (branch) => {
+      branch.twigs.push(twig._id);
+      await branch.save();
+    });
+
+    res.send(twig);
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: `Error: ${err}` });

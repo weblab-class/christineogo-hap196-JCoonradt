@@ -21,6 +21,7 @@ const BranchOne = () => {
     "/branchOne/branchOneTwigTwo.png",
     "/branchOne/branchOneTwigThree.png"
   ];
+  const [twigs, setTwigs] = useState([]);
 
   useEffect(() => {
     const fetchBranch = async () => {
@@ -31,6 +32,10 @@ const BranchOne = () => {
           setBranch(branchData);
           setBranchName(branchData.name);
           setBranchDescription(branchData.description);
+          if (branchData.twigs) {
+            setTwigs(branchData.twigs);
+            setCurrentTwigIndex(Math.min(branchData.twigs.length, twigImages.length - 1));
+          }
         } else {
           console.error("Failed to fetch branch data");
         }
@@ -44,9 +49,34 @@ const BranchOne = () => {
     }
   }, [branchId]);
 
-  const handleAddTwig = () => {
+  // function to add a twig to the branch
+  const handleAddTwig = async () => {
     if (currentTwigIndex < twigImages.length - 1) {
-      setCurrentTwigIndex(currentTwigIndex + 1);
+      try {
+        // create new twig in database
+        const response = await fetch("/api/twig", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            name: "dummy name",
+            description: "dummy description",
+            branchId: branchId,
+          }),
+        });
+
+        if (response.ok) {
+          const newTwig = await response.json();
+          setTwigs([...twigs, newTwig]);
+          setCurrentTwigIndex(Math.min(twigs.length + 1, twigImages.length - 1));
+        } else {
+          console.error("Failed to create new twig");
+        }
+      } catch (error) {
+        console.error("Failed to create new twig:", error);
+      }
     }
   };
 
