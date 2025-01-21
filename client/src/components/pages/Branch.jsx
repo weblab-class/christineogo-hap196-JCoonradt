@@ -33,14 +33,43 @@ const Branch = () => {
       "/branchTwo/branchTwoTwigTwo.png",
       "/branchTwo/branchTwoTwigThree.png",
     ],
+    3: [
+      "/branchThree/branchThreeNoTwigs.png",
+      "/branchThree/branchThreeTwigOne.png",
+      "/branchThree/branchThreeTwigTwo.png",
+      "/branchThree/branchThreeTwigThree.png",
+    ],
+    4: [
+      "/branchFour/branchFourNoTwigs.png",
+      "/branchFour/branchFourTwigOne.png",
+      "/branchFour/branchFourTwigTwo.png",
+      "/branchFour/branchFourTwigThree.png",
+    ],
+    5: [
+      "/branchFive/branchFiveNoTwigs.png",
+      "/branchFive/branchFiveTwigOne.png",
+      "/branchFive/branchFiveTwigTwo.png",
+      "/branchFive/branchFiveTwigThree.png",
+    ],
+    6: [
+      "/branchSix/branchSixNoTwigs.png",
+      "/branchSix/branchSixTwigOne.png",
+      "/branchSix/branchSixTwigTwo.png",
+      "/branchSix/branchSixTwigThree.png",
+    ],
   };
 
   // get the correct image set based on branch type
-  const twigImages = branchImageSets[branchType || 1];
+  const twigImages = branchImageSets[branchType] || branchImageSets[1];
   const [isTwigMode, setIsTwigMode] = useState(false);
   const [twigs, setTwigs] = useState([]);
   const [twigName, setTwigName] = useState("");
   const [twigDescription, setTwigDescription] = useState("");
+
+  // function to determine if wooden sign should be on the left
+  const isWoodenSignLeft = () => {
+    return [2, 4, 6].includes(branchType);
+  };
 
   // grab the branch info when we load the page
   useEffect(() => {
@@ -185,7 +214,7 @@ const Branch = () => {
       />
       {/* wooden sign for displaying/editing branch or twig info */}
       {showWoodenSign && (
-        <div className="wooden-sign-container">
+        <div className={`wooden-sign-container ${isWoodenSignLeft() ? 'left-sign' : 'right-sign'}`}>
           <WoodenSign
             title={isTwigMode ? twigName : branchName}
             description={isTwigMode ? twigDescription : branchDescription}

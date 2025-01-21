@@ -1,3 +1,4 @@
+/* prevent scrolling and ensure full viewport coverage */
 html, body {
   overflow: hidden;
   height: 100%;
@@ -5,6 +6,7 @@ html, body {
   padding: 0;
 }
 
+/* background image styles */
 .branch-background-image {
   position: absolute; /* make background cover whole page */
   top: 0;
@@ -15,7 +17,7 @@ html, body {
   z-index: -1; /* put behind other content */
 }
 
-/* branch one styles */
+/* styles for right-side branch type 1 */
 .branch-type-1 .branch-image {
   position: absolute;
   top: 8%;
@@ -26,6 +28,7 @@ html, body {
   z-index: -1;
 }
 
+/* wooden sign positioning for branch type 1 */
 .branch-type-1 .wooden-sign-container {
   position: absolute;
   left: 10px;
@@ -33,7 +36,7 @@ html, body {
   z-index: 2;
 }
 
-/* branch two styles */
+/* styles for left-side branch type 2 */
 .branch-type-2 .branch-image {
   position: absolute;
   top: 8%;
@@ -44,6 +47,7 @@ html, body {
   z-index: -1;
 }
 
+/* wooden sign positioning for branch type 2 */
 .branch-type-2 .wooden-sign-container {
   position: absolute;
   right: 10px;
@@ -51,12 +55,14 @@ html, body {
   z-index: 2;
 }
 
+/* container for add twig button */
 .add-twig-container {
   position: absolute;
   top: 10%;
   left: 80%;
 }
 
+/* back to tree navigation button container */
 .back-to-tree {
   position: absolute;
   right: 130px;
@@ -67,24 +73,26 @@ html, body {
   z-index: 1;
 }
 
+/* back chevron icon styles */
 .back-chevron {
   width: var(--xxl);
   transform: rotate(270deg);
   margin-right: 8px;
 }
 
-/* back to tree text for left side branches */
+/* text styles for back to tree button */
 .back-text {
   color: rgb(71, 68, 68);
   font-size: var(--xl);
   /* transition: color 0.1s ease; */
 }
 
+/* hover effect for back to tree text */
 .back-to-tree:hover .back-text {
   color: #39ff14;
 }
 
-/* back to tree text for right side branches */
+/* back to tree button positioning for left-side branches */
 .branch-type-2 .back-to-tree {
   left: 130px;
   right: auto;
@@ -95,7 +103,104 @@ html, body {
   z-index: 1;
 }
 
+/* chevron rotation for left-side branches */
 .branch-type-2 .back-chevron {
+  width: var(--xxl);
+  transform: rotate(90deg);
+  margin-right: 8px;
+}
+
+/* styles for right-side branch type 3 (same as type 1) */
+.branch-type-3 .branch-image {
+  position: absolute;
+  top: 8%;
+  right: -5%;
+  width: 55%;
+  height: 100%;
+  object-fit: contain;
+  z-index: -1;
+}
+
+/* wooden sign positioning for branch type 3 */
+.branch-type-3 .wooden-sign-container {
+  position: absolute;
+  left: 10px;
+  top: 0%;
+  z-index: 2;
+}
+
+/* styles for left-side branch type 4 (same as type 2) */
+.branch-type-4 .branch-image {
+  position: absolute;
+  top: 8%;
+  left: -5%;
+  width: 55%;
+  height: 100%;
+  object-fit: contain;
+  z-index: -1;
+}
+
+/* wooden sign positioning for branch type 4 */
+.branch-type-4 .wooden-sign-container {
+  position: absolute;
+  right: 10px;
+  top: 0%;
+  z-index: 2;
+}
+
+/* styles for right-side branch type 5 (same as type 1) */
+.branch-type-5 .branch-image {
+  position: absolute;
+  top: 8%;
+  right: -5%;
+  width: 55%;
+  height: 100%;
+  object-fit: contain;
+  z-index: -1;
+}
+
+/* wooden sign positioning for branch type 5 */
+.branch-type-5 .wooden-sign-container {
+  position: absolute;
+  left: 10px;
+  top: 0%;
+  z-index: 2;
+}
+
+/* styles for left-side branch type 6 (same as type 2) */
+.branch-type-6 .branch-image {
+  position: absolute;
+  top: 8%;
+  left: -5%;
+  width: 55%;
+  height: 100%;
+  object-fit: contain;
+  z-index: -1;
+}
+
+/* wooden sign positioning for branch type 6 */
+.branch-type-6 .wooden-sign-container {
+  position: absolute;
+  right: 10px;
+  top: 0%;
+  z-index: 2;
+}
+
+/* back to tree button positioning for left-side branches 4 and 6 */
+.branch-type-4 .back-to-tree,
+.branch-type-6 .back-to-tree {
+  left: 130px;
+  right: auto;
+  bottom: 80px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* chevron rotation for left-side branches 4 and 6 */
+.branch-type-4 .back-chevron,
+.branch-type-6 .back-chevron {
   width: var(--xxl);
   transform: rotate(90deg);
   margin-right: 8px;
