@@ -4,6 +4,33 @@ import Navbar from "../modules/Navbar";
 import "./Branch.css";
 import WoodenSign from "../modules/WoodenSign";
 
+import branchOneNoTwigs from "../../assets/branches/branchOne/branchOneNoTwigs.png";
+import branchOneTwigOne from "../../assets/branches/branchOne/branchOneTwigOne.png";
+import branchOneTwigTwo from "../../assets/branches/branchOne/branchOneTwigTwo.png";
+import branchOneTwigThree from "../../assets/branches/branchOne/branchOneTwigThree.png";
+import branchTwoNoTwigs from "../../assets/branches/branchTwo/branchTwoNoTwigs.png";
+import branchTwoTwigOne from "../../assets/branches/branchTwo/branchTwoTwigOne.png";
+import branchTwoTwigTwo from "../../assets/branches/branchTwo/branchTwoTwigTwo.png";
+import branchTwoTwigThree from "../../assets/branches/branchTwo/branchTwoTwigThree.png";
+import branchThreeNoTwigs from "../../assets/branches/branchThree/branchThreeNoTwigs.png";
+import branchThreeTwigOne from "../../assets/branches/branchThree/branchThreeTwigOne.png";
+import branchThreeTwigTwo from "../../assets/branches/branchThree/branchThreeTwigTwo.png";
+import branchThreeTwigThree from "../../assets/branches/branchThree/branchThreeTwigThree.png";
+import branchFourNoTwigs from "../../assets/branches/branchFour/branchFourNoTwigs.png";
+import branchFourTwigOne from "../../assets/branches/branchFour/branchFourTwigOne.png";
+import branchFourTwigTwo from "../../assets/branches/branchFour/branchFourTwigTwo.png";
+import branchFourTwigThree from "../../assets/branches/branchFour/branchFourTwigThree.png";
+import branchFiveNoTwigs from "../../assets/branches/branchFive/branchFiveNoTwigs.png";
+import branchFiveTwigOne from "../../assets/branches/branchFive/branchFiveTwigOne.png";
+import branchFiveTwigTwo from "../../assets/branches/branchFive/branchFiveTwigTwo.png";
+import branchFiveTwigThree from "../../assets/branches/branchFive/branchFiveTwigThree.png";
+import branchSixNoTwigs from "../../assets/branches/branchSix/branchSixNoTwigs.png";
+import branchSixTwigOne from "../../assets/branches/branchSix/branchSixTwigOne.png";
+import branchSixTwigTwo from "../../assets/branches/branchSix/branchSixTwigTwo.png";
+import branchSixTwigThree from "../../assets/branches/branchSix/branchSixTwigThree.png";
+import chevronGrey from "../../assets/chevronGrey.png";
+import branchBackground from "../../assets/branchBackground.png";
+
 // component for displaying a single branch and its twigs
 // goal is to have a branch component that can be used for both left and right side branches
 const Branch = () => {
@@ -22,40 +49,40 @@ const Branch = () => {
   // image sets for different branch types
   const branchImageSets = {
     1: [
-      "/branchOne/branchOneNoTwigs.png",
-      "/branchOne/branchOneTwigOne.png",
-      "/branchOne/branchOneTwigTwo.png",
-      "/branchOne/branchOneTwigThree.png",
+      branchOneNoTwigs,
+      branchOneTwigOne,
+      branchOneTwigTwo,
+      branchOneTwigThree,
     ],
     2: [
-      "/branchTwo/branchTwoNoTwigs.png",
-      "/branchTwo/branchTwoTwigOne.png",
-      "/branchTwo/branchTwoTwigTwo.png",
-      "/branchTwo/branchTwoTwigThree.png",
+      branchTwoNoTwigs,
+      branchTwoTwigOne,
+      branchTwoTwigTwo,
+      branchTwoTwigThree,
     ],
     3: [
-      "/branchThree/branchThreeNoTwigs.png",
-      "/branchThree/branchThreeTwigOne.png",
-      "/branchThree/branchThreeTwigTwo.png",
-      "/branchThree/branchThreeTwigThree.png",
+      branchThreeNoTwigs,
+      branchThreeTwigOne,
+      branchThreeTwigTwo,
+      branchThreeTwigThree,
     ],
     4: [
-      "/branchFour/branchFourNoTwigs.png",
-      "/branchFour/branchFourTwigOne.png",
-      "/branchFour/branchFourTwigTwo.png",
-      "/branchFour/branchFourTwigThree.png",
+      branchFourNoTwigs,
+      branchFourTwigOne,
+      branchFourTwigTwo,
+      branchFourTwigThree,
     ],
     5: [
-      "/branchFive/branchFiveNoTwigs.png",
-      "/branchFive/branchFiveTwigOne.png",
-      "/branchFive/branchFiveTwigTwo.png",
-      "/branchFive/branchFiveTwigThree.png",
+      branchFiveNoTwigs,
+      branchFiveTwigOne,
+      branchFiveTwigTwo,
+      branchFiveTwigThree,
     ],
     6: [
-      "/branchSix/branchSixNoTwigs.png",
-      "/branchSix/branchSixTwigOne.png",
-      "/branchSix/branchSixTwigTwo.png",
-      "/branchSix/branchSixTwigThree.png",
+      branchSixNoTwigs,
+      branchSixTwigOne,
+      branchSixTwigTwo,
+      branchSixTwigThree,
     ],
   };
 
@@ -203,12 +230,12 @@ const Branch = () => {
       <Navbar />
       {/* back button to return to tree view */}
       <div className="back-to-tree" onClick={() => navigate("/")}>
-        <img src="/chevronGrey.png" alt="Back" className="back-chevron" />
+        <img src={chevronGrey} alt="Back" className="back-chevron" />
         <span className="back-text">Back to Tree</span>
       </div>
       {/* background image */}
       <img
-        src="/branchBackground.png"
+        src={branchBackground}
         alt="Branch Background"
         className="branch-background-image"
       />

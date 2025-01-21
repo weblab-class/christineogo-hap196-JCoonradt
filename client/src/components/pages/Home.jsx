@@ -4,14 +4,15 @@ import { useNavigate } from "react-router-dom";
 import "../../utilities.css";
 import "./Home.css";
 import { UserContext } from "../App";
-import noBranch from "/noBranch.png";
-import oneBranch from "/oneBranch.png";
-import twoBranch from "/twoBranch.png";
-import threeBranch from "/threeBranch.png";
-import fourBranch from "/fourBranch.png";
-import fiveBranch from "/fiveBranch.png";
-import sixBranch from "/sixBranch.png";
+import noBranch from "../../assets/noBranch.png";
+import oneBranch from "../../assets/oneBranch.png";
+import twoBranch from "../../assets/twoBranch.png";
+import threeBranch from "../../assets/threeBranch.png";
+import fourBranch from "../../assets/fourBranch.png";
+import fiveBranch from "../../assets/fiveBranch.png";
+import sixBranch from "../../assets/sixBranch.png";
 import CustomButton from "../modules/CustomButton";
+import background from "../../assets/background.png";
 import Navbar from "../modules/Navbar";
 import Login from "./Login";
 import WoodenSign from "../modules/WoodenSign";
@@ -147,7 +148,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <img className="background-image" src="/background.png" alt="Background" />
+      <img className="background-image" src={background} alt="Background" />
       <div className="add-branch-container">
         <CustomButton text="Add Branch" onClick={handleAddBranch} />
       </div>
