@@ -40,7 +40,7 @@ html, body {
 .branch-type-2 .branch-image {
   position: absolute;
   top: 8%;
-  left: -5%;
+  left: 0%;
   width: 55%;
   height: 100%;
   object-fit: contain;
@@ -152,7 +152,7 @@ html, body {
 .branch-type-5 .branch-image {
   position: absolute;
   top: 8%;
-  right: -5%;
+  right: 0%;
   width: 55%;
   height: 100%;
   object-fit: contain;
