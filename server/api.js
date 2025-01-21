@@ -82,11 +82,11 @@ router.get("/tree/:userId", async (req, res) => {
         model: 'branch'
       }
     });
-    
+
     if (!user) {
       return res.status(404).send({ error: "User not found" });
     }
-    
+
     res.send(user.tree);
   } catch (err) {
     console.log(err);
@@ -115,18 +115,18 @@ router.put("/branch/:branchId", async (req, res) => {
   }
   try {
     const branch = await Branch.findById(req.params.branchId);
-    
+
     if (!branch) {
       return res.status(404).send({ error: "Branch not found" });
     }
-    
+
     // // check if the user is the creator of the branch
     // do later because we don't have a creator_id field yet **
 
     branch.name = req.body.name;
     branch.description = req.body.description;
     await branch.save();
-    
+
     res.send(branch);
   } catch (err) {
     console.log(err);
@@ -141,11 +141,11 @@ router.delete("/branch/:branchId", async (req, res) => {
   }
   try {
     const branch = await Branch.findById(req.params.branchId);
-    
+
     if (!branch) {
       return res.status(404).send({ error: "Branch not found" });
     }
-    
+
     // Remove branch from user's tree
     await User.findById(req.user._id).populate('tree').then(async (user) => {
       user.tree.branches = user.tree.branches.filter(b => b.toString() !== req.params.branchId);
@@ -154,7 +154,7 @@ router.delete("/branch/:branchId", async (req, res) => {
 
     // Delete the branch
     await Branch.findByIdAndDelete(req.params.branchId);
-    
+
     res.send({ message: "Branch deleted successfully" });
   } catch (err) {
     console.log(err);
@@ -189,6 +189,65 @@ router.post("/twig", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
+//forest
+// Get all users with optional search filter (maybe change later if we don't want them to be able to see everyone)
+router.get("/trees", async (req, res) => {
+  try {
+    const searchQuery = req.query.search || "";
+    let users;
+    
+    if (searchQuery) {
+      users = await User.find({
+        name: { $regex: searchQuery, $options: 'i' }
+      }).select('name _id');
+    } else {
+      users = await User.find({}).select('name _id');
+    }
+
+    const trees = users.map(user => ({
+      ownerId: user._id,
+      ownerName: user.name,
+    }));
+
+    res.send(trees);
+  } catch (err) {
+    console.log(`Failed to get trees: ${err}`);
+    res.status(500).send({ error: "Failed to get trees" });
+  }
+});
+
+// Send friend request
+router.post("/friend-request", auth.ensureLoggedIn, async (req, res) => {
+  try {
+    const { friendId } = req.body;
+    const userId = req.user._id;
+
+    // Don't allow self-friend requests
+    if (userId.equals(friendId)) {
+      return res.status(400).send({ error: "Cannot send friend request to yourself" });
+    }
+
+    // Check if already friends or request pending
+    const user = await User.findById(userId);
+    const existingFriend = user.friends.find(friend => friend.userId.equals(friendId));
+
+    if (existingFriend) {
+      return res.status(400).send({
+        error: `Already ${existingFriend.status === 'pending' ? 'sent a request' : 'friends'}`
+      });
+    }
+
+    // Add friend request
+    user.friends.push({ userId: friendId, status: 'pending' });
+    await user.save();
+
+    res.send({ message: "Friend request sent" });
+  } catch (err) {
+    console.log(`Failed to send friend request: ${err}`);
+    res.status(500).send({ error: "Failed to send friend request" });
   }
 });
 
