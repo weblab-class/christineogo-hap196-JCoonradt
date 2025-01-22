@@ -234,16 +234,36 @@ router.get("/trees", async (req, res) => {
 router.post("/friend-request", auth.ensureLoggedIn, async (req, res) => {
   try {
     const { friendId } = req.body;
-    const userId = req.user._id;
+    const mongoose = require('mongoose');
+    
+    if (!req.user) {
+      return res.status(401).send({ error: "You must be logged in to send friend requests" });
+    }
+    
+    // Convert both IDs to ObjectId
+    const friendObjectId = new mongoose.Types.ObjectId(friendId);
+    const userObjectId = new mongoose.Types.ObjectId(req.user._id);
 
     // Don't allow self-friend requests
-    if (userId.equals(friendId)) {
+    if (userObjectId.toString() === friendObjectId.toString()) {
       return res.status(400).send({ error: "Cannot send friend request to yourself" });
     }
 
+    // Check if the friend exists
+    const friend = await User.findById(friendObjectId);
+    if (!friend) {
+      return res.status(404).send({ error: "User not found" });
+    }
+
     // Check if already friends or request pending
-    const user = await User.findById(userId);
-    const existingFriend = user.friends.find(friend => friend.userId.equals(friendId));
+    const user = await User.findById(userObjectId);
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
+    }
+    
+    const existingFriend = user.friends.find(friend => 
+      friend.userId.toString() === friendObjectId.toString()
+    );
 
     if (existingFriend) {
       return res.status(400).send({
@@ -252,12 +272,15 @@ router.post("/friend-request", auth.ensureLoggedIn, async (req, res) => {
     }
 
     // Add friend request
-    user.friends.push({ userId: friendId, status: 'pending' });
+    user.friends.push({ userId: friendObjectId, status: 'pending' });
     await user.save();
 
     res.send({ message: "Friend request sent" });
   } catch (err) {
     console.log(`Failed to send friend request: ${err}`);
+    if (err.name === 'CastError') {
+      return res.status(400).send({ error: "Invalid user ID format" });
+    }
     res.status(500).send({ error: "Failed to send friend request" });
   }
 });
