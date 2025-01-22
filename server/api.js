@@ -97,7 +97,7 @@ router.get("/tree/:userId", async (req, res) => {
 // get a single branch by id
 router.get("/branch/:branchId", async (req, res) => {
   try {
-    const branch = await Branch.findById(req.params.branchId);
+    const branch = await Branch.findById(req.params.branchId).populate('twigs');
     if (!branch) {
       return res.status(404).send({ error: "Branch not found" });
     }
