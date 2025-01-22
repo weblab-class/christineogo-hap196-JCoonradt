@@ -224,6 +224,29 @@ const Branch = () => {
     }
   };
 
+  // handler for hovering over a twig
+  const handleTwigHover = (twig) => {
+    if (!isEditMode) {
+      setTwigName(twig.name);
+      setTwigDescription(twig.description);
+      setShowWoodenSign(true);
+      setIsTwigMode(true);
+    }
+  };
+
+  const handleTwigHoverEnd = () => {
+    if (!isEditMode) {
+      // if we are not hovering over a twig, show the branch info
+      setTwigName("");
+      setTwigDescription("");
+      setShowWoodenSign(true);
+      setIsTwigMode(false);
+      
+      setBranchName(branch?.name || "");
+      setBranchDescription(branch?.description || "");
+    }
+  };
+
   // render component
   return (
     <div className={`branch-type-${branchType}`}>
@@ -249,7 +272,7 @@ const Branch = () => {
             onDelete={handleDeleteBranch}
             onCancel={handleCancel}
             onAddTwig={handleAddTwig}
-            readOnly={false}
+            readOnly={!isEditMode && isTwigMode}
             initialEditMode={isEditMode}
             mode={isTwigMode ? "twig" : "branch"}
           />
@@ -257,6 +280,18 @@ const Branch = () => {
       )}
       {/* branch image showing current number of twigs */}
       <img className="branch-image" src={twigImages[currentTwigIndex]} alt="Branch" />
+      
+      {/* twig hitboxes */}
+      {twigs.slice(0, 3).map((twig, index) => (
+        <div
+          key={index}
+          className={`twig-hitbox twig-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
+          onMouseEnter={() => handleTwigHover(twig)}
+          onMouseLeave={handleTwigHoverEnd}
+        >
+          {twig.name}
+        </div>
+      ))}
     </div>
   );
 };
