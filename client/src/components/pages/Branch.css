@@ -237,9 +237,9 @@ html, body {
 }
 
 /* twig hitboxes for branch 1 */
-.branch-type-1 .twig-hitbox-0 { top: 30%; left: 30%; }
-.branch-type-1 .twig-hitbox-1 { top: 45%; left: 20%; }
-.branch-type-1 .twig-hitbox-2 { top: 60%; left: 10%; }
+.branch-type-1 .twig-hitbox-0 { top: 35%; right: 10%; }
+.branch-type-1 .twig-hitbox-1 { top: 55%; right: 20%; }
+.branch-type-1 .twig-hitbox-2 { top: 27%; right: 23%; }
 
 /* twig hitboxes for branch 2 */
 .branch-type-2 .twig-hitbox-0 { top: 30%; left: 55%; }
