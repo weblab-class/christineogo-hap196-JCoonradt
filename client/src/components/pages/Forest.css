@@ -18,10 +18,10 @@
 
 .search-container {
   position: absolute;
-  top: 0;
+  top: 100px;
   left: 0;
   width: 100%;
-  height: 100vh;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,10 +80,13 @@
 }
 
 .forest-content {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
   z-index: 1;
   padding: 20px;
-  margin-top: 100vh;
+  margin-top: 20px;
 }
 
 .tree-grid {
@@ -131,12 +134,12 @@
 }
 
 .friend-button {
-  background-color: #2196F3;
+  background-color: #4CAF50;
   color: white;
 }
 
 .friend-button:hover {
-  background-color: #1976D2;
+  background-color: #45a049;
 }
 
 .friend-button:disabled {

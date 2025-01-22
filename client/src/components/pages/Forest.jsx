@@ -11,10 +11,14 @@ const Forest = () => {
   const [friendRequestStatus, setFriendRequestStatus] = useState({});
 
   const fetchTrees = async (query = "") => {
+    // debugging console statements
+    console.log("Fetching trees with query:", query);
     try {
       const response = await get("/api/trees", { search: query });
+      console.log("API response data:", JSON.stringify(response, null, 2));
       if (response) {
         setTrees(response);
+        console.log("Updated trees state:", response);
       }
     } catch (err) {
       console.error("Failed to fetch trees:", err);
@@ -30,9 +34,19 @@ const Forest = () => {
   }, []);
 
   const handleSearch = async () => {
+    console.log("Search triggered with query:", searchQuery);
     await fetchTrees(searchQuery);
   };
 
+  const handleKeyPress = async (e) => {
+    if (e.key === 'Enter') {
+      console.log("Enter key pressed");
+      e.preventDefault();
+      await handleSearch();
+    }
+  };
+
+  // ignore this for now it is not functional yet
   const handleFriendRequest = async (friendId) => {
     try {
       await post("/api/friend-request", { friendId });
@@ -65,12 +79,7 @@ const Forest = () => {
                 placeholder="Search for trees..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={async (e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    await handleSearch();
-                  }
-                }}
+                onKeyDown={handleKeyPress}
               />
               <button
                 className="search-button"
@@ -86,7 +95,7 @@ const Forest = () => {
           <div className="tree-grid">
             {trees.length === 0 ? (
               <div className="no-trees-message">
-                No trees found
+                No trees found :(
               </div>
             ) : (
               trees.map((tree) => (

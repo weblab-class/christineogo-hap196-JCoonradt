@@ -197,14 +197,24 @@ router.post("/twig", async (req, res) => {
 router.get("/trees", async (req, res) => {
   try {
     const searchQuery = req.query.search || "";
-    let users;
+    console.log("API received search query:", searchQuery);
     
+    let users;
     if (searchQuery) {
+      const searchRegex = new RegExp(searchQuery, 'i');
+      console.log("Using regex:", searchRegex);
+      
       users = await User.find({
-        name: { $regex: searchQuery, $options: 'i' }
+        name: { $regex: searchRegex }
       }).select('name _id');
+      
+      console.log("MongoDB query:", {
+        name: { $regex: searchRegex }
+      });
+      console.log("Found users:", users);
     } else {
       users = await User.find({}).select('name _id');
+      console.log("Found all users:", users);
     }
 
     const trees = users.map(user => ({
@@ -212,6 +222,7 @@ router.get("/trees", async (req, res) => {
       ownerName: user.name,
     }));
 
+    console.log("Sending trees response:", trees);
     res.send(trees);
   } catch (err) {
     console.log(`Failed to get trees: ${err}`);
