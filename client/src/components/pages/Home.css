@@ -10,19 +10,19 @@
 
 .tree-image {
   position: absolute;
-  top: -3%;
+  bottom: 8%;
   left: 50%; /* put in center of page */
-  width: 60%; /* scale it down */
-  height: 100%; /* scale it down */
+  width: 55%;
+  height: 85%;
   object-fit: cover; /* keep aspect ratio */
   z-index: -1;
   transform: translateX(-50%); /* center horizontally */
 }
 
-.wooden-sign {
+.wooden-sign-container-home {
   position: absolute;
-  top: 24%;
-  left: 25%;
+  top: 25%;
+  left: 16%;
   width: 30%;
   height: 50%;
   transform: translate(-50%, -50%);

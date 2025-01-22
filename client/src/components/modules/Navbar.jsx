@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
 import { UserContext } from "../App";
 import "./Navbar.css";
+import chevronGrey from "../../assets/chevronGrey.png";
+import chevronWhite from "../../assets/chevronWhite.png";
 
 const Navbar = () => {
   const { userId, handleLogout } = useContext(UserContext);
@@ -44,7 +46,7 @@ const Navbar = () => {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {!isMenuOpen && <img src="/chevronGrey.png" alt="Menu" className="grey chevron" />}
+      {!isMenuOpen && <img src={chevronGrey} alt="Menu" className="grey chevron" />}
       {isMenuOpen && (
         <>
           <div className="menu">
@@ -57,8 +59,8 @@ const Navbar = () => {
                   Logout
                 </Link>
               )}
-              
-              <img src="/chevronWhite.png" alt="Close menu" className="chevron-rotated" />
+
+              <img src={chevronWhite} alt="Close menu" className="chevron-rotated" />
             </div>
           </div>
         </>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./WoodenSign.css";
 import CustomButton from "./CustomButton";
-
+import woodenSign from "../../assets/woodenSign.png";
 const WoodenSign = ({ 
   title, 
   description, 
@@ -48,7 +48,7 @@ const WoodenSign = ({
 
   return (
     <div className="wooden-sign-container">
-      <img src="/woodenSign.png" alt="Wooden Sign" className="wooden-sign-image" />
+      <img src={woodenSign} alt="Wooden Sign" className="wooden-sign-image" />
       <div className="wooden-sign-content">
         {isEditing ? (
           <>

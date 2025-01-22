@@ -3,6 +3,7 @@ import { UserContext } from "../App.jsx";
 import { get, post } from "../../utilities";
 import "./Forest.css";
 import Navbar from "../modules/Navbar";
+import forestBackground from "../../assets/forestBackground.png";
 
 const Forest = () => {
   const [trees, setTrees] = useState([]);
@@ -69,7 +70,7 @@ const Forest = () => {
     <>
       <Navbar />
       <div className="forest-container">
-        <img src="/Forest.png" alt="Forest Background" className="background-image" />
+        <img src={forestBackground} alt="Forest Background" className="background-image" />
         <div className="search-container">
           <div className="search-bar">
             <div className="search-input-container">

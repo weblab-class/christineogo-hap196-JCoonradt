@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { UserContext } from "../App";
 import "./Login.css";
+import loginBackground from "../../assets/loginBackground.png";
 
 const Login = () => {
   const { handleLogin } = useContext(UserContext);
@@ -9,7 +10,7 @@ const Login = () => {
   return (
     <div className="Login-container">
       {/* <Navbar /> */}
-      <img src="/loginBackground.png" alt="Background" className="login-background" />
+      <img src={loginBackground} alt="Background" className="login-background" />
 
       <div className="information-sign">
         <img src="/woodenSign.png" alt="Info Sign" className="information-sign" />
