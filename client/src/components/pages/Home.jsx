@@ -12,7 +12,7 @@ import fourBranch from "../../assets/fourBranch.png";
 import fiveBranch from "../../assets/fiveBranch.png";
 import sixBranch from "../../assets/sixBranch.png";
 import CustomButton from "../modules/CustomButton";
-import background from "../../assets/background.png";
+import background from "../../assets/treeBackground.png";
 import Navbar from "../modules/Navbar";
 import Login from "./Login";
 import WoodenSign from "../modules/WoodenSign";
