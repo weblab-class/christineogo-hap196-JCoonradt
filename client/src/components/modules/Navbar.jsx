@@ -52,6 +52,7 @@ const Navbar = () => {
           <div className="menu">
             <h2>MENU</h2>
             <div className="menu-links-div">
+              <Link to="/howto">How To</Link>
               <Link to="/">My Tree</Link>
               <Link to="/forest">Forest</Link>
               {userId && (

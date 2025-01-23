@@ -10,7 +10,7 @@
 
 .navbar:hover {
   /* height: 100vh; on hover, expand to full height */
-  height: 75vh; /* changed from 100vh to a fixed height */
+  height: 85vh;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.75));
 }
 
@@ -48,7 +48,7 @@
 .menu a {
   color: white;
   text-decoration: none;
-  margin: 30px 0;
+  margin: 20px 0;
   padding: 5px;
 }
 
