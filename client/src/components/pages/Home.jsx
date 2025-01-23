@@ -103,6 +103,8 @@ const Home = () => {
           const numBranches = treeData.branches.length;
           // update the tree image with the correct number of branches
           setCurrentImageIndex(Math.min(numBranches, 6));
+          // update the branches state
+          setBranches(treeData.branches);
         }
 
         setShowWoodenSign(false);
