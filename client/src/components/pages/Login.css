@@ -8,17 +8,53 @@
   z-index: -1; /* put behind other content */
 }
 
-.information-sign {
-  position: absolute;
-  top: -20%; /* Adjust the position as needed */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 650px; /* Adjust the size */
-  z-index: 0; /* Higher z-index to appear on top */
+.login-tree {
+  position: fixed; /* Stick to the viewport */
+  bottom: -200px; /* Align to the bottom of the screen */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center it properly */
+  width: auto; /* Set a smaller width for the tree image */
+  height: 150%; /* Maintain aspect ratio */
+  z-index: 0; /* Keep it behind other content */
+  pointer-events: none; /* Prevent the image from blocking interactions */
 }
 
-.information-sign img {
-  filter: brightness(80%);
+.login-racoon {
+  position: fixed; /* Sticks the image to a fixed position on the screen */
+  bottom: 0; /* Aligns the image to the bottom */
+  left: 0; /* Aligns the image to the left */
+  max-width: 30%; /* Optional: Resize to fit nicely */
+  max-height: 30%; /* Optional: Ensures the image doesn’t overflow */
+  object-fit: cover; /* Maintains aspect ratio */
+  z-index: 0; /* Keeps it behind other content */
+}
+
+.login-owl {
+  position: fixed; /* Sticks the image to a fixed position on the screen */
+  bottom: -20px; /* Aligns the image to the bottom */
+  right: 0; /* Aligns the image to the left */
+  max-width: 40%; /* Optional: Resize to fit nicely */
+  max-height: 40%; /* Optional: Ensures the image doesn’t overflow */
+  object-fit: cover; /* Maintains aspect ratio */
+  z-index: 0; /* Keeps it behind other content */
+}
+
+.information-signL {
+  position: absolute;
+  top: -17%; /* Adjust the position as needed */
+  left: 2%;
+
+  width: 400px; /* Adjust the size */
+  z-index: 1; /* Higher z-index to appear on top */
+}
+
+.information-signR {
+  position: absolute;
+  top: -17%; /* Adjust the position as needed */
+  left: 50%;
+
+  width: 400px; /* Adjust the size */
+  z-index: 0; /* Higher z-index to appear on top */
 }
 
 .Login-googleButton {
@@ -28,28 +64,38 @@
   transform: translate(-50%, 450%);
 }
 
-.information-sign h1 {
-  position: absolute;
-  left: 50%;
-  width: 80%;
-  transform: translate(-50%, 110%);
-  color: white;
-  font-size: 5rem;
-  font-weight: bold;
-  text-align: center;
-  z-index: 1;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
-}
-
-.information-sign h2 {
+.information-signL h1 {
   position: absolute;
   left: 50%;
   width: 100%;
-  transform: translate(-50%, 190%);
+  transform: translate(-50%, 85%);
   color: white;
-  font-size: 2rem;
+  font-size: 4rem;
   font-weight: bold;
   text-align: center;
-  z-index: 1;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
+  z-index: 2;
+  text-shadow: 2px 2px 0 #000, /* Black outline */ -2px 2px 0 #000, 2px -2px 0 #000,
+    -2px -2px 0 #000, 2px 0px 0 #000, -2px 0px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000; /* Ensures complete outline */
+}
+
+.information-signL h2 {
+  position: absolute;
+  left: 50%;
+  width: 95%;
+  transform: translate(-50%, 180%);
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  z-index: 2;
+  text-shadow: 2px 2px 0 #000, /* Black outline */ -2px 2px 0 #000, 2px -2px 0 #000,
+    -2px -2px 0 #000, 2px 0px 0 #000, -2px 0px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000; /* Ensures complete outline */
+}
+
+div.Login-googleButton {
+  position: fixed !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 1000;
 }
