@@ -38,7 +38,7 @@ const Forest = () => {
     console.log("Search triggered with query:", searchQuery);
     await fetchTrees(searchQuery);
   };
-
+// allows users to search by pressing enter
   const handleKeyPress = async (e) => {
     if (e.key === 'Enter') {
       console.log("Enter key pressed");
@@ -47,7 +47,7 @@ const Forest = () => {
     }
   };
 
-  // ignore this for now it is not functional yet
+  // ignore this for now it is not functional yet but should handle friend requests
   const handleFriendRequest = async (friendId) => {
     try {
       await post("/api/friend-request", { friendId });
