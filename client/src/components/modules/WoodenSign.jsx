@@ -1,106 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import "./WoodenSign.css";
-// import CustomButton from "./CustomButton";
-// import woodenSign from "../../assets/woodenSign.png";
-// const WoodenSign = ({
-//   title,
-//   description,
-//   onSubmit,
-//   onDelete,
-//   onCancel,
-//   onAddTwig,
-//   readOnly,
-//   initialEditMode = false,
-//   mode = "branch" // new prop to distinguish between branch and twig modes
-// }) => {
-//   const [isEditing, setIsEditing] = useState(initialEditMode);
-//   const [editTitle, setEditTitle] = useState(title);
-//   const [editDescription, setEditDescription] = useState(description);
-
-//   useEffect(() => {
-//     setIsEditing(initialEditMode);
-//     // on initial load, set the edit title and description to the title and description passed in
-//     setEditTitle(title);
-//     setEditDescription(description);
-//   }, [initialEditMode, title, description]);
-
-//   const handleSubmit = () => {
-//     // pass in mode prop to distinguish between submission type
-//     // if mode is twig, then we need to create a new twig
-//     // if mode is branch, then we need to update the branch
-//     // basically submit can be used for both twig and branch
-//     onSubmit(editTitle, editDescription, mode);
-//     setIsEditing(false);
-//   };
-
-//   const handleCancel = () => {
-//     setEditTitle(title);
-//     setEditDescription(description);
-//     setIsEditing(false);
-//     if (onCancel) onCancel();
-//   };
-
-//   const handleDelete = () => {
-//     if (window.confirm("Are you sure you want to delete this branch? Deleting a branch will delete all twigs grown on it.")) {
-//       onDelete();
-//     }
-//   };
-
-//   return (
-//     <div className="wooden-sign-container">
-//       <img src={woodenSign} alt="Wooden Sign" className="wooden-sign-image" />
-//       <div className="wooden-sign-content">
-//         {isEditing ? (
-//           <>
-//             <input
-//               type="text"
-//               value={editTitle}
-//               onChange={(e) => setEditTitle(e.target.value)}
-//               placeholder={mode === "branch" ? "Enter branch name" : "Enter twig name"}
-//               className="wooden-sign-title"
-//             />
-//             <textarea
-//               value={editDescription}
-//               onChange={(e) => setEditDescription(e.target.value)}
-//               placeholder={mode === "branch" ? "Enter branch description" : "Enter twig description"}
-//               className="wooden-sign-description"
-//             />
-//           </>
-//         ) : (
-//           <>
-//             <h2 className="wooden-sign-title">{title}</h2>
-//             <p className="wooden-sign-description">{description}</p>
-//           </>
-//         )}
-//       </div>
-//       {!readOnly && (
-//         <div className="wooden-sign-buttons">
-//           {isEditing ? (
-//             <>
-//               <CustomButton text="Submit" color="green" onClick={handleSubmit} />
-//               <CustomButton text="Cancel" color="red" onClick={handleCancel} />
-//             </>
-//           ) : (
-//             <>
-//               <CustomButton text="Edit" color="white" onClick={() => setIsEditing(true)} />
-//               <CustomButton text="Delete" color="red" onClick={handleDelete} />
-//               {mode === "branch" && (
-//                 <CustomButton
-//                   text="Add Twig"
-//                   color="green"
-//                   onClick={onAddTwig}
-//                 />
-//               )}
-//             </>
-//           )}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default WoodenSign;
-
 import React, { useState, useEffect, memo } from "react";
 import "./WoodenSign.css";
 import CustomButton from "./CustomButton";
@@ -122,9 +19,11 @@ const WoodenSign = memo(
     onDelete,
     onCancel,
     onAddTwig,
+    onAddLeaf,
     readOnly,
     initialEditMode = false,
     mode = "branch",
+    showAddLeaf = false,
   }) => {
     const [isEditing, setIsEditing] = useState(initialEditMode);
     const [editTitle, setEditTitle] = useState(title);
@@ -152,11 +51,14 @@ const WoodenSign = memo(
     };
 
     const handleDelete = () => {
-      if (
-        window.confirm(
-          "Are you sure you want to delete this branch? Deleting a branch will delete all twigs grown on it."
-        )
-      ) {
+      const confirmMessage = 
+        mode === "branch" 
+          ? "Are you sure you want to delete this branch? This will delete all twigs and leaves grown on it."
+          : mode === "twig"
+          ? "Are you sure you want to delete this twig? This will delete all leaves grown on it."
+          : "Are you sure you want to delete this leaf?";
+
+      if (window.confirm(confirmMessage)) {
         onDelete();
       }
     };
@@ -171,14 +73,24 @@ const WoodenSign = memo(
                 type="text"
                 defaultValue={editTitle}
                 onChange={(e) => debouncedSetEditTitle(e.target.value)}
-                placeholder={mode === "branch" ? "Enter branch name" : "Enter twig name"}
+                placeholder={
+                  mode === "branch" 
+                    ? "Enter branch name" 
+                    : mode === "twig"
+                    ? "Enter twig name"
+                    : "Enter leaf name"
+                }
                 className="wooden-sign-title"
               />
               <textarea
                 defaultValue={editDescription}
                 onChange={(e) => debouncedSetEditDescription(e.target.value)}
                 placeholder={
-                  mode === "branch" ? "Enter branch description" : "Enter twig description"
+                  mode === "branch" 
+                    ? "Enter branch description" 
+                    : mode === "twig"
+                    ? "Enter twig description"
+                    : "Enter leaf description"
                 }
                 className="wooden-sign-description"
               />
@@ -203,6 +115,9 @@ const WoodenSign = memo(
                 <CustomButton text="Delete" color="red" onClick={handleDelete} />
                 {mode === "branch" && (
                   <CustomButton text="Add Twig" color="green" onClick={onAddTwig} />
+                )}
+                {showAddLeaf && (
+                  <CustomButton text="Add Leaf" color="green" onClick={onAddLeaf} />
                 )}
               </>
             )}

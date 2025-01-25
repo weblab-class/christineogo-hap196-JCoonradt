@@ -13,6 +13,7 @@ const express = require("express");
 const User = require("./models/user");
 const Branch = require("./models/branch");
 const Twig = require("./models/twig");
+const Leaf = require("./models/leaf");
 
 // import authentication library
 const auth = require("./auth");
@@ -275,15 +276,19 @@ router.post("/leaf", async (req, res) => {
       return res.status(404).send({ error: "Twig not found" });
     }
 
-    const newLeaf = {
+    // create a new leaf object
+    const leaf = await Leaf.create({
       name: req.body.name,
       description: req.body.description,
       link: req.body.link,
-    };
+    });
 
-    twig.leaves.push(newLeaf);
+    // add its ObjectId to the twig's leaves array
+    twig.leaves.push(leaf._id);
     await twig.save();
-    res.send(newLeaf);
+    
+    // return the populated leaf object
+    res.send(leaf);
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: `Error: ${err}` });

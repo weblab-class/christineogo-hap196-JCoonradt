@@ -102,12 +102,34 @@ const Twig = () => {
     setLeafDescription("");
     setLeafLink("");
     setIsLeafMode(true);
+    setShowWoodenSign(true);
+  };
+
+  // handlers for leaf hover events
+  const handleLeafHover = (leaf) => {
+    if (!isEditMode) {
+      setLeafName(leaf.name);
+      setLeafDescription(leaf.description);
+      setLeafLink(leaf.link);
+      setShowWoodenSign(true);
+      setIsLeafMode(true);
+    }
+  };
+
+  const handleLeafHoverEnd = () => {
+    if (!isEditMode) {
+      setLeafName("");
+      setLeafDescription("");
+      setLeafLink("");
+      setShowWoodenSign(true);
+      setIsLeafMode(false);
+    }
   };
 
   // handler for submitting twig or leaf changes
   const handleSubmit = async (title, description, mode) => {
     try {
-      if (isLeafMode) {
+      if (mode === "leaf") {
         const response = await fetch("/api/leaf", {
           method: "POST",
           headers: {
@@ -117,15 +139,20 @@ const Twig = () => {
           body: JSON.stringify({
             name: title,
             description: description,
-            link: leafLink,
             twigId: twigId,
           }),
         });
 
         if (response.ok) {
           const newLeaf = await response.json();
-          setLeaves([...leaves, newLeaf]);
-          setCurrentLeafIndex(Math.min(leaves.length + 1, leafImages.length - 1));
+          const updatedLeaves = [...leaves, newLeaf];
+          setLeaves(updatedLeaves);
+          setCurrentLeafIndex(Math.min(updatedLeaves.length, leafImages.length - 1));
+          setIsEditMode(false);
+          setIsLeafMode(false);
+          setShowWoodenSign(true);
+          setLeafName(newLeaf.name);
+          setLeafDescription(newLeaf.description);
         }
       } else {
         const response = await fetch(`/api/twig/${twigId}`, {
@@ -147,8 +174,6 @@ const Twig = () => {
           setTwigDescription(updatedTwig.description);
         }
       }
-      setIsEditMode(false);
-      setIsLeafMode(false);
     } catch (error) {
       console.error("Failed to submit:", error);
     }
@@ -192,27 +217,6 @@ const Twig = () => {
     }
   };
 
-  // handlers for leaf hover events
-  const handleLeafHover = (leaf) => {
-    if (!isEditMode) {
-      setLeafName(leaf.name);
-      setLeafDescription(leaf.description);
-      setLeafLink(leaf.link);
-      setShowWoodenSign(true);
-      setIsLeafMode(true);
-    }
-  };
-
-  const handleLeafHoverEnd = () => {
-    if (!isEditMode) {
-      setLeafName("");
-      setLeafDescription("");
-      setLeafLink("");
-      setShowWoodenSign(true);
-      setIsLeafMode(false);
-    }
-  };
-
   // log this so we know that we're going back to the correct branch
   console.log("original branch type:", originalBranchType);
 
@@ -246,6 +250,7 @@ const Twig = () => {
             readOnly={!isEditMode && isLeafMode}
             initialEditMode={isEditMode}
             mode={isLeafMode ? "leaf" : "twig"}
+            showAddLeaf={!isLeafMode && !isEditMode}
           />
         </div>
       )}
