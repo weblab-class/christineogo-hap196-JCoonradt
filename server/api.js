@@ -82,13 +82,22 @@ router.get("/tree/:userId", async (req, res) => {
       populate: {
         path: "branches",
         model: "branch",
-      },
+        populate: {
+          path: "twigs",
+          model: "twig"
+        }
+      }
     });
 
     if (!user) {
       return res.status(404).send({ error: "User not found" });
     }
 
+    if (!user.tree) {
+      return res.status(404).send({ error: "Tree not found" });
+    }
+
+    console.log("Sending tree data:", user.tree);
     res.send(user.tree);
   } catch (err) {
     console.log(err);
@@ -316,6 +325,20 @@ router.get("/trees", async (req, res) => {
   } catch (err) {
     console.log(`Failed to get trees: ${err}`);
     res.status(500).send({ error: "Failed to get trees" });
+  }
+});
+
+// get user info by id
+router.get("/user/:userId", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
+    }
+    res.send({ _id: user._id, name: user.name });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
   }
 });
 

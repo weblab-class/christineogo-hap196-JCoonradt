@@ -4,6 +4,7 @@ import { get, post } from "../../utilities";
 import "./Forest.css";
 import Navbar from "../modules/Navbar";
 import forestBackground from "../../assets/forestBackground.png";
+import { useNavigate } from "react-router-dom";
 
 const Forest = () => {
   const [trees, setTrees] = useState([]);
@@ -16,6 +17,7 @@ const Forest = () => {
     incomingRequests: []
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const fetchTrees = async (query = "") => {
     console.log("Fetching trees with query:", query);
@@ -116,6 +118,16 @@ const Forest = () => {
   const FriendStatusModal = () => {
     if (!isModalOpen) return null;
 
+    const handleVisitTree = (friend) => {
+      setIsModalOpen(false);
+      navigate(`/friend/${friend._id}/tree`, { 
+        state: { 
+          friendName: friend.name,
+          userId: friend._id 
+        }
+      });
+    };
+
     return (
       <>
         <div className="modal-overlay" onClick={() => setIsModalOpen(false)} />
@@ -168,6 +180,12 @@ const Forest = () => {
                 {friendData.friends.map((friend) => (
                   <div key={friend._id} className="friend-item">
                     <span>{friend.name}</span>
+                    <button
+                      onClick={() => handleVisitTree(friend)}
+                      className="visit-tree-button"
+                    >
+                      Visit Tree
+                    </button>
                   </div>
                 ))}
               </div>
