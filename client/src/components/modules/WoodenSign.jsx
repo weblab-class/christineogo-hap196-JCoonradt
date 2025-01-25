@@ -73,14 +73,24 @@ const WoodenSign = memo(
                 type="text"
                 defaultValue={editTitle}
                 onChange={(e) => debouncedSetEditTitle(e.target.value)}
-                placeholder={mode === "branch" ? "Enter branch name" : "Enter twig name"}
+                placeholder={
+                  mode === "branch" 
+                    ? "Enter branch name" 
+                    : mode === "twig"
+                    ? "Enter twig name"
+                    : "Enter leaf name"
+                }
                 className="wooden-sign-title"
               />
               <textarea
                 defaultValue={editDescription}
                 onChange={(e) => debouncedSetEditDescription(e.target.value)}
                 placeholder={
-                  mode === "branch" ? "Enter branch description" : "Enter twig description"
+                  mode === "branch" 
+                    ? "Enter branch description" 
+                    : mode === "twig"
+                    ? "Enter twig description"
+                    : "Enter leaf description"
                 }
                 className="wooden-sign-description"
               />

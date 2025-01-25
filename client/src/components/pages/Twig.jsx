@@ -102,6 +102,7 @@ const Twig = () => {
     setLeafDescription("");
     setLeafLink("");
     setIsLeafMode(true);
+    setShowWoodenSign(true);
   };
 
   // handlers for leaf hover events
@@ -144,13 +145,14 @@ const Twig = () => {
 
         if (response.ok) {
           const newLeaf = await response.json();
-          setLeaves([...leaves, newLeaf]);
-          setCurrentLeafIndex(Math.min(leaves.length + 1, leafImages.length - 1));
-          // reset to twig view after successful submission
+          const updatedLeaves = [...leaves, newLeaf];
+          setLeaves(updatedLeaves);
+          setCurrentLeafIndex(Math.min(updatedLeaves.length, leafImages.length - 1));
           setIsEditMode(false);
           setIsLeafMode(false);
-          setLeafName("");
-          setLeafDescription("");
+          setShowWoodenSign(true);
+          setLeafName(newLeaf.name);
+          setLeafDescription(newLeaf.description);
         }
       } else {
         const response = await fetch(`/api/twig/${twigId}`, {
