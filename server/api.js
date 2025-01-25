@@ -60,10 +60,12 @@ router.post("/branch", async (req, res) => {
     const branch = await Branch.create(newBranch);
 
     // Find user and update their tree by adding the new branch
-    await User.findById(req.user._id).populate('tree').then(async (user) => {
-      user.tree.branches.push(branch._id);
-      await user.tree.save();
-    });
+    await User.findById(req.user._id)
+      .populate("tree")
+      .then(async (user) => {
+        user.tree.branches.push(branch._id);
+        await user.tree.save();
+      });
 
     res.send(branch);
   } catch (err) {
@@ -76,11 +78,11 @@ router.post("/branch", async (req, res) => {
 router.get("/tree/:userId", async (req, res) => {
   try {
     const user = await User.findById(req.params.userId).populate({
-      path: 'tree',
+      path: "tree",
       populate: {
-        path: 'branches',
-        model: 'branch'
-      }
+        path: "branches",
+        model: "branch",
+      },
     });
 
     if (!user) {
@@ -97,7 +99,7 @@ router.get("/tree/:userId", async (req, res) => {
 // get a single branch by id
 router.get("/branch/:branchId", async (req, res) => {
   try {
-    const branch = await Branch.findById(req.params.branchId).populate('twigs');
+    const branch = await Branch.findById(req.params.branchId).populate("twigs");
     if (!branch) {
       return res.status(404).send({ error: "Branch not found" });
     }
@@ -147,10 +149,12 @@ router.delete("/branch/:branchId", async (req, res) => {
     }
 
     // Remove branch from user's tree
-    await User.findById(req.user._id).populate('tree').then(async (user) => {
-      user.tree.branches = user.tree.branches.filter(b => b.toString() !== req.params.branchId);
-      await user.tree.save();
-    });
+    await User.findById(req.user._id)
+      .populate("tree")
+      .then(async (user) => {
+        user.tree.branches = user.tree.branches.filter((b) => b.toString() !== req.params.branchId);
+        await user.tree.save();
+      });
 
     // Delete the branch
     await Branch.findByIdAndDelete(req.params.branchId);
@@ -192,32 +196,117 @@ router.post("/twig", async (req, res) => {
   }
 });
 
+// get a single twig by id
+router.get("/twig/:twigId", async (req, res) => {
+  try {
+    const twig = await Twig.findById(req.params.twigId).populate("leaves");
+    if (!twig) {
+      return res.status(404).send({ error: "Twig not found" });
+    }
+    res.send(twig);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
+// update a twig
+router.put("/twig/:twigId", async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send({ error: "Error: You must be logged in" });
+  }
+  try {
+    const twig = await Twig.findById(req.params.twigId);
+    if (!twig) {
+      return res.status(404).send({ error: "Twig not found" });
+    }
+    twig.name = req.body.name;
+    twig.description = req.body.description;
+    await twig.save();
+    res.send(twig);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
+// delete a twig
+router.delete("/twig/:twigId", async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send({ error: "Error: You must be logged in" });
+  }
+  try {
+    const twig = await Twig.findById(req.params.twigId);
+    if (!twig) {
+      return res.status(404).send({ error: "Twig not found" });
+    }
+
+    // Remove twig reference from branch
+    await Branch.findByIdAndUpdate(twig.branchId, {
+      $pull: { twigs: twig._id },
+    });
+
+    // Delete the twig
+    await Twig.findByIdAndDelete(req.params.twigId);
+    res.send({ message: "Twig deleted successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
+// create a new leaf
+router.post("/leaf", async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send({ error: "Error: You must be logged in" });
+  }
+  try {
+    const twig = await Twig.findById(req.body.twigId);
+    if (!twig) {
+      return res.status(404).send({ error: "Twig not found" });
+    }
+
+    const newLeaf = {
+      name: req.body.name,
+      description: req.body.description,
+      link: req.body.link,
+    };
+
+    twig.leaves.push(newLeaf);
+    await twig.save();
+    res.send(newLeaf);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
 //forest
 // Get all users with optional search filter (maybe change later if we don't want them to be able to see everyone)
 router.get("/trees", async (req, res) => {
   try {
     const searchQuery = req.query.search || "";
     console.log("API received search query:", searchQuery);
-    
+
     let users;
     if (searchQuery) {
-      const searchRegex = new RegExp(searchQuery, 'i');
+      const searchRegex = new RegExp(searchQuery, "i");
       console.log("Using regex:", searchRegex);
-      
+
       users = await User.find({
-        name: { $regex: searchRegex }
-      }).select('name _id');
-      
+        name: { $regex: searchRegex },
+      }).select("name _id");
+
       console.log("MongoDB query:", {
-        name: { $regex: searchRegex }
+        name: { $regex: searchRegex },
       });
       console.log("Found users:", users);
     } else {
-      users = await User.find({}).select('name _id');
+      users = await User.find({}).select("name _id");
       console.log("Found all users:", users);
     }
 
-    const trees = users.map(user => ({
+    const trees = users.map((user) => ({
       ownerId: user._id,
       ownerName: user.name,
     }));
@@ -234,12 +323,12 @@ router.get("/trees", async (req, res) => {
 router.post("/friend-request", auth.ensureLoggedIn, async (req, res) => {
   try {
     const { friendId } = req.body;
-    const mongoose = require('mongoose');
-    
+    const mongoose = require("mongoose");
+
     if (!req.user) {
       return res.status(401).send({ error: "You must be logged in to send friend requests" });
     }
-    
+
     // Convert both IDs to ObjectId
     const friendObjectId = new mongoose.Types.ObjectId(friendId);
     const userObjectId = new mongoose.Types.ObjectId(req.user._id);
@@ -260,25 +349,25 @@ router.post("/friend-request", auth.ensureLoggedIn, async (req, res) => {
     if (!user) {
       return res.status(404).send({ error: "User not found" });
     }
-    
-    const existingFriend = user.friends.find(friend => 
-      friend.userId.toString() === friendObjectId.toString()
+
+    const existingFriend = user.friends.find(
+      (friend) => friend.userId.toString() === friendObjectId.toString()
     );
 
     if (existingFriend) {
       return res.status(400).send({
-        error: `Already ${existingFriend.status === 'pending' ? 'sent a request' : 'friends'}`
+        error: `Already ${existingFriend.status === "pending" ? "sent a request" : "friends"}`,
       });
     }
 
     // Add friend request
-    user.friends.push({ userId: friendObjectId, status: 'pending' });
+    user.friends.push({ userId: friendObjectId, status: "pending" });
     await user.save();
 
     res.send({ message: "Friend request sent" });
   } catch (err) {
     console.log(`Failed to send friend request: ${err}`);
-    if (err.name === 'CastError') {
+    if (err.name === "CastError") {
       return res.status(400).send({ error: "Invalid user ID format" });
     }
     res.status(500).send({ error: "Failed to send friend request" });

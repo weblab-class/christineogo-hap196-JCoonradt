@@ -1,0 +1,161 @@
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.twig-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+/* right side twig */
+.twig-type-1 .twig-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.twig-type-1 .wooden-sign-container {
+  position: absolute;
+  left: 10px;
+  top: 0%;
+  z-index: 2;
+}
+
+/* left side twig */
+.twig-type-2 .twig-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.twig-type-2 .wooden-sign-container {
+  position: absolute;
+  right: 10px;
+  top: 0%;
+  z-index: 2;
+}
+
+.back-to-branch {
+  position: absolute;
+  right: 130px;
+  bottom: 80px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.back-chevron {
+  width: var(--xxl);
+  transform: rotate(270deg);
+  margin-right: 8px;
+}
+
+.back-text {
+  color: rgb(71, 68, 68);
+  font-size: var(--xl);
+}
+
+.back-to-branch:hover .back-text {
+  color: #39ff14;
+}
+
+.twig-type-2 .back-to-branch {
+  left: 130px;
+  right: auto;
+}
+
+.twig-type-2 .back-chevron {
+  transform: rotate(90deg);
+}
+
+/* leaf hitbox styles */
+.leaf-hitbox {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  font-size: var(--m);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  transition: color 0.3s ease;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.leaf-hitbox.edit-mode {
+  pointer-events: none;
+}
+
+.leaf-hitbox:hover {
+  color: #39ff14;
+}
+/* leaf hitbox positions for right side twig */
+.twig-type-1 .leaf-hitbox-0 {
+  top: 30%;
+  right: 15%;
+}
+.twig-type-1 .leaf-hitbox-1 {
+  top: 40%;
+  right: 25%;
+}
+.twig-type-1 .leaf-hitbox-2 {
+  top: 50%;
+  right: 20%;
+}
+.twig-type-1 .leaf-hitbox-3 {
+  top: 35%;
+  right: 30%;
+}
+.twig-type-1 .leaf-hitbox-4 {
+  top: 45%;
+  right: 15%;
+}
+.twig-type-1 .leaf-hitbox-5 {
+  top: 55%;
+  right: 25%;
+}
+
+/* leaf hitbox positions for left side twig */
+.twig-type-2 .leaf-hitbox-0 {
+  top: 30%;
+  left: 15%;
+}
+.twig-type-2 .leaf-hitbox-1 {
+  top: 40%;
+  left: 25%;
+}
+.twig-type-2 .leaf-hitbox-2 {
+  top: 50%;
+  left: 20%;
+}
+.twig-type-2 .leaf-hitbox-3 {
+  top: 35%;
+  left: 30%;
+}
+.twig-type-2 .leaf-hitbox-4 {
+  top: 45%;
+  left: 15%;
+}
+.twig-type-2 .leaf-hitbox-5 {
+  top: 55%;
+  left: 25%;
+}

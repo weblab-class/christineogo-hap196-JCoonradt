@@ -6,6 +6,7 @@ import NotFound from "./components/pages/NotFound";
 import Branch from "./components/pages/Branch";
 import Forest from "./components/pages/Forest";
 import HowTo from "./components/pages/HowTo";
+import Twig from "./components/pages/Twig";
 
 import {
   createBrowserRouter,
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path="/forest" element={<Forest />} />
       <Route path="/tree/:userId" element={<Home />} />
       <Route path="/tree/:userId/branch/:branchId" element={<Branch />} />
+      <Route path="/tree/:userId/branch/:branchId/twig/:twigId" element={<Twig />} />
       <Route path="/howto" element={<HowTo />} />
     </Route>
   )

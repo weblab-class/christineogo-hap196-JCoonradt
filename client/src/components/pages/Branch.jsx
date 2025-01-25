@@ -34,7 +34,7 @@ import branchBackground from "../../assets/branchBackground.png";
 // component for displaying a single branch and its twigs
 // goal is to have a branch component that can be used for both left and right side branches
 const Branch = () => {
-  const { branchId } = useParams();
+  const { branchId, userId } = useParams();
   const location = useLocation();
   // default to 1 if not specified
   const branchType = location.state?.branchType || 1;
@@ -46,44 +46,17 @@ const Branch = () => {
   const navigate = useNavigate();
   const [currentTwigIndex, setCurrentTwigIndex] = useState(0);
 
+  // userId from either params or location state
+  const currentUserId = userId || location.state?.userId;
+
   // image sets for different branch types
   const branchImageSets = {
-    1: [
-      branchOneNoTwigs,
-      branchOneTwigOne,
-      branchOneTwigTwo,
-      branchOneTwigThree,
-    ],
-    2: [
-      branchTwoNoTwigs,
-      branchTwoTwigOne,
-      branchTwoTwigTwo,
-      branchTwoTwigThree,
-    ],
-    3: [
-      branchThreeNoTwigs,
-      branchThreeTwigOne,
-      branchThreeTwigTwo,
-      branchThreeTwigThree,
-    ],
-    4: [
-      branchFourNoTwigs,
-      branchFourTwigOne,
-      branchFourTwigTwo,
-      branchFourTwigThree,
-    ],
-    5: [
-      branchFiveNoTwigs,
-      branchFiveTwigOne,
-      branchFiveTwigTwo,
-      branchFiveTwigThree,
-    ],
-    6: [
-      branchSixNoTwigs,
-      branchSixTwigOne,
-      branchSixTwigTwo,
-      branchSixTwigThree,
-    ],
+    1: [branchOneNoTwigs, branchOneTwigOne, branchOneTwigTwo, branchOneTwigThree],
+    2: [branchTwoNoTwigs, branchTwoTwigOne, branchTwoTwigTwo, branchTwoTwigThree],
+    3: [branchThreeNoTwigs, branchThreeTwigOne, branchThreeTwigTwo, branchThreeTwigThree],
+    4: [branchFourNoTwigs, branchFourTwigOne, branchFourTwigTwo, branchFourTwigThree],
+    5: [branchFiveNoTwigs, branchFiveTwigOne, branchFiveTwigTwo, branchFiveTwigThree],
+    6: [branchSixNoTwigs, branchSixTwigOne, branchSixTwigTwo, branchSixTwigThree],
   };
 
   // get the correct image set based on branch type
@@ -241,7 +214,7 @@ const Branch = () => {
       setTwigDescription("");
       setShowWoodenSign(true);
       setIsTwigMode(false);
-      
+
       setBranchName(branch?.name || "");
       setBranchDescription(branch?.description || "");
     }
@@ -252,19 +225,22 @@ const Branch = () => {
     <div className={`branch-type-${branchType}`}>
       <Navbar />
       {/* back button to return to tree view */}
-      <div className="back-to-tree" onClick={() => navigate("/")}>
+      <div
+        className="back-to-tree"
+        onClick={() =>
+          navigate(`/tree/${currentUserId}`, {
+            state: { userId: currentUserId },
+          })
+        }
+      >
         <img src={chevronGrey} alt="Back" className="back-chevron" />
         <span className="back-text">Back to Tree</span>
       </div>
       {/* background image */}
-      <img
-        src={branchBackground}
-        alt="Branch Background"
-        className="branch-background-image"
-      />
+      <img src={branchBackground} alt="Branch Background" className="branch-background-image" />
       {/* wooden sign for displaying/editing branch or twig info */}
       {showWoodenSign && (
-        <div className={`wooden-sign-container ${isWoodenSignLeft() ? 'left-sign' : 'right-sign'}`}>
+        <div className={`wooden-sign-container ${isWoodenSignLeft() ? "left-sign" : "right-sign"}`}>
           <WoodenSign
             title={isTwigMode ? twigName : branchName}
             description={isTwigMode ? twigDescription : branchDescription}
@@ -280,7 +256,7 @@ const Branch = () => {
       )}
       {/* branch image showing current number of twigs */}
       <img className="branch-image" src={twigImages[currentTwigIndex]} alt="Branch" />
-      
+
       {/* twig hitboxes */}
       {twigs.slice(0, 3).map((twig, index) => (
         <div
@@ -288,6 +264,15 @@ const Branch = () => {
           className={`twig-hitbox twig-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
           onMouseEnter={() => handleTwigHover(twig)}
           onMouseLeave={handleTwigHoverEnd}
+          onClick={() =>
+            navigate(`/tree/${currentUserId}/branch/${branchId}/twig/${twig._id}`, {
+              state: {
+                twigType: isWoodenSignLeft() ? 2 : 1,
+                branchId: branchId,
+                userId: currentUserId,
+              },
+            })
+          }
         >
           {twig.name}
         </div>
