@@ -26,6 +26,7 @@ const Twig = () => {
   const location = useLocation();
   const twigType = location.state?.twigType || 1;
   const branchId = location.state?.branchId;
+  const originalBranchType = location.state?.branchType;
   const navigate = useNavigate();
 
   const [twig, setTwig] = useState(null);
@@ -165,7 +166,12 @@ const Twig = () => {
       });
 
       if (response.ok) {
-        navigate(`/tree/${location.state?.userId}/branch/${branchId}`);
+        navigate(`/tree/${location.state?.userId}/branch/${branchId}`, {
+          state: {
+            userId: location.state?.userId,
+            branchType: originalBranchType,
+          },
+        });
       }
     } catch (error) {
       console.error("Failed to delete twig:", error);
@@ -207,6 +213,9 @@ const Twig = () => {
     }
   };
 
+  // log this so we know that we're going back to the correct branch
+  console.log("original branch type:", originalBranchType);
+
   return (
     <div className={`twig-type-${twigType}`}>
       <Navbar />
@@ -214,7 +223,10 @@ const Twig = () => {
         className="back-to-branch"
         onClick={() =>
           navigate(`/tree/${location.state?.userId}/branch/${branchId}`, {
-            state: { userId: location.state?.userId },
+            state: {
+              userId: location.state?.userId,
+              branchType: originalBranchType,
+            },
           })
         }
       >

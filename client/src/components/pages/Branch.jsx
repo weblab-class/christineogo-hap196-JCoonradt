@@ -270,6 +270,8 @@ const Branch = () => {
                 twigType: isWoodenSignLeft() ? 2 : 1,
                 branchId: branchId,
                 userId: currentUserId,
+                // need to pass in the original branch type so we can go back to it
+                branchType: branchType,
               },
             })
           }

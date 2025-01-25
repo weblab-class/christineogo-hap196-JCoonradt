@@ -90,50 +90,15 @@ body{
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
   font-family: "Pixelify Sans", sans-serif;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.tree-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at center, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.tree-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.tree-card:hover::before {
-  opacity: 1;
 }
 
 .tree-card h3 {
   margin: 0 0 15px 0;
-  color: #2d5a2e;
-  position: relative;
-  transition: color 0.3s ease;
-  z-index: 2;
-}
-
-.tree-card:hover h3 {
   color: #333;
 }
 
 .tree-card-actions {
   margin-top: 15px;
-  position: relative;
-  z-index: 2;
 }
 
 .friend-button {
