@@ -10,9 +10,14 @@ const Forest = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { userId } = useContext(UserContext);
   const [friendRequestStatus, setFriendRequestStatus] = useState({});
+  const [friendData, setFriendData] = useState({
+    friends: [],
+    pendingRequests: [],
+    incomingRequests: []
+  });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchTrees = async (query = "") => {
-    // debugging console statements
     console.log("Fetching trees with query:", query);
     try {
       const response = await get("/api/trees", { search: query });
@@ -27,9 +32,36 @@ const Forest = () => {
     }
   };
 
+  const fetchFriendData = async () => {
+    try {
+      const response = await get("/api/friend-status");
+      setFriendData(response);
+    } catch (err) {
+      console.error("Failed to fetch friend data:", err);
+    }
+  };
+
+  const getFriendshipStatus = (treeOwnerId) => {
+    // Check if they are already friends
+    if (friendData.friends.some(friend => friend._id === treeOwnerId)) {
+      return { text: "Friend", disabled: true };
+    }
+    // Check if there's a pending request sent by the current user
+    if (friendData.pendingRequests.some(request => request._id === treeOwnerId)) {
+      return { text: "Request Sent", disabled: true };
+    }
+    // Check if there's an incoming request from this user
+    if (friendData.incomingRequests.some(request => request._id === treeOwnerId)) {
+      return { text: "Accept Request", disabled: false, isIncoming: true };
+    }
+    // Default state - not friends
+    return { text: "Add Friend", disabled: false };
+  };
+
   useEffect(() => {
     const initializeTrees = async () => {
       await fetchTrees();
+      await fetchFriendData();
     };
     initializeTrees();
   }, []);
@@ -38,7 +70,7 @@ const Forest = () => {
     console.log("Search triggered with query:", searchQuery);
     await fetchTrees(searchQuery);
   };
-// allows users to search by pressing enter
+
   const handleKeyPress = async (e) => {
     if (e.key === 'Enter') {
       console.log("Enter key pressed");
@@ -47,10 +79,16 @@ const Forest = () => {
     }
   };
 
-  // ignore this for now it is not functional yet but should handle friend requests
   const handleFriendRequest = async (friendId) => {
     try {
-      await post("/api/friend-request", { friendId });
+      // If it's an incoming request, accept it instead of sending a new request
+      const status = getFriendshipStatus(friendId);
+      if (status.isIncoming) {
+        await handleAcceptFriend(friendId);
+      } else {
+        await post("/api/friend-request", { friendId });
+      }
+      await fetchFriendData();
       setFriendRequestStatus(prev => ({
         ...prev,
         [friendId]: 'sent'
@@ -66,11 +104,91 @@ const Forest = () => {
     }
   };
 
+  const handleAcceptFriend = async (friendId) => {
+    try {
+      await post("/api/accept-friend", { friendId });
+      await fetchFriendData();
+    } catch (err) {
+      console.error("Failed to accept friend request:", err);
+    }
+  };
+
+  const FriendStatusModal = () => {
+    if (!isModalOpen) return null;
+
+    return (
+      <>
+        <div className="modal-overlay" onClick={() => setIsModalOpen(false)} />
+        <div className="friend-status-modal">
+          <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
+          
+          <div className="modal-section">
+            <h3>Incoming Friend Requests</h3>
+            {friendData.incomingRequests.length === 0 ? (
+              <p>No incoming friend requests</p>
+            ) : (
+              <div>
+                {friendData.incomingRequests.map((request) => (
+                  <div key={request._id} className="friend-item">
+                    <span>{request.name}</span>
+                    <button
+                      onClick={() => handleAcceptFriend(request._id)}
+                      className="accept-button"
+                    >
+                      Accept
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="modal-section">
+            <h3>Pending Requests</h3>
+            {friendData.pendingRequests.length === 0 ? (
+              <p>No pending requests</p>
+            ) : (
+              <div>
+                {friendData.pendingRequests.map((request) => (
+                  <div key={request._id} className="friend-item">
+                    <span>{request.name}</span>
+                    <span className="pending-status">Pending</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="modal-section">
+            <h3>Friends</h3>
+            {friendData.friends.length === 0 ? (
+              <p>No friends yet</p>
+            ) : (
+              <div>
+                {friendData.friends.map((friend) => (
+                  <div key={friend._id} className="friend-item">
+                    <span>{friend.name}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       <Navbar />
       <div className="forest-container">
         <img src={forestBackground} alt="Forest Background" className="background-image" />
+        <button 
+          className="friend-status-button"
+          onClick={() => setIsModalOpen(true)}
+        >
+          Friend Status
+        </button>
         <div className="search-container">
           <div className="search-bar">
             <div className="search-input-container">
@@ -105,13 +223,11 @@ const Forest = () => {
                   {userId !== tree.ownerId && (
                     <div className="tree-card-actions">
                       <button
-                        className="friend-button"
+                        className={`friend-button ${getFriendshipStatus(tree.ownerId).isIncoming ? 'accept-friend-button' : ''}`}
                         onClick={() => handleFriendRequest(tree.ownerId)}
-                        disabled={friendRequestStatus[tree.ownerId] === 'sent'}
+                        disabled={getFriendshipStatus(tree.ownerId).disabled}
                       >
-                        {friendRequestStatus[tree.ownerId] === 'sent'
-                          ? 'Request Sent'
-                          : friendRequestStatus[tree.ownerId] || 'Add Friend'}
+                        {getFriendshipStatus(tree.ownerId).text}
                       </button>
                     </div>
                   )}
@@ -120,6 +236,7 @@ const Forest = () => {
             )}
           </div>
         </div>
+        <FriendStatusModal />
       </div>
     </>
   );

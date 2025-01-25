@@ -374,6 +374,89 @@ router.post("/friend-request", auth.ensureLoggedIn, async (req, res) => {
   }
 });
 
+// Get friend status
+router.get("/friend-status", auth.ensureLoggedIn, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
+    }
+
+    // Get incoming friend requests (where other users have current user in their friends array with pending status)
+    const incomingRequests = await User.find({
+      "friends": {
+        $elemMatch: {
+          userId: user._id,
+          status: "pending"
+        }
+      }
+    }).select("name _id");
+
+    // Safely process user's friends list, handling potentially malformed data
+    const friendsList = await Promise.all(user.friends.map(async friend => {
+      try {
+        // Check if friend.userId exists and is valid
+        if (!friend.userId) return null;
+        
+        const friendUser = await User.findById(friend.userId).select("name _id");
+        if (!friendUser) return null;
+
+        return {
+          _id: friendUser._id,
+          name: friendUser.name,
+          status: friend.status || "pending" // Default to pending if status is missing
+        };
+      } catch (err) {
+        console.log(`Error processing friend ${friend.userId}: ${err}`);
+        return null;
+      }
+    }));
+
+    // Filter out any null values from invalid friends
+    const validFriendsList = friendsList.filter(friend => friend !== null);
+
+    res.send({
+      friends: validFriendsList.filter(f => f.status === "accepted"),
+      pendingRequests: validFriendsList.filter(f => f.status === "pending"),
+      incomingRequests: incomingRequests
+    });
+  } catch (err) {
+    console.log(`Failed to get friend status: ${err}`);
+    res.status(500).send({ error: "Failed to get friend status" });
+  }
+});
+
+// Accept friend request
+router.post("/accept-friend", auth.ensureLoggedIn, async (req, res) => {
+  try {
+    const { friendId } = req.body;
+    const user = await User.findById(req.user._id);
+    const friend = await User.findById(friendId);
+
+    if (!user || !friend) {
+      return res.status(404).send({ error: "User not found" });
+    }
+
+    // Add friend to current user's friends list with accepted status
+    user.friends.push({ userId: friendId, status: "accepted" });
+    await user.save();
+
+    // Update the status of the friend request to accepted
+    const friendRequest = friend.friends.find(
+      f => f.userId.toString() === user._id.toString() && f.status === "pending"
+    );
+    if (friendRequest) {
+      friendRequest.status = "accepted";
+      await friend.save();
+    }
+
+    res.send({ message: "Friend request accepted" });
+  } catch (err) {
+    console.log(`Failed to accept friend request: ${err}`);
+    res.status(500).send({ error: "Failed to accept friend request" });
+  }
+});
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);
