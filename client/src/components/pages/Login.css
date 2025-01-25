@@ -8,6 +8,10 @@
   z-index: -1; /* put behind other content */
 }
 
+img.information-signL {
+  filter: brightness(85%); /* Reduces brightness to 30% */
+}
+
 .login-tree {
   position: fixed; /* Stick to the viewport */
   bottom: -200px; /* Align to the bottom of the screen */
@@ -31,7 +35,7 @@
 
 .login-owl {
   position: fixed; /* Sticks the image to a fixed position on the screen */
-  bottom: -20px; /* Aligns the image to the bottom */
+  bottom: 0; /* Aligns the image to the bottom */
   right: 0; /* Aligns the image to the left */
   max-width: 40%; /* Optional: Resize to fit nicely */
   max-height: 40%; /* Optional: Ensures the image doesn’t overflow */
@@ -82,7 +86,7 @@
   position: absolute;
   left: 50%;
   width: 95%;
-  transform: translate(-50%, 180%);
+  transform: translate(-50%, 220%);
   color: white;
   font-size: 1.8rem;
   font-weight: bold;
