@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback, lazy, Suspense } from "react";
+import React, { useContext, useState, useEffect, useCallback, lazy, Suspense, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "../../utilities.css";
@@ -12,6 +12,7 @@ import fourBranch from "../../assets/fourBranch.png";
 import fiveBranch from "../../assets/fiveBranch.png";
 import sixBranch from "../../assets/sixBranch.png";
 import background from "../../assets/treeBackground.png";
+import racoonImg from "../../assets/racoon.gif";
 
 // Lazy-loaded components
 const CustomButton = lazy(() => import("../modules/CustomButton"));
@@ -47,6 +48,63 @@ const Home = React.memo(() => {
   const [branches, setBranches] = useState([]);
   const [isEditMode, setIsEditMode] = useState(false);
 
+  //Tutorial state variables and steps
+  const [tutorialActive, setTutorialActive] = useState(false);
+  const tutorialActiveRef = useRef(false);
+  const [currentStep, setCurrentStep] = useState(-1);
+
+  const steps = [
+    {
+      message: "Click the add branch button above to create a new branch.",
+      top: "40%",
+      left: "75%",
+    },
+    {
+      message:
+        "Title and describe your branch. Branches are for general skills areas like finance, research, or website development",
+      top: "50%",
+      left: "30%",
+    },
+    {
+      message:
+        "Great! Now, click on the title of the branch you just created to zoom in and see your twigs",
+      top: "62%",
+      left: "33%",
+    },
+    {
+      message:
+        "Fantastic! Now, pres the add twig button to add a twig to cover a more specific category of the general skill area like options trading for finance, climate science research for research or MERN stack for website development.",
+      top: "20%",
+      left: "10%",
+    },
+    {
+      message:
+        "Awesome! Now you can add a leaf with specific projects on that twig. For example, on an options trading twig I could put an algorithm I made, on a climate science research twig I could put an energy analysis project I completed, and for a MERN Stack twig I could put this amazing website that my team and I created!",
+      top: "20%",
+      left: "10%",
+    },
+    {
+      message:
+        "You can always use the navigation bar up here to select forest and visit your friends' trees. You're all set! Have fun exploring.",
+      top: "20%",
+      left: "10%",
+    },
+  ];
+  const startTutorial = () => {
+    console.log("Starting tutorial...");
+    setTutorialActive(true);
+    tutorialActiveRef.current = true; // Set tutorialActive to true
+    setCurrentStep(0); // Reset tutorial step
+    console.log("Tutorial active:", tutorialActiveRef.current);
+  };
+  const handleNext = () => {
+    if (currentStep < steps.length - 1) {
+      setCurrentStep((prev) => prev + 1);
+    } else {
+      setTutorialActive = false; // End tutorial
+    }
+  };
+
   // States to manage wooden sign content
   const [branchName, setBranchName] = useState("");
   const [branchDescription, setBranchDescription] = useState("");
@@ -79,6 +137,8 @@ const Home = React.memo(() => {
     setIsEditMode(true);
     setBranchName("");
     setBranchDescription("");
+    console.log("Current step" + currentStep);
+    setCurrentStep(1);
     setShowWoodenSign(true);
   }, []);
 
@@ -110,7 +170,8 @@ const Home = React.memo(() => {
         } else {
           console.error("Failed to fetch updated tree data");
         }
-
+        console.log("Current step" + currentStep);
+        setCurrentStep(2);
         setShowWoodenSign(false);
         setBranchName("");
         setBranchDescription("");
@@ -140,7 +201,14 @@ const Home = React.memo(() => {
   // Handle branch click
   const handleBranchClick = useCallback(
     (branchId, index) => {
-      navigate(`/tree/${userId}/branch/${branchId}`, { state: { branchType: index + 1 } });
+      console.log("Navigating with tutorialActive:", tutorialActive);
+      navigate(`/tree/${userId}/branch/${branchId}`, {
+        state: {
+          branchType: index + 1,
+          tutorialActive: tutorialActiveRef.current, // Ensure this value is correct
+          currentStep: 3,
+        },
+      });
     },
     [navigate, userId]
   );
@@ -158,7 +226,7 @@ const Home = React.memo(() => {
   return (
     <div>
       <Suspense fallback={<div>Loading Navbar...</div>}>
-        <Navbar />
+        <Navbar startTutorial={startTutorial} />
       </Suspense>
       <img className="background-image" src={background} alt="Background" />
       <div className="add-branch-container">
@@ -196,6 +264,27 @@ const Home = React.memo(() => {
           {branches[index]?.name}
         </div>
       ))}
+
+      {/* Tutorial Overlay */}
+      {tutorialActive && (
+        <div className="tutorial-overlay">
+          <div
+            className="tutorial-animal"
+            style={{
+              top: steps[currentStep].top,
+              left: steps[currentStep].left,
+              position: "absolute",
+              transition: "all 0.5s ease-in-out",
+            }}
+          >
+            <img src={racoonImg} alt="Animal Guide" className="animal-image" />
+            <div className="tutorial-message">{steps[currentStep].message}</div>
+          </div>
+          <button className="tutorial-next" onClick={handleNext}>
+            {currentStep < steps.length - 1 ? "Next" : "Finish"}
+          </button>
+        </div>
+      )}
     </div>
   );
 });
