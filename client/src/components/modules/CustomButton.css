@@ -8,6 +8,12 @@
   transition: background-color 0.2s ease;
 }
 
+.custom-button:disabled {
+  background-color: rgba(139, 115, 85, 0.5);
+  cursor: not-allowed;
+  color: #a9a9a9 !important; /* override text colors when disabled */
+}
+
 .text-green {
   color: #00ff00;
   font-family: "Pixelify Sans", sans-serif;
@@ -26,6 +32,6 @@
   font-size: var(--xl);
 }
 
-.custom-button:hover {
+.custom-button:hover:not(:disabled) {
   background-color: rgba(0, 0, 0, 0.8); /* more opaque black */
 }

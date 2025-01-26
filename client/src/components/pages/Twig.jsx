@@ -101,7 +101,7 @@ const Twig = () => {
     },
     {
       message:
-        "Fantastic! Now title and describe your leaf. For example, on an options trading twig I could put an algorithm I made, on a climate science research twig I could put an energy analysis project I completed, and for a MERN Stack twig I could put this amazing website we created!",
+        "Fantastic! Now title and describe your leaf. Add a link or file to your project leaf too if relevant. For example, on an options trading twig I could put an algorithm I made, on a climate science research twig I could put an energy analysis project I completed, and for a MERN Stack twig I could put this amazing website we created!",
       top: "50%",
       left: "30%",
     },

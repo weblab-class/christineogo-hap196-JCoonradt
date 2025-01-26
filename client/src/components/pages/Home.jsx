@@ -259,7 +259,11 @@ const Home = React.memo(() => {
       </div>
       <div className="add-branch-container">
         <Suspense fallback={<div>Loading Button...</div>}>
-          <CustomButton text="Add Branch" onClick={handleAddBranch} />
+          <CustomButton
+            text="Add Branch"
+            onClick={handleAddBranch}
+            disabled={currentImageIndex >= 6}
+          />
         </Suspense>
       </div>
       <div className="wooden-sign-container-home">

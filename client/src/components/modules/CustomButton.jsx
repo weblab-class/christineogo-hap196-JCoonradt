@@ -1,10 +1,12 @@
 import React from "react";
 import "./CustomButton.css";
 
-const CustomButton = ({ text, onClick, color = "green" }) => {
+const CustomButton = ({ text, onClick, color = "brown", disabled = false }) => {
+  const colorClass = `text-${color === "brown" ? "white" : color}`;
+
   return (
-    <button className="custom-button" onClick={onClick}>
-      <span className={`text-${color}`}>{text}</span>
+    <button className={`custom-button ${colorClass}`} onClick={onClick} disabled={disabled}>
+      {text}
     </button>
   );
 };
