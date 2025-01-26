@@ -124,7 +124,7 @@
   text-align: center;
   z-index: 1000;
   top: -320px;
-  width: 300px;
+  width: 350px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   pointer-events: auto; /* Allow interactions with the text bubble if needed */
 }

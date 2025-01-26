@@ -28,6 +28,8 @@ body {
   left: 10px;
   top: 10%;
   z-index: 1000;
+  height: 600px;
+  width: 400px;
 }
 
 /* left side twig */
@@ -45,6 +47,8 @@ body {
   position: absolute;
   right: 10px;
   top: 35%;
+  height: 600px;
+  width: 400px;
   z-index: 2;
 }
 
@@ -193,4 +197,20 @@ body {
 
 .tutorial-next:hover {
   background-color: #45a049;
+}
+
+.tutorial-message {
+  position: relative; /* Position relative to the .tutorial-animal container */
+  bottom: 10px; /* Adjust the position above the animal */
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 15px 20px; /* Control bubble size */
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+  z-index: 1000;
+  top: -360px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  pointer-events: auto; /* Allow interactions with the text bubble if needed */
 }
