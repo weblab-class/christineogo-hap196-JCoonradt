@@ -311,12 +311,16 @@ const Home = React.memo(() => {
               transition: "all 0.5s ease-in-out",
             }}
           >
-            <img src={racoonImg} alt="Animal Guide" className="animal-image" />
-            <div className="tutorial-message">{steps[currentStep].message}</div>
+            <img
+              src={racoonImg}
+              style={{ zIndex: 1000 }}
+              alt="Animal Guide"
+              className="animal-image"
+            />
+            <div className="tutorial-message" style={{ zIndex: 1000 }}>
+              {steps[currentStep].message}
+            </div>
           </div>
-          <button className="tutorial-next" onClick={handleNext}>
-            {currentStep < steps.length - 1 ? "Next" : "Finish"}
-          </button>
         </div>
       )}
     </div>

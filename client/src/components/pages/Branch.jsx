@@ -102,6 +102,11 @@ const Branch = () => {
       left: "60%",
     },
     {
+      message: "Awesome! Now add a leaf by pressing the add leaf button.",
+      top: "40%",
+      left: "30%",
+    },
+    {
       message:
         "Awesome! Now add a leaf with specific projects on that twig by pressing the add leaf button. For example, on an options trading twig I could put an algorithm I made, on a climate science research twig I could put an energy analysis project I completed, and for a MERN Stack twig I could put this amazing website that my team and I created!",
       top: "20%",
@@ -134,6 +139,8 @@ const Branch = () => {
   const [twigs, setTwigs] = useState([]);
   const [twigName, setTwigName] = useState("");
   const [twigDescription, setTwigDescription] = useState("");
+
+  const tutorialActiveRef = useRef(location.state?.tutorialActive || false);
 
   const [tutorialActive, setTutorialActive] = useState(location.state?.tutorialActive || false);
   console.log(tutorialActive);
@@ -333,9 +340,6 @@ const Branch = () => {
             <img src={racoonImg} alt="Animal Guide" className="animal-image" />
             <div className="tutorial-message">{steps[currentStep].message}</div>
           </div>
-          <button className="tutorial-next" onClick={handleNext}>
-            {currentStep < steps.length - 1 ? "Next" : "Finish"}
-          </button>
         </div>
       )}
       {/* wooden sign for displaying/editing branch or twig info */}
@@ -362,6 +366,7 @@ const Branch = () => {
         Your browser does not support the audio element.
       </audio>
       <MusicButton />
+
       {/* twig hitboxes */}
       {twigs.slice(0, 3).map((twig, index) => (
         <div
@@ -377,6 +382,8 @@ const Branch = () => {
                 userId: currentUserId,
                 // need to pass in the original branch type so we can go back to it
                 branchType: branchType,
+                tutorialActive: tutorialActiveRef.current, // Ensure this value is correct
+                currentStep: 6,
               },
             })
           }

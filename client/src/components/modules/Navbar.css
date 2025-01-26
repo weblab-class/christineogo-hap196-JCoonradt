@@ -4,46 +4,42 @@
   height: 60px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
   cursor: pointer;
-  transition: 0.3s ease-in-out; /* transition to slide menu in */
-  z-index: 510; /* put on top of other elements */
+  transition: height 0.3s ease-in-out, background 0.3s ease-in-out; /* Smooth height and background transitions */
+  z-index: 505; /* Place it above other elements */
+  overflow: hidden; /* Prevent menu content from showing when collapsed */
 }
 
+/* Navbar expanded on hover */
 .navbar:hover {
-  /* height: 100vh; on hover, expand to full height */
-  height: 85vh;
+  height: 85vh; /* Expand to full height */
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.75));
 }
 
+/* Disable hover when tutorial has started */
+.navbar-no-hover:hover {
+  height: 60px; /* Keep collapsed height */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+}
+
+/* Menu styles */
 .menu {
   position: absolute;
-  top: -20px;
+  top: 60px; /* Position below navbar */
   left: 50%;
-  transform: translateX(-50%); /* center the menu */
-  padding: 10px;
+  transform: translateX(-50%);
+  width: 100%;
+  padding: 20px;
   text-align: center;
   color: white;
   font-size: var(--xxxl);
-  width: 100%;
-}
-
-.close-button:hover {
-  color: #39ff14;
-}
-
-.menu-header h2 {
-  margin: 0;
-  top: -40px;
-  display: inline-block;
-  width: 100%;
-  margin-top: var(--l);
-  margin-bottom: var(--l);
+  z-index: 506;
 }
 
 .menu-links-div {
-  margin-top: var(--l);
   display: flex;
-  flex-direction: column; /* stack links vertically */
+  flex-direction: column; /* Stack links vertically */
   align-items: center;
+  margin-top: 20px;
 }
 
 .menu a {
@@ -51,29 +47,25 @@
   text-decoration: none;
   margin: 5px 0;
   padding: 5px;
+  font-size: var(--xxl);
 }
 
 .menu a:hover {
-  color: #39ff14;
+  color: #39ff14; /* Highlight links on hover */
 }
 
+/* Chevron icon */
 .chevron {
   height: 24px;
   cursor: pointer;
   position: absolute;
   left: 50%;
-  top: 18px; /* center vertically in the 60px navbar */
+  top: 18px; /* Center vertically in the 60px navbar */
   transform: translateX(-50%);
+  transition: opacity 0.3s ease-in-out;
 }
 
-.chevron-rotated {
-  height: 24px;
-  transform: rotate(180deg);
-  cursor: pointer;
-  margin-top: var(--xxxxxl);
-}
-
+/* Chevron hidden when navbar expands */
 .navbar:hover .chevron {
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
 }

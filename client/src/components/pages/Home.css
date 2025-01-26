@@ -102,7 +102,7 @@
   display: flex;
   flex-direction: column; /* Stack bubble and animal vertically */
   align-items: center; /* Center-align the bubble and the animal */
-  z-index: 1001; /* Ensure it's above other elements */
+  z-index: 1201; /* Ensure it's above other elements */
   pointer-events: none; /* Prevent this container from blocking clicks */
 }
 
@@ -136,7 +136,7 @@
   width: 100vw;
   height: 100vh;
   background-color: transparent; /* Transparent overlay */
-  z-index: 495; /* Keep it below the tutorial elements */
+  z-index: 510; /* Keep it below the tutorial elements */
   pointer-events: none; /* Ensure overlay doesn't block clicks */
   background-color: rgba(0, 0, 0, 0.5);
 }
