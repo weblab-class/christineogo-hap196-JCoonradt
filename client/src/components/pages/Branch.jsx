@@ -355,6 +355,7 @@ const Branch = () => {
             readOnly={!isEditMode && isTwigMode}
             initialEditMode={isEditMode}
             mode={isTwigMode ? "twig" : "branch"}
+            disabled={twigs.length >= 3}
           />
         </div>
       )}

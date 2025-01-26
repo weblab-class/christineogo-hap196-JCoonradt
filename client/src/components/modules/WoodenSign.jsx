@@ -34,6 +34,7 @@ const WoodenSign = memo(
     initialEditMode = false,
     mode = "branch",
     showAddLeaf = false,
+    disabled = false,
   }) => {
     const [isEditing, setIsEditing] = useState(initialEditMode);
     const [editTitle, setEditTitle] = useState(title);
@@ -208,7 +209,12 @@ const WoodenSign = memo(
                 <CustomButton text="Edit" color="white" onClick={() => setIsEditing(true)} />
                 <CustomButton text="Delete" color="red" onClick={handleDelete} />
                 {mode === "branch" && (
-                  <CustomButton text="Add Twig" color="green" onClick={onAddTwig} />
+                  <CustomButton 
+                    text="Add Twig" 
+                    color="green" 
+                    onClick={onAddTwig}
+                    disabled={disabled}
+                  />
                 )}
                 {showAddLeaf && <CustomButton text="Add Leaf" color="green" onClick={onAddLeaf} />}
               </>
