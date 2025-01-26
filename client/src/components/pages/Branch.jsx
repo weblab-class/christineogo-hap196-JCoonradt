@@ -31,6 +31,7 @@ import branchSixTwigThree from "../../assets/branches/branchSix/branchSixTwigThr
 import chevronGrey from "../../assets/chevronGrey.png";
 import branchBackground from "../../assets/branchBackground.png";
 import racoonImg from "../../assets/racoon.gif";
+import MusicButton from "../modules/MusicButton";
 
 // component for displaying a single branch and its twigs
 // goal is to have a branch component that can be used for both left and right side branches
@@ -345,7 +346,7 @@ const Branch = () => {
       )}
       {/* branch image showing current number of twigs */}
       <img className="branch-image" src={twigImages[currentTwigIndex]} alt="Branch" />
-
+      <MusicButton />
       {/* twig hitboxes */}
       {twigs.slice(0, 3).map((twig, index) => (
         <div

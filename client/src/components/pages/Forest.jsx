@@ -5,6 +5,7 @@ import "./Forest.css";
 import Navbar from "../modules/Navbar";
 import forestBackground from "../../assets/forestBackground.png";
 import { useNavigate } from "react-router-dom";
+import MusicButton from "../modules/MusicButton";
 
 const Forest = () => {
   const [trees, setTrees] = useState([]);
@@ -14,7 +15,7 @@ const Forest = () => {
   const [friendData, setFriendData] = useState({
     friends: [],
     pendingRequests: [],
-    incomingRequests: []
+    incomingRequests: [],
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -45,15 +46,15 @@ const Forest = () => {
 
   const getFriendshipStatus = (treeOwnerId) => {
     // Check if they are already friends
-    if (friendData.friends.some(friend => friend._id === treeOwnerId)) {
+    if (friendData.friends.some((friend) => friend._id === treeOwnerId)) {
       return { text: "Friend", disabled: true };
     }
     // Check if there's a pending request sent by the current user
-    if (friendData.pendingRequests.some(request => request._id === treeOwnerId)) {
+    if (friendData.pendingRequests.some((request) => request._id === treeOwnerId)) {
       return { text: "Request Sent", disabled: true };
     }
     // Check if there's an incoming request from this user
-    if (friendData.incomingRequests.some(request => request._id === treeOwnerId)) {
+    if (friendData.incomingRequests.some((request) => request._id === treeOwnerId)) {
       return { text: "Accept Request", disabled: false, isIncoming: true };
     }
     // Default state - not friends
@@ -74,7 +75,7 @@ const Forest = () => {
   };
 
   const handleKeyPress = async (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       console.log("Enter key pressed");
       e.preventDefault();
       await handleSearch();
@@ -91,16 +92,16 @@ const Forest = () => {
         await post("/api/friend-request", { friendId });
       }
       await fetchFriendData();
-      setFriendRequestStatus(prev => ({
+      setFriendRequestStatus((prev) => ({
         ...prev,
-        [friendId]: 'sent'
+        [friendId]: "sent",
       }));
     } catch (err) {
       console.error("Failed to send friend request:", err);
       if (err.response?.data?.error) {
-        setFriendRequestStatus(prev => ({
+        setFriendRequestStatus((prev) => ({
           ...prev,
-          [friendId]: err.response.data.error
+          [friendId]: err.response.data.error,
         }));
       }
     }
@@ -120,11 +121,11 @@ const Forest = () => {
 
     const handleVisitTree = (friend) => {
       setIsModalOpen(false);
-      navigate(`/friend/${friend._id}/tree`, { 
-        state: { 
+      navigate(`/friend/${friend._id}/tree`, {
+        state: {
           friendName: friend.name,
-          userId: friend._id 
-        }
+          userId: friend._id,
+        },
       });
     };
 
@@ -132,8 +133,10 @@ const Forest = () => {
       <>
         <div className="modal-overlay" onClick={() => setIsModalOpen(false)} />
         <div className="friend-status-modal">
-          <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
-          
+          <button className="modal-close" onClick={() => setIsModalOpen(false)}>
+            ×
+          </button>
+
           <div className="modal-section">
             <h3>Incoming Friend Requests</h3>
             {friendData.incomingRequests.length === 0 ? (
@@ -180,10 +183,7 @@ const Forest = () => {
                 {friendData.friends.map((friend) => (
                   <div key={friend._id} className="friend-item">
                     <span>{friend.name}</span>
-                    <button
-                      onClick={() => handleVisitTree(friend)}
-                      className="visit-tree-button"
-                    >
+                    <button onClick={() => handleVisitTree(friend)} className="visit-tree-button">
                       Visit Tree
                     </button>
                   </div>
@@ -201,10 +201,7 @@ const Forest = () => {
       <Navbar />
       <div className="forest-container">
         <img src={forestBackground} alt="Forest Background" className="background-image" />
-        <button 
-          className="friend-status-button"
-          onClick={() => setIsModalOpen(true)}
-        >
+        <button className="friend-status-button" onClick={() => setIsModalOpen(true)}>
           Friend Status
         </button>
         <div className="search-container">
@@ -218,10 +215,7 @@ const Forest = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={handleKeyPress}
               />
-              <button
-                className="search-button"
-                onClick={handleSearch}
-              >
+              <button className="search-button" onClick={handleSearch}>
                 Search
               </button>
             </div>
@@ -231,9 +225,7 @@ const Forest = () => {
         <div className="forest-content">
           <div className="tree-grid">
             {trees.length === 0 ? (
-              <div className="no-trees-message">
-                No trees found :(
-              </div>
+              <div className="no-trees-message">No trees found :(</div>
             ) : (
               trees.map((tree) => (
                 <div key={tree.ownerId} className="tree-card">
@@ -241,7 +233,9 @@ const Forest = () => {
                   {userId !== tree.ownerId && (
                     <div className="tree-card-actions">
                       <button
-                        className={`friend-button ${getFriendshipStatus(tree.ownerId).isIncoming ? 'accept-friend-button' : ''}`}
+                        className={`friend-button ${
+                          getFriendshipStatus(tree.ownerId).isIncoming ? "accept-friend-button" : ""
+                        }`}
                         onClick={() => handleFriendRequest(tree.ownerId)}
                         disabled={getFriendshipStatus(tree.ownerId).disabled}
                       >
@@ -255,6 +249,7 @@ const Forest = () => {
           </div>
         </div>
         <FriendStatusModal />
+        <MusicButton />
       </div>
     </>
   );

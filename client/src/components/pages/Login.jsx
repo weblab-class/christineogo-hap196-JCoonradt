@@ -14,6 +14,7 @@ const Login = () => {
   return (
     <div className="Login-container">
       {/* <Navbar /> */}
+
       <img src={loginBackground} alt="Background" className="login-background" />
       <img src={logInTree} alt="Background" className="login-tree" />
       <img src={racoon} alt="Cute racoon" className="login-racoon" />
