@@ -20,6 +20,7 @@ import rightTwigThreeLeaf from "../../assets/twigs/right/rightTwigThreeLeaf.png"
 import rightTwigFourLeaf from "../../assets/twigs/right/rightTwigFourLeaf.png";
 import rightTwigFiveLeaf from "../../assets/twigs/right/rightTwigFiveLeaf.png";
 import rightTwigSixLeaf from "../../assets/twigs/right/rightTwigSixLeaf.png";
+import MusicButton from "../modules/MusicButton";
 
 const Twig = () => {
   const { twigId } = useParams();
@@ -281,6 +282,7 @@ const Twig = () => {
           {leaf.name}
         </div>
       ))}
+      <MusicButton />
     </div>
   );
 };

@@ -19,6 +19,7 @@ const CustomButton = lazy(() => import("../modules/CustomButton"));
 const Navbar = lazy(() => import("../modules/Navbar"));
 const Login = lazy(() => import("./Login"));
 const WoodenSign = lazy(() => import("../modules/WoodenSign"));
+const MusicButton = lazy(() => import("../modules/MusicButton"));
 
 const branchImages = [
   noBranch,
@@ -264,6 +265,7 @@ const Home = React.memo(() => {
           {branches[index]?.name}
         </div>
       ))}
+      <MusicButton />
 
       {/* Tutorial Overlay */}
       {tutorialActive && (
