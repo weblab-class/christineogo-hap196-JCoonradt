@@ -38,8 +38,11 @@ const router = createBrowserRouter(
       <Route path="/friend/:userId/tree/branch/:branchId/twig/:twigId/leaf/:leafId" element={<FriendLeaf />} />
       <Route path="/tree/:userId/branch/:branchId" element={<Branch />} />
       <Route path="/tree/:userId/branch/:branchId/twig/:twigId" element={<Twig />} />
-      <Route path="/tree/:userId/branch/:branchId/twig/:twigId/leaf/:leafId" element={<Leaf />} />
       <Route path="/howto" element={<HowTo />} />
+      {/* Friend tree routes */}
+      <Route path="/friend/:userId/tree" element={<FriendTree />} />
+      <Route path="/friend/:userId/tree/branch/:branchId" element={<FriendBranch />} />
+      <Route path="/friend/:userId/tree/twig/:twigId" element={<FriendTwig />} />
     </Route>
   )
 );

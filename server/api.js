@@ -88,6 +88,10 @@ router.get("/tree/:userId", async (req, res) => {
           model: "twig",
           populate: {
             path: "leaves",
+          },
+        },
+      },
+            path: "leaves",
             model: "leaf"
           }
         }
@@ -304,7 +308,7 @@ router.post("/leaf", async (req, res) => {
     // add its ObjectId to the twig's leaves array
     twig.leaves.push(leaf._id);
     await twig.save();
-    
+
     // return the populated leaf object
     res.send(leaf);
   } catch (err) {
@@ -360,10 +364,7 @@ router.delete("/leaf/:leafId", async (req, res) => {
     }
 
     // remove leaf reference from twig
-    await Twig.findOneAndUpdate(
-      { leaves: leaf._id },
-      { $pull: { leaves: leaf._id } }
-    );
+    await Twig.findOneAndUpdate({ leaves: leaf._id }, { $pull: { leaves: leaf._id } });
 
     // delete the leaf
     await Leaf.findByIdAndDelete(req.params.leafId);
@@ -505,41 +506,43 @@ router.get("/friend-status", auth.ensureLoggedIn, async (req, res) => {
 
     // Get incoming friend requests (where other users have current user in their friends array with pending status)
     const incomingRequests = await User.find({
-      "friends": {
+      friends: {
         $elemMatch: {
           userId: user._id,
-          status: "pending"
-        }
-      }
+          status: "pending",
+        },
+      },
     }).select("name _id");
 
     // Safely process user's friends list, handling potentially malformed data
-    const friendsList = await Promise.all(user.friends.map(async friend => {
-      try {
-        // Check if friend.userId exists and is valid
-        if (!friend.userId) return null;
-        
-        const friendUser = await User.findById(friend.userId).select("name _id");
-        if (!friendUser) return null;
+    const friendsList = await Promise.all(
+      user.friends.map(async (friend) => {
+        try {
+          // Check if friend.userId exists and is valid
+          if (!friend.userId) return null;
 
-        return {
-          _id: friendUser._id,
-          name: friendUser.name,
-          status: friend.status || "pending" // Default to pending if status is missing
-        };
-      } catch (err) {
-        console.log(`Error processing friend ${friend.userId}: ${err}`);
-        return null;
-      }
-    }));
+          const friendUser = await User.findById(friend.userId).select("name _id");
+          if (!friendUser) return null;
+
+          return {
+            _id: friendUser._id,
+            name: friendUser.name,
+            status: friend.status || "pending", // Default to pending if status is missing
+          };
+        } catch (err) {
+          console.log(`Error processing friend ${friend.userId}: ${err}`);
+          return null;
+        }
+      })
+    );
 
     // Filter out any null values from invalid friends
-    const validFriendsList = friendsList.filter(friend => friend !== null);
+    const validFriendsList = friendsList.filter((friend) => friend !== null);
 
     res.send({
-      friends: validFriendsList.filter(f => f.status === "accepted"),
-      pendingRequests: validFriendsList.filter(f => f.status === "pending"),
-      incomingRequests: incomingRequests
+      friends: validFriendsList.filter((f) => f.status === "accepted"),
+      pendingRequests: validFriendsList.filter((f) => f.status === "pending"),
+      incomingRequests: incomingRequests,
     });
   } catch (err) {
     console.log(`Failed to get friend status: ${err}`);
@@ -564,7 +567,7 @@ router.post("/accept-friend", auth.ensureLoggedIn, async (req, res) => {
 
     // Update the status of the friend request to accepted
     const friendRequest = friend.friends.find(
-      f => f.userId.toString() === user._id.toString() && f.status === "pending"
+      (f) => f.userId.toString() === user._id.toString() && f.status === "pending"
     );
     if (friendRequest) {
       friendRequest.status = "accepted";
