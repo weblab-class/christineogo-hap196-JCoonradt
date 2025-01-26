@@ -1,9 +1,17 @@
 .wooden-sign-container {
-  position: absolute;
-  top: 0%;
-  /* left: 1%; */
+  position: fixed;
   width: 400px;
-  z-index: 2;
+  z-index: 501;
+}
+
+.left-sign {
+  left: 10px;
+  top: 0%;
+}
+
+.right-sign {
+  right: 10px;
+  top: 0%;
 }
 
 .wooden-sign-image {
@@ -14,11 +22,11 @@
 .wooden-sign-content {
   position: absolute;
   top: 50%;
-  left: 48%; /* center the content */
+  left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  width: 80%; /* reduced from 100% to prevent text overflow */
-  word-wrap: break-word; /* allow text to wrap */
+  width: 80%;
+  word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
@@ -133,7 +141,7 @@
 .wooden-sign-content-link {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   text-decoration: none;
   border-radius: 4px;

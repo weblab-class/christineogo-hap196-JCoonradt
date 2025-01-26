@@ -34,6 +34,7 @@ const WoodenSign = memo(
     initialEditMode = false,
     mode = "branch",
     showAddLeaf = false,
+    disabled = false,
   }) => {
     const [isEditing, setIsEditing] = useState(initialEditMode);
     const [editTitle, setEditTitle] = useState(title);
@@ -47,15 +48,15 @@ const WoodenSign = memo(
       setEditTitle(title);
       setEditDescription(description);
       setEditLink(link || "");
-      setUploadedImage(link?.startsWith('data:image') ? link : null);
+      setUploadedImage(link?.startsWith("data:image") ? link : null);
     }, [initialEditMode, title, description, link]);
 
     const debouncedSetEditTitle = debounce((value) => setEditTitle(value), 150);
     const debouncedSetEditDescription = debounce((value) => setEditDescription(value), 150);
-    
+
     const handleLinkChange = (value) => {
       setEditLink(value);
-      if (value && !value.startsWith('data:image') && !isValidUrl(value)) {
+      if (value && !value.startsWith("data:image") && !isValidUrl(value)) {
         setLinkError("Please enter a valid URL (e.g., https://example.com)");
       } else {
         setLinkError("");
@@ -65,7 +66,8 @@ const WoodenSign = memo(
     const handleImageUpload = async (e) => {
       const file = e.target.files[0];
       if (file) {
-        if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        if (file.size > 5 * 1024 * 1024) {
+          // 5MB limit
           setLinkError("Image size should be less than 5MB");
           return;
         }
@@ -80,11 +82,11 @@ const WoodenSign = memo(
     };
 
     const handleSubmit = () => {
-      if (editLink && !editLink.startsWith('data:image') && !isValidUrl(editLink)) {
+      if (editLink && !editLink.startsWith("data:image") && !isValidUrl(editLink)) {
         setLinkError("Please enter a valid URL before submitting");
         return;
       }
-      onSubmit(editTitle, editDescription, editLink, mode);
+      onSubmit(editTitle, editDescription, mode, editLink);
       setIsEditing(false);
     };
 
@@ -92,15 +94,15 @@ const WoodenSign = memo(
       setEditTitle(title);
       setEditDescription(description);
       setEditLink(link || "");
-      setUploadedImage(link?.startsWith('data:image') ? link : null);
+      setUploadedImage(link?.startsWith("data:image") ? link : null);
       setLinkError("");
       setIsEditing(false);
       if (onCancel) onCancel();
     };
 
     const handleDelete = () => {
-      const confirmMessage = 
-        mode === "branch" 
+      const confirmMessage =
+        mode === "branch"
           ? "Are you sure you want to delete this branch? This will delete all twigs and leaves grown on it."
           : mode === "twig"
           ? "Are you sure you want to delete this twig? This will delete all leaves grown on it."
@@ -122,8 +124,8 @@ const WoodenSign = memo(
                 defaultValue={editTitle}
                 onChange={(e) => debouncedSetEditTitle(e.target.value)}
                 placeholder={
-                  mode === "branch" 
-                    ? "Enter branch name" 
+                  mode === "branch"
+                    ? "Enter branch name"
                     : mode === "twig"
                     ? "Enter twig name"
                     : "Enter leaf name"
@@ -134,8 +136,8 @@ const WoodenSign = memo(
                 defaultValue={editDescription}
                 onChange={(e) => debouncedSetEditDescription(e.target.value)}
                 placeholder={
-                  mode === "branch" 
-                    ? "Enter branch description" 
+                  mode === "branch"
+                    ? "Enter branch description"
                     : mode === "twig"
                     ? "Enter twig description"
                     : "Enter leaf description"
@@ -150,7 +152,7 @@ const WoodenSign = memo(
                       value={editLink}
                       onChange={(e) => handleLinkChange(e.target.value)}
                       placeholder="Enter website URL (e.g., https://example.com)"
-                      className={`wooden-sign-link ${linkError ? 'error' : ''}`}
+                      className={`wooden-sign-link ${linkError ? "error" : ""}`}
                     />
                     {linkError && <div className="wooden-sign-link-error">{linkError}</div>}
                   </div>
@@ -162,7 +164,11 @@ const WoodenSign = memo(
                       className="wooden-sign-image-input"
                     />
                     {uploadedImage && (
-                      <img src={uploadedImage} alt="Preview" className="wooden-sign-image-preview" />
+                      <img
+                        src={uploadedImage}
+                        alt="Preview"
+                        className="wooden-sign-image-preview"
+                      />
                     )}
                   </div>
                 </div>
@@ -174,10 +180,15 @@ const WoodenSign = memo(
               <p className="wooden-sign-description">{description}</p>
               {mode === "leaf" && link && (
                 <div className="wooden-sign-media">
-                  {link.startsWith('data:image') ? (
+                  {link.startsWith("data:image") ? (
                     <img src={link} alt="Uploaded content" className="wooden-sign-content-image" />
                   ) : isValidUrl(link) ? (
-                    <a href={link} target="_blank" rel="noopener noreferrer" className="wooden-sign-content-link">
+                    <a
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="wooden-sign-content-link"
+                    >
                       Visit Link
                     </a>
                   ) : null}
@@ -198,10 +209,20 @@ const WoodenSign = memo(
                 <CustomButton text="Edit" color="white" onClick={() => setIsEditing(true)} />
                 <CustomButton text="Delete" color="red" onClick={handleDelete} />
                 {mode === "branch" && (
-                  <CustomButton text="Add Twig" color="green" onClick={onAddTwig} />
+                  <CustomButton 
+                    text="Add Twig" 
+                    color="green" 
+                    onClick={onAddTwig}
+                    disabled={disabled}
+                  />
                 )}
                 {showAddLeaf && (
-                  <CustomButton text="Add Leaf" color="green" onClick={onAddLeaf} />
+                  <CustomButton 
+                    text="Add Leaf" 
+                    color="green" 
+                    onClick={onAddLeaf}
+                    disabled={disabled}
+                  />
                 )}
               </>
             )}

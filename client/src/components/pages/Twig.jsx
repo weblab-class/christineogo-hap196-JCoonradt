@@ -208,7 +208,7 @@ const Twig = () => {
   };
 
   // handler for submitting twig or leaf changes
-  const handleSubmit = async (title, description, link, mode) => {
+  const handleSubmit = async (title, description, mode, link) => {
     try {
       setCurrentStep(8);
       playSound();
@@ -238,6 +238,7 @@ const Twig = () => {
           setLeafName(newLeaf.name);
           setLeafDescription(newLeaf.description);
           setLeafLink(newLeaf.link || "");
+          setLeafLink(newLeaf.link);
         }
       } else {
         const response = await fetch(`/api/twig/${twigId}`, {
@@ -337,6 +338,7 @@ const Twig = () => {
             initialEditMode={isEditMode}
             mode={isLeafMode ? "leaf" : "twig"}
             showAddLeaf={!isLeafMode && !isEditMode}
+            disabled={leaves.length >= 6}
           />
         </div>
       )}
