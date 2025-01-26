@@ -6,19 +6,19 @@ import "./Navbar.css";
 import chevronGrey from "../../assets/chevronGrey.png";
 import chevronWhite from "../../assets/chevronWhite.png";
 
-const Navbar = () => {
+const Navbar = ({ startTutorial }) => {
   const { userId, handleLogout } = useContext(UserContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [tutorialStarted, setTutorialStarted] = useState(false);
 
-  // hook to open menu at a delay so it doesn't open immediately
+  // Open/close the menu based on hover state and tutorial state
   useEffect(() => {
     let timeout;
-    if (isHovering) {
+    if (isHovering && !tutorialStarted) {
       timeout = setTimeout(() => {
         setIsMenuOpen(true);
-        // 2 second delay
-      }, 200);
+      }, 200); // 200ms delay
     } else {
       setIsMenuOpen(false);
     }
@@ -26,45 +26,59 @@ const Navbar = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [isHovering]);
+  }, [isHovering, tutorialStarted]);
 
-  // close menu function. use when arrow is clicked
+  // Close the menu
   const handleMenuClose = () => {
     setIsMenuOpen(false);
+    setIsHovering(false); // Ensure the hover effect is reset
   };
 
-  // logout function
+  // Logout handler
   const handleLogoutClick = () => {
     googleLogout();
     handleLogout();
-    setIsMenuOpen(false);
+    handleMenuClose();
+  };
+
+  // Start tutorial and close the menu
+  const handleTutorialStart = () => {
+    handleMenuClose(); // Close the menu and overlay
+    setTutorialStarted(true); // Mark the tutorial as started
+    startTutorial(); // Start the tutorial
   };
 
   return (
     <div
       className="navbar"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
+      onMouseEnter={() => !tutorialStarted && setIsHovering(true)} // Disable hover if tutorial has started
+      onMouseLeave={() => setIsHovering(false)} // Disable hover if tutorial has started
     >
-      {!isMenuOpen && <img src={chevronGrey} alt="Menu" className="grey chevron" />}
-      {isMenuOpen && (
-        <>
-          <div className="menu">
-            <h2>MENU</h2>
-            <div className="menu-links-div">
-              <Link to="/howto">How To</Link>
-              <Link to="/">My Tree</Link>
-              <Link to="/forest">Forest</Link>
-              {userId && (
-                <Link to="/" onClick={handleLogoutClick}>
-                  Logout
+      {!isMenuOpen || tutorialStarted ? (
+        <img src={chevronGrey} alt="Menu" className="grey chevron" />
+      ) : (
+        isMenuOpen &&
+        !tutorialStarted && (
+          <>
+            <div className="menu">
+              <h2>MENU</h2>
+              <div className="menu-links-div">
+                {/* Start tutorial when "Tutorial" link is clicked */}
+                <Link to="/" onClick={handleTutorialStart}>
+                  Tutorial
                 </Link>
-              )}
-
-              <img src={chevronWhite} alt="Close menu" className="chevron-rotated" />
+                <Link to="/">My Tree</Link>
+                <Link to="/forest">Forest</Link>
+                {userId && (
+                  <Link to="/" onClick={handleLogoutClick}>
+                    Logout
+                  </Link>
+                )}
+                <img src={chevronWhite} alt="Close menu" className="chevron-rotated" />
+              </div>
             </div>
-          </div>
-        </>
+          </>
+        )
       )}
     </div>
   );

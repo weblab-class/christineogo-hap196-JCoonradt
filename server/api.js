@@ -82,14 +82,31 @@ router.get("/tree/:userId", async (req, res) => {
       path: "tree",
       populate: {
         path: "branches",
+<<<<<<< HEAD
+        populate: {
+          path: "twigs",
+          populate: {
+            path: "leaves"
+          }
+=======
         model: "branch",
-      },
+        populate: {
+          path: "twigs",
+          model: "twig"
+>>>>>>> b0ff14bea3cdd01e011d34ca80e9425d3b3a0838
+        }
+      }
     });
 
-    if (!user) {
-      return res.status(404).send({ error: "User not found" });
+    if (!user || !user.tree) {
+      return res.status(404).send({ error: "User or tree not found" });
     }
 
+    if (!user.tree) {
+      return res.status(404).send({ error: "Tree not found" });
+    }
+
+    console.log("Sending tree data:", user.tree);
     res.send(user.tree);
   } catch (err) {
     console.log(err);
@@ -143,7 +160,7 @@ router.delete("/branch/:branchId", async (req, res) => {
     return res.status(401).send({ error: "Error: You must be logged in" });
   }
   try {
-    const branch = await Branch.findById(req.params.branchId);
+    const branch = await Branch.findById(req.params.branchId).populate("twigs");
 
     if (!branch) {
       return res.status(404).send({ error: "Branch not found" });
@@ -157,10 +174,19 @@ router.delete("/branch/:branchId", async (req, res) => {
         await user.tree.save();
       });
 
+    // make sure to delete all leaves associated with each twig
+    for (const twig of branch.twigs) {
+      const twigDoc = await Twig.findById(twig._id).populate("leaves");
+      if (twigDoc && twigDoc.leaves) {
+        await Leaf.deleteMany({ _id: { $in: twigDoc.leaves } });
+      }
+      await Twig.findByIdAndDelete(twig._id);
+    }
+
     // Delete the branch
     await Branch.findByIdAndDelete(req.params.branchId);
 
-    res.send({ message: "Branch deleted successfully" });
+    res.send({ message: "Branch and all associated twigs and leaves deleted successfully" });
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: `Error: ${err}` });
@@ -237,9 +263,14 @@ router.delete("/twig/:twigId", async (req, res) => {
     return res.status(401).send({ error: "Error: You must be logged in" });
   }
   try {
-    const twig = await Twig.findById(req.params.twigId);
+    const twig = await Twig.findById(req.params.twigId).populate("leaves");
     if (!twig) {
       return res.status(404).send({ error: "Twig not found" });
+    }
+
+    // make sure to delete all associated leaves
+    if (twig.leaves && twig.leaves.length > 0) {
+      await Leaf.deleteMany({ _id: { $in: twig.leaves } });
     }
 
     // Remove twig reference from branch
@@ -249,7 +280,7 @@ router.delete("/twig/:twigId", async (req, res) => {
 
     // Delete the twig
     await Twig.findByIdAndDelete(req.params.twigId);
-    res.send({ message: "Twig deleted successfully" });
+    res.send({ message: "Twig and all associated leaves deleted successfully" });
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: `Error: ${err}` });
@@ -280,6 +311,67 @@ router.post("/leaf", async (req, res) => {
     
     // return the populated leaf object
     res.send(leaf);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
+// get a single leaf by id
+router.get("/leaf/:leafId", async (req, res) => {
+  try {
+    const leaf = await Leaf.findById(req.params.leafId);
+    if (!leaf) {
+      return res.status(404).send({ error: "Leaf not found" });
+    }
+    res.send(leaf);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
+// update a leaf
+router.put("/leaf/:leafId", async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send({ error: "Error: You must be logged in" });
+  }
+  try {
+    const leaf = await Leaf.findById(req.params.leafId);
+    if (!leaf) {
+      return res.status(404).send({ error: "Leaf not found" });
+    }
+    leaf.name = req.body.name;
+    leaf.description = req.body.description;
+    leaf.link = req.body.link;
+    await leaf.save();
+    res.send(leaf);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
+// delete a leaf
+router.delete("/leaf/:leafId", async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send({ error: "Error: You must be logged in" });
+  }
+  try {
+    const leaf = await Leaf.findById(req.params.leafId);
+    if (!leaf) {
+      return res.status(404).send({ error: "Leaf not found" });
+    }
+
+    // remove leaf reference from twig
+    await Twig.findOneAndUpdate(
+      { leaves: leaf._id },
+      { $pull: { leaves: leaf._id } }
+    );
+
+    // delete the leaf
+    await Leaf.findByIdAndDelete(req.params.leafId);
+    res.send({ message: "Leaf deleted successfully" });
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: `Error: ${err}` });
@@ -321,6 +413,20 @@ router.get("/trees", async (req, res) => {
   } catch (err) {
     console.log(`Failed to get trees: ${err}`);
     res.status(500).send({ error: "Failed to get trees" });
+  }
+});
+
+// get user info by id
+router.get("/user/:userId", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
+    }
+    res.send({ _id: user._id, name: user.name });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
   }
 });
 

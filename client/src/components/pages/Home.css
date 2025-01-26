@@ -21,17 +21,19 @@
 
 .wooden-sign-container-home {
   position: absolute;
-  top: 25%;
-  left: 16%;
+  top: 14%;
+  left: 15%;
   width: 30%;
   height: 50%;
   transform: translate(-50%, -50%);
+  z-index: 505;
 }
 
 .add-branch-container {
   position: absolute;
   top: 10%;
   left: 80%;
+  z-index: 506;
 }
 
 .branch-hitbox {
@@ -40,13 +42,13 @@
   height: 200px;
   /* background-color: rgba(255, 0, 0, 0.5); */
   border-radius: 50%;
-  z-index: 1;
+  z-index: 506;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   text-align: center;
-  font-size: var(--l);
+  font-size: var(--xl);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   transition: color 0.3s ease;
   cursor: pointer;
@@ -58,13 +60,113 @@
 }
 
 /* classes for each branch hitbox position */
-.branch-hitbox-0 { top: 50%; left: 25%; }
-.branch-hitbox-1 { top: 57%; left: 62%; }
-.branch-hitbox-2 { top: 27%; left: 23%; }
-.branch-hitbox-3 { top: 40%; left: 63%; }
-.branch-hitbox-4 { top: 8%; left: 26%; }
-.branch-hitbox-5 { top: 10%; left: 62%; }
+.branch-hitbox-0 {
+  top: 50%;
+  left: 25%;
+  z-index: 506;
+}
+.branch-hitbox-1 {
+  top: 57%;
+  left: 62%;
+  z-index: 506;
+}
+.branch-hitbox-2 {
+  top: 20%;
+  left: 24%;
+  z-index: 506;
+}
+.branch-hitbox-3 {
+  top: 40%;
+  left: 63%;
+  z-index: 506;
+}
+.branch-hitbox-4 {
+  top: 8%;
+  left: 26%;
+  z-index: 506;
+}
+.branch-hitbox-5 {
+  top: 10%;
+  left: 62%;
+  z-index: 506;
+}
 
 .branch-hitbox:hover {
   color: #39ff14;
+}
+
+/* Parent container for the animal and bubble */
+.tutorial-animal {
+  position: absolute; /* Position on the screen dynamically */
+  display: flex;
+  flex-direction: column; /* Stack bubble and animal vertically */
+  align-items: center; /* Center-align the bubble and the animal */
+  z-index: 1001; /* Ensure it's above other elements */
+  pointer-events: none; /* Prevent this container from blocking clicks */
+}
+
+.animal-image {
+  width: 300px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* The text bubble */
+.tutorial-message {
+  position: relative; /* Position relative to the .tutorial-animal container */
+  bottom: 10px; /* Adjust the position above the animal */
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 15px 20px; /* Control bubble size */
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+  z-index: 1000;
+  top: -320px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  pointer-events: auto; /* Allow interactions with the text bubble if needed */
+}
+
+.tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent; /* Transparent overlay */
+  z-index: 495; /* Keep it below the tutorial elements */
+  pointer-events: none; /* Ensure overlay doesn't block clicks */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Create the triangle pointer */
+.tutorial-message::after {
+  content: "";
+  position: absolute;
+  bottom: -10px; /* Position below the speech bubble */
+  left: 50%; /* Center the triangle horizontally */
+  transform: translateX(-50%); /* Adjust for perfect centering */
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent; /* Left side of the triangle */
+  border-right: 10px solid transparent; /* Right side of the triangle */
+  border-top: 10px solid rgba(255, 255, 255, 0.9); /* Top part is the triangle */
+}
+
+.tutorial-next {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1002;
+}
+
+.tutorial-next:hover {
+  background-color: #45a049;
 }

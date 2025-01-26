@@ -7,7 +7,15 @@ import Branch from "./components/pages/Branch";
 import Forest from "./components/pages/Forest";
 import HowTo from "./components/pages/HowTo";
 import Twig from "./components/pages/Twig";
+<<<<<<< HEAD
+import Leaf from "./components/pages/Leaf";
+import Stats from "./components/pages/Stats";
+=======
+import FriendTree from "./components/pages/FriendTree";
+import FriendBranch from "./components/pages/FriendBranch";
+import FriendTwig from "./components/pages/FriendTwig";
 
+>>>>>>> b0ff14bea3cdd01e011d34ca80e9425d3b3a0838
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -28,7 +36,16 @@ const router = createBrowserRouter(
       <Route path="/tree/:userId" element={<Home />} />
       <Route path="/tree/:userId/branch/:branchId" element={<Branch />} />
       <Route path="/tree/:userId/branch/:branchId/twig/:twigId" element={<Twig />} />
+      <Route path="/tree/:userId/branch/:branchId/twig/:twigId/leaf/:leafId" element={<Leaf />} />
       <Route path="/howto" element={<HowTo />} />
+<<<<<<< HEAD
+      <Route path="/stats" element={<Stats />} />
+=======
+      {/* Friend tree routes */}
+      <Route path="/friend/:userId/tree" element={<FriendTree />} />
+      <Route path="/friend/:userId/tree/branch/:branchId" element={<FriendBranch />} />
+      <Route path="/friend/:userId/tree/twig/:twigId" element={<FriendTwig />} />
+>>>>>>> b0ff14bea3cdd01e011d34ca80e9425d3b3a0838
     </Route>
   )
 );

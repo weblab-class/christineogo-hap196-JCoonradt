@@ -30,6 +30,7 @@ import branchSixTwigTwo from "../../assets/branches/branchSix/branchSixTwigTwo.p
 import branchSixTwigThree from "../../assets/branches/branchSix/branchSixTwigThree.png";
 import chevronGrey from "../../assets/chevronGrey.png";
 import branchBackground from "../../assets/branchBackground.png";
+import racoonImg from "../../assets/racoon.gif";
 
 // component for displaying a single branch and its twigs
 // goal is to have a branch component that can be used for both left and right side branches
@@ -45,6 +46,64 @@ const Branch = () => {
   const [branchDescription, setBranchDescription] = useState("");
   const navigate = useNavigate();
   const [currentTwigIndex, setCurrentTwigIndex] = useState(0);
+
+  const handleNext = () => {
+    if (currentStep < steps.length - 1) {
+      setCurrentStep((prev) => prev + 1);
+    } else {
+      setTutorialActive(false); // End tutorial
+    }
+  };
+
+  const steps = [
+    {
+      message: "Click the add branch button above to create a new branch.",
+      top: "40%",
+      left: "75%",
+    },
+    {
+      message:
+        "Title and describe your branch. Branches are for general skills areas like finance, research, or website development",
+      top: "50%",
+      left: "30%",
+    },
+    {
+      message:
+        "Great! Now, click on the title of the branch you just created to zoom in and see your twigs",
+      top: "62%",
+      left: "33%",
+    },
+    {
+      message:
+        "Fantastic! Now, press the add twig button to add a twig to cover a more specific category of the general skill.",
+      top: "50%",
+      left: "40%",
+    },
+    {
+      message:
+        "Groovy! Now, now title and describe your twig. It should cover a more specific category of your branch's general skill area like options trading for finance, climate science research for research or MERN stack for website development.",
+      top: "30%",
+      left: "40%",
+    },
+    {
+      message:
+        "Awesome! Now press on the title of the twig you just created to zoom in and see your leaves.",
+      top: "30%",
+      left: "60%",
+    },
+    {
+      message:
+        "Awesome! Now add a leaf with specific projects on that twig by pressing the add leaf button. For example, on an options trading twig I could put an algorithm I made, on a climate science research twig I could put an energy analysis project I completed, and for a MERN Stack twig I could put this amazing website that my team and I created!",
+      top: "20%",
+      left: "10%",
+    },
+    {
+      message:
+        "You can always use the navigation bar up here to select forest and visit your friends' trees. You're all set! Have fun exploring.",
+      top: "20%",
+      left: "10%",
+    },
+  ];
 
   // userId from either params or location state
   const currentUserId = userId || location.state?.userId;
@@ -66,6 +125,9 @@ const Branch = () => {
   const [twigName, setTwigName] = useState("");
   const [twigDescription, setTwigDescription] = useState("");
 
+  const [tutorialActive, setTutorialActive] = useState(location.state?.tutorialActive || false);
+  console.log(tutorialActive);
+  const [currentStep, setCurrentStep] = useState(location.state?.currentStep || 0);
   // function to determine if wooden sign should be on the left
   const isWoodenSignLeft = () => {
     return [2, 4, 6].includes(branchType);
@@ -73,6 +135,10 @@ const Branch = () => {
 
   // grab the branch info when we load the page
   useEffect(() => {
+    console.log("Branch Component Mounted");
+    console.log("Tutorial Active:", tutorialActive);
+    console.log("Current Step:", currentStep);
+
     const fetchBranch = async () => {
       try {
         // get the api to get branch details
@@ -80,6 +146,7 @@ const Branch = () => {
         if (response.ok) {
           const branchData = await response.json();
           // update all our state with the branch info
+          console.log(tutorialActive);
           setBranch(branchData);
           setBranchName(branchData.name);
           setBranchDescription(branchData.description);
@@ -102,6 +169,7 @@ const Branch = () => {
 
   // handler for adding a new twig
   const handleAddTwig = () => {
+    setCurrentStep(4);
     setIsEditMode(true);
     setTwigName("");
     setTwigDescription("");
@@ -156,6 +224,7 @@ const Branch = () => {
       }
       setIsEditMode(false);
       setIsTwigMode(false);
+      setCurrentStep(5);
     } catch (error) {
       console.error("Failed to submit:", error);
     }
@@ -238,6 +307,26 @@ const Branch = () => {
       </div>
       {/* background image */}
       <img src={branchBackground} alt="Branch Background" className="branch-background-image" />
+
+      {tutorialActive && (
+        <div className="tutorial-overlay">
+          <div
+            className="tutorial-animal"
+            style={{
+              top: steps[currentStep].top,
+              left: steps[currentStep].left,
+              position: "absolute",
+              transition: "all 0.5s ease-in-out",
+            }}
+          >
+            <img src={racoonImg} alt="Animal Guide" className="animal-image" />
+            <div className="tutorial-message">{steps[currentStep].message}</div>
+          </div>
+          <button className="tutorial-next" onClick={handleNext}>
+            {currentStep < steps.length - 1 ? "Next" : "Finish"}
+          </button>
+        </div>
+      )}
       {/* wooden sign for displaying/editing branch or twig info */}
       {showWoodenSign && (
         <div className={`wooden-sign-container ${isWoodenSignLeft() ? "left-sign" : "right-sign"}`}>
