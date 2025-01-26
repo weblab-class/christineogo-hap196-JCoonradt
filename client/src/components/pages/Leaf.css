@@ -1,0 +1,48 @@
+.leaf-page {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.leaf-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.center-sign {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.back-to-twig {
+  position: absolute;
+  left: 130px;
+  bottom: 80px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.back-chevron {
+  width: var(--xxl);
+  transform: rotate(90deg);
+  margin-right: 8px;
+}
+
+.back-text {
+  color: rgb(71, 68, 68);
+  font-size: var(--xl);
+}
+
+.back-to-twig:hover .back-text {
+  color: #39ff14;
+}

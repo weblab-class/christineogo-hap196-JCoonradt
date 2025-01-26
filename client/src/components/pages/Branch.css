@@ -186,7 +186,7 @@ body {
   align-items: center;
   color: white;
   text-align: center;
-  font-size: var(--l);
+  font-size: var(--xl);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   transition: color 0.3s ease;
   cursor: pointer;

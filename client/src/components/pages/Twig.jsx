@@ -264,6 +264,19 @@ const Twig = () => {
           className={`leaf-hitbox leaf-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
           onMouseEnter={() => handleLeafHover(leaf)}
           onMouseLeave={handleLeafHoverEnd}
+          onClick={() =>
+            navigate(
+              `/tree/${location.state?.userId}/branch/${branchId}/twig/${twigId}/leaf/${leaf._id}`,
+              {
+                state: {
+                  twigId: twigId,
+                  branchId: branchId,
+                  userId: location.state?.userId,
+                  twigType: twigType,
+                },
+              }
+            )
+          }
         >
           {leaf.name}
         </div>

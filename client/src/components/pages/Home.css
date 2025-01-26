@@ -21,8 +21,8 @@
 
 .wooden-sign-container-home {
   position: absolute;
-  top: 25%;
-  left: 16%;
+  top: 14%;
+  left: 15%;
   width: 30%;
   height: 50%;
   transform: translate(-50%, -50%);
@@ -48,7 +48,7 @@
   align-items: center;
   color: white;
   text-align: center;
-  font-size: var(--l);
+  font-size: var(--xl);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   transition: color 0.3s ease;
   cursor: pointer;
@@ -71,8 +71,8 @@
   z-index: 506;
 }
 .branch-hitbox-2 {
-  top: 27%;
-  left: 23%;
+  top: 20%;
+  left: 24%;
   z-index: 506;
 }
 .branch-hitbox-3 {
