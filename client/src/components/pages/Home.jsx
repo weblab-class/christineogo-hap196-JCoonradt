@@ -14,6 +14,7 @@ import sixBranch from "../../assets/sixBranch.png";
 import background from "../../assets/treeBackground.png";
 import racoonImg from "../../assets/racoon.gif";
 import rabbitImg from "../../assets/rabbit.gif";
+import owlImg from "../../assets/owl.gif";
 import treeGrow from "../../assets/treeGrow1.mp3";
 
 // Lazy-loaded components
@@ -240,7 +241,22 @@ const Home = React.memo(() => {
       <Suspense fallback={<div>Loading Navbar...</div>}>
         <Navbar startTutorial={startTutorial} />
       </Suspense>
+
       <img className="background-image" src={background} alt="Background" />
+
+      <div>
+        {/* Rabbit */}
+        <img src={rabbitImg} alt="Rabbit" className="rabbit" />
+
+        {/* Other content */}
+      </div>
+
+      <div>
+        {/* Owl */}
+        <img src={owlImg} alt="Owl" className="owl" />
+
+        {/* Other content */}
+      </div>
       <div className="add-branch-container">
         <Suspense fallback={<div>Loading Button...</div>}>
           <CustomButton text="Add Branch" onClick={handleAddBranch} />
@@ -282,13 +298,6 @@ const Home = React.memo(() => {
         <source src={treeGrow} type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
-
-      <div>
-        {/* Rabbit */}
-        <img src={rabbitImg} alt="Rabbit" className="rabbit" />
-
-        {/* Other content */}
-      </div>
 
       {/* Tutorial Overlay */}
       {tutorialActive && (
