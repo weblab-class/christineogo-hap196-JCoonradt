@@ -4,7 +4,7 @@ import { get } from "../../utilities";
 
 import "../../utilities.css";
 import "./Home.css";
-import "./Branch.css";  
+import "./Branch.css";
 import noBranch from "../../assets/noBranch.png";
 import oneBranch from "../../assets/oneBranch.png";
 import twoBranch from "../../assets/twoBranch.png";
@@ -63,9 +63,9 @@ const FriendTree = React.memo(() => {
           get("/api/tree/" + userId),
           !location.state?.friendName ? get("/api/user/" + userId) : Promise.resolve(null)
         ]);
-        
+
         console.log("Received tree data:", treeData);
-        
+
         if (treeData) {
           const numBranches = treeData.branches.length;
           console.log("Number of branches:", numBranches);
@@ -106,8 +106,8 @@ const FriendTree = React.memo(() => {
   // Handle branch click
   const handleBranchClick = useCallback(
     (branchId, index) => {
-      navigate(`/friend/${userId}/tree/branch/${branchId}`, { 
-        state: { 
+      navigate(`/friend/${userId}/tree/branch/${branchId}`, {
+        state: {
           branchType: branchTypeMapping[index],
           friendName: friendName,
           userId: userId
@@ -118,7 +118,7 @@ const FriendTree = React.memo(() => {
   );
 
   return (
-    <div>
+    <div className="friend-tree" style={{ backgroundColor: '#7bbfff' }}>
       <Suspense fallback={<div>Loading Navbar...</div>}>
         <Navbar />
       </Suspense>
@@ -136,7 +136,7 @@ const FriendTree = React.memo(() => {
       </div>
 
       <img className="tree-image" src={branchImages[currentImageIndex]} alt="Tree with branches" />
-      
+
       {/* Branch hitboxes */}
       {branchHitboxPositions.slice(0, currentImageIndex).map((position, index) => (
         <div
@@ -164,7 +164,7 @@ const FriendTree = React.memo(() => {
           {branches[index]?.name}
         </div>
       ))}
-      
+
       <div className="friend-name-label">
         {friendName}'s Tree
       </div>

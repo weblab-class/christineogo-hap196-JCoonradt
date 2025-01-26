@@ -1,7 +1,8 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import Navbar from "../modules/Navbar";
+import { get } from "../../utilities";
 import "./Twig.css";
+import Navbar from "../modules/Navbar";
 import WoodenSign from "../modules/WoodenSign";
 import chevronGrey from "../../assets/chevronGrey.png";
 
@@ -22,13 +23,11 @@ import rightTwigFiveLeaf from "../../assets/twigs/right/rightTwigFiveLeaf.png";
 import rightTwigSixLeaf from "../../assets/twigs/right/rightTwigSixLeaf.png";
 
 const FriendTwig = () => {
-  const { twigId } = useParams();
-  const location = useLocation();
-  const twigType = location.state?.twigType || 1;
-  const branchId = location.state?.branchId;
-  const originalBranchType = location.state?.branchType;
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const { userId, branchId, twigId } = useParams();
+  const twigType = location.state?.twigType || 1;
+  const originalBranchType = location.state?.branchType;
   const [twig, setTwig] = useState(null);
   const [showWoodenSign, setShowWoodenSign] = useState(true);
   const [twigName, setTwigName] = useState("");
@@ -39,6 +38,7 @@ const FriendTwig = () => {
   const [leafDescription, setLeafDescription] = useState("");
   const [leafLink, setLeafLink] = useState("");
   const [friendName, setFriendName] = useState(location.state?.friendName || "");
+  const [branchType, setBranchType] = useState(location.state?.branchType || 1);
 
   // Image sets for different twig types (left and right side)
   const twigImageSets = {
@@ -74,32 +74,30 @@ const FriendTwig = () => {
     const fetchTwigAndUser = async () => {
       try {
         const [twigResponse, userResponse] = await Promise.all([
-          fetch(`/api/twig/${twigId}`),
-          !location.state?.friendName ? fetch(`/api/user/${location.state?.userId}`) : Promise.resolve(null)
+          get(`/api/twig/${twigId}`), // Changed to use path parameter instead of query
+          !location.state?.friendName ? get("/api/user", { userId: userId }) : Promise.resolve(null)
         ]);
 
-        if (twigResponse.ok) {
-          const twigData = await twigResponse.json();
-          setTwig(twigData);
-          setTwigName(twigData.name);
-          setTwigDescription(twigData.description);
-          setLeaves(twigData.leaves || []);
-          setCurrentLeafIndex(Math.min(twigData.leaves?.length || 0, leafImages.length - 1));
+        if (twigResponse.twig) {
+          setTwig(twigResponse.twig);
+          setTwigName(twigResponse.twig.name);
+          setTwigDescription(twigResponse.twig.description);
+          setLeaves(twigResponse.twig.leaves || []);
+          setCurrentLeafIndex(Math.min(twigResponse.twig.leaves?.length || 0, leafImages.length - 1));
         }
 
-        if (!location.state?.friendName && userResponse) {
-          const userData = await userResponse.json();
-          setFriendName(userData.name);
+        if (!location.state?.friendName && userResponse?.user) {
+          setFriendName(userResponse.user.name);
         }
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
     };
 
-    if (twigId && location.state?.userId) {
+    if (twigId) {
       fetchTwigAndUser();
     }
-  }, [twigId, location.state?.userId, location.state?.friendName]);
+  }, [twigId, userId, location.state?.friendName]);
 
   // handlers for leaf hover events
   const handleLeafHover = (leaf) => {
@@ -117,17 +115,45 @@ const FriendTwig = () => {
   };
 
   return (
-    <div>
+    <div className="twig-container" style={{ backgroundColor: '#7bbfff' }}>
       <Navbar />
-      <div className="wooden-sign-container">
-        {showWoodenSign && (
-          <WoodenSign
-            title={leafName || twigName}
-            description={leafDescription || twigDescription}
-            readOnly={true}
-            isLeft={isWoodenSignLeft()}
-          />
-        )}
+      <div className="wooden-sign-container" style={{ position: 'fixed', left: '10px', top: '0%', zIndex: 501 }}>
+        <WoodenSign
+          title={twigName}
+          description={leafDescription || twigDescription}
+          readOnly={true}
+          isLeft={isWoodenSignLeft()}
+        />
+      </div>
+      <div
+        className="back-to-tree"
+        onClick={() =>
+          navigate(`/friend/${userId}/tree`, {
+            state: { friendName: friendName, userId: userId },
+          })
+        }
+        style={{ position: 'fixed', bottom: '80px', right: '130px', zIndex: 1000 }}
+      >
+        <img src={chevronGrey} alt="Back" className="back-chevron" />
+        <span className="back-text">Back to Tree</span>
+      </div>
+      <div
+        className="back-to-branch"
+        onClick={() =>
+          navigate(`/friend/${userId}/tree/branch/${location.state?.branchId}`, {
+            state: {
+              branchType: branchType,
+              friendName: friendName,
+              userId: userId,
+              currentUserId: userId,
+              branchId: location.state?.branchId
+            },
+          })
+        }
+        style={{ position: 'fixed', bottom: '140px', right: '130px', zIndex: 1000 }}
+      >
+        <img src={chevronGrey} alt="Back" className="back-chevron" />
+        <span className="back-text">Back to Branch</span>
       </div>
       <img
         className="twig-image"
@@ -153,9 +179,9 @@ const FriendTwig = () => {
         src={chevronGrey}
         alt="Back"
         onClick={() =>
-          navigate(`/friend/${location.state?.userId}/tree/branch/${branchId}`, {
+          navigate(`/friend/${userId}/tree/branch/${branchId}`, {
             state: {
-              userId: location.state?.userId,
+              userId: userId,
               branchType: originalBranchType,
             },
           })

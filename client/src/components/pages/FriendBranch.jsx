@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { get } from "../../utilities";
 import Navbar from "../modules/Navbar";
@@ -30,13 +30,13 @@ import branchSixTwigOne from "../../assets/branches/branchSix/branchSixTwigOne.p
 import branchSixTwigTwo from "../../assets/branches/branchSix/branchSixTwigTwo.png";
 import branchSixTwigThree from "../../assets/branches/branchSix/branchSixTwigThree.png";
 import chevronGrey from "../../assets/chevronGrey.png";
-import branchBackground from "../../assets/branchBackground.png";
 
 // component for displaying a friend's branch and its twigs (read-only)
 const FriendBranch = () => {
-  const { branchId, userId } = useParams();
+  const { branchId: paramBranchId, userId } = useParams();
   const location = useLocation();
   const branchType = location.state?.branchType || 1;
+  const branchId = paramBranchId || location.state?.branchId;
   const [branch, setBranch] = useState(null);
   const [showWoodenSign, setShowWoodenSign] = useState(true);
   const [branchName, setBranchName] = useState("");
@@ -72,7 +72,7 @@ const FriendBranch = () => {
     const fetchBranchAndUser = async () => {
       try {
         console.log("Fetching branch with ID:", branchId, "and branch type:", branchType);
-        
+
         // Use the get utility function instead of fetch
         const [branchData, userData] = await Promise.all([
           get("/api/branch/" + branchId),
@@ -80,7 +80,7 @@ const FriendBranch = () => {
         ]);
 
         console.log("Received branch data:", branchData);
-        
+
         if (branchData) {
           setBranch(branchData);
           setBranchName(branchData.name);
@@ -129,9 +129,15 @@ const FriendBranch = () => {
   };
 
   return (
-    <div className={`branch-type-${branchType}`}>
+    <div className={`branch-type-${branchType}`} style={{
+      backgroundColor: '#7bbfff',
+      minHeight: '100vh',
+      width: '100%',
+      position: 'fixed',
+      top: 0,
+      left: 0
+    }}>
       <Navbar />
-      <img className="background-image" src={branchBackground} alt="Branch background" />
       <div className="wooden-sign-container">
         {showWoodenSign && (
           <WoodenSign
@@ -146,7 +152,7 @@ const FriendBranch = () => {
         className="branch-image"
         src={twigImages[currentTwigIndex]}
         alt={`Branch type ${branchType} with ${currentTwigIndex} twigs`}
-        style={{ opacity: 1 }} // Ensure image is visible
+        style={{ opacity: 1, zIndex: 0 }}
       />
       {twigs.map((twig, index) => (
         <div
@@ -155,15 +161,33 @@ const FriendBranch = () => {
           onMouseEnter={() => handleTwigHover(twig)}
           onMouseLeave={() => setShowWoodenSign(false)}
           onClick={() => handleTwigClick(twig._id, index + 1)}
-        />
+          style={{
+            zIndex: 1,
+            color: 'white',
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+            fontSize: 'var(--l)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center'
+          }}
+        >
+          {twig.name}
+        </div>
       ))}
-      <img
-        className="back-button"
-        src={chevronGrey}
-        alt="Back"
-        onClick={() => navigate(`/friend/${currentUserId}/tree`)}
-      />
-      <div className="friend-name-label">
+      <div
+        className="back-to-tree"
+        onClick={() =>
+          navigate(`/friend/${userId}/tree`, {
+            state: { friendName: friendName, userId: userId },
+          })
+        }
+        style={{ position: 'fixed', bottom: '80px', right: '130px', zIndex: 1000 }}
+      >
+        <img src={chevronGrey} alt="Back" className="back-chevron" />
+        <span className="back-text">Back to Tree</span>
+      </div>
+      <div className="friend-name-label" style={{ zIndex: 3 }}>
         {friendName}'s Tree
       </div>
     </div>

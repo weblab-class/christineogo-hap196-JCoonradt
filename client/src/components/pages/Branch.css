@@ -7,31 +7,39 @@ body {
   padding: 0;
 }
 
+/* branch container with fallback background */
+[class^="branch-type-"] {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #7bbfff; /* Light blue fallback */
+}
+
 /* background image styles */
-.branch-background-image {
-  position: absolute; /* make background cover whole page */
+.background-image {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* keep aspect ratio */
-  z-index: -1; /* put behind other content */
+  object-fit: cover;
+  z-index: -1;
 }
 
 /* styles for right-side branch type 1 */
 .branch-type-1 .branch-image {
-  position: absolute;
+  position: fixed;
   top: 8%;
   right: -5%;
   width: 55%;
   height: 100%;
   object-fit: contain;
-  z-index: -1;
 }
 
 /* wooden sign positioning for branch type 1 */
 .branch-type-1 .wooden-sign-container {
-  position: absolute;
+  position: fixed;
   left: 10px;
   top: 0%;
   z-index: 501;
@@ -39,58 +47,92 @@ body {
 
 /* styles for left-side branch type 2 */
 .branch-type-2 .branch-image {
-  position: absolute;
+  position: fixed;
   top: 8%;
   left: 0%;
   width: 55%;
   height: 100%;
   object-fit: contain;
-  z-index: -1;
 }
 
 /* wooden sign positioning for branch type 2 */
 .branch-type-2 .wooden-sign-container {
-  position: absolute;
+  position: fixed;
   right: 10px;
   top: 0%;
   z-index: 2;
 }
 
-/* container for add twig button */
-.add-twig-container {
-  position: absolute;
-  top: 10%;
-  left: 80%;
+/* styles for right-side branch type 3 (same as type 1) */
+.branch-type-3 .branch-image {
+  position: fixed;
+  top: 8%;
+  right: -5%;
+  width: 55%;
+  height: 100%;
+  object-fit: contain;
 }
 
-/* back to tree navigation button container */
-.back-to-tree {
-  position: absolute;
-  right: 130px;
-  bottom: 80px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  z-index: 1;
+/* wooden sign positioning for branch type 3 */
+.branch-type-3 .wooden-sign-container {
+  position: fixed;
+  left: 10px;
+  top: 0%;
+  z-index: 2;
 }
 
-/* back chevron icon styles */
-.back-chevron {
-  width: var(--xxl);
-  transform: rotate(270deg);
-  margin-right: 8px;
+/* styles for left-side branch type 4 (same as type 2) */
+.branch-type-4 .branch-image {
+  position: fixed;
+  top: 8%;
+  left: -5%;
+  width: 55%;
+  height: 100%;
+  object-fit: contain;
 }
 
-/* text styles for back to tree button */
-.back-text {
-  color: rgb(71, 68, 68);
-  font-size: var(--xl);
-  /* transition: color 0.1s ease; */
+/* wooden sign positioning for branch type 4 */
+.branch-type-4 .wooden-sign-container {
+  position: fixed;
+  right: 10px;
+  top: 0%;
+  z-index: 2;
 }
 
-/* hover effect for back to tree text */
-.back-to-tree:hover .back-text {
-  color: #39ff14;
+/* styles for right-side branch type 5 (same as type 1) */
+.branch-type-5 .branch-image {
+  position: fixed;
+  top: 8%;
+  right: 0%;
+  width: 55%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* wooden sign positioning for branch type 5 */
+.branch-type-5 .wooden-sign-container {
+  position: fixed;
+  left: 10px;
+  top: 0%;
+  z-index: 2;
+}
+
+/* styles for left-side branch type 6 (same as type 2) */
+.branch-type-6 .branch-image {
+  position: fixed;
+  top: 8%;
+  left: -5%;
+  width: 55%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* wooden sign positioning for branch type 6 */
+.branch-type-6 .wooden-sign-container {
+  position: fixed;
+  right: 10px;
+  top: 0%;
+  z-index: 2;
 }
 
 /* back to tree button positioning for left-side branches */
@@ -109,82 +151,6 @@ body {
   width: var(--xxl);
   transform: rotate(90deg);
   margin-right: 8px;
-}
-
-/* styles for right-side branch type 3 (same as type 1) */
-.branch-type-3 .branch-image {
-  position: absolute;
-  top: 8%;
-  right: -5%;
-  width: 55%;
-  height: 100%;
-  object-fit: contain;
-  z-index: -1;
-}
-
-/* wooden sign positioning for branch type 3 */
-.branch-type-3 .wooden-sign-container {
-  position: absolute;
-  left: 10px;
-  top: 0%;
-  z-index: 2;
-}
-
-/* styles for left-side branch type 4 (same as type 2) */
-.branch-type-4 .branch-image {
-  position: absolute;
-  top: 8%;
-  left: -5%;
-  width: 55%;
-  height: 100%;
-  object-fit: contain;
-  z-index: -1;
-}
-
-/* wooden sign positioning for branch type 4 */
-.branch-type-4 .wooden-sign-container {
-  position: absolute;
-  right: 10px;
-  top: 0%;
-  z-index: 2;
-}
-
-/* styles for right-side branch type 5 (same as type 1) */
-.branch-type-5 .branch-image {
-  position: absolute;
-  top: 8%;
-  right: 0%;
-  width: 55%;
-  height: 100%;
-  object-fit: contain;
-  z-index: -1;
-}
-
-/* wooden sign positioning for branch type 5 */
-.branch-type-5 .wooden-sign-container {
-  position: absolute;
-  left: 10px;
-  top: 0%;
-  z-index: 2;
-}
-
-/* styles for left-side branch type 6 (same as type 2) */
-.branch-type-6 .branch-image {
-  position: absolute;
-  top: 8%;
-  left: -5%;
-  width: 55%;
-  height: 100%;
-  object-fit: contain;
-  z-index: -1;
-}
-
-/* wooden sign positioning for branch type 6 */
-.branch-type-6 .wooden-sign-container {
-  position: absolute;
-  right: 10px;
-  top: 0%;
-  z-index: 2;
 }
 
 /* back to tree button positioning for left-side branches 4 and 6 */
@@ -396,4 +362,78 @@ body {
 
 .tutorial-next:hover {
   background-color: #45a049;
+}
+
+/* back to tree button */
+.back-to-tree {
+  position: fixed;
+  right: 130px;
+  bottom: 80px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* back to branch button */
+.back-to-branch {
+  position: fixed;
+  right: 130px;
+  bottom: 140px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* back chevron icon */
+.back-chevron {
+  width: var(--xxl);
+  transform: rotate(270deg);
+  margin-right: 8px;
+}
+
+/* back text styling */
+.back-text {
+  color: rgb(71, 68, 68);
+  font-size: var(--xl);
+}
+
+/* hover effect for back text */
+.back-to-tree:hover .back-text,
+.back-to-branch:hover .back-text {
+  color: #39ff14;
+}
+
+/* left-side branch adjustments */
+[class^="branch-type-"] .back-to-tree,
+[class^="branch-type-"] .back-to-branch {
+  right: auto;
+  left: 130px;
+}
+
+[class^="branch-type-"] .back-chevron {
+  transform: rotate(90deg);
+}
+
+/* Friend view hitbox hover effects */
+.friend-tree .branch-hitbox:hover,
+.friend-tree .twig-hitbox:hover,
+.friend-tree .leaf-hitbox:hover {
+  color: #39ff14 !important;
+}
+
+/* Branch view */
+.branch-type-1 .twig-hitbox:hover,
+.branch-type-2 .twig-hitbox:hover,
+.branch-type-3 .twig-hitbox:hover,
+.branch-type-4 .twig-hitbox:hover,
+.branch-type-5 .twig-hitbox:hover,
+.branch-type-6 .twig-hitbox:hover {
+  color: #39ff14 !important;
+}
+
+/* Twig view */
+.twig-container .leaf-hitbox:hover {
+  color: #39ff14 !important;
 }

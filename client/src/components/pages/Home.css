@@ -170,3 +170,21 @@
 .tutorial-next:hover {
   background-color: #45a049;
 }
+
+.friend-name-label {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 15px 30px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 32px;
+  font-weight: 600;
+  color: #2c3e50;
+  z-index: 1000;
+  text-align: center;
+  letter-spacing: 0.5px;
+  border: 2px solid rgba(44, 62, 80, 0.1);
+}
