@@ -105,7 +105,7 @@ const Home = React.memo(() => {
     if (currentStep < steps.length - 1) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      setTutorialActive = false; // End tutorial
+      setTutorialActive(false); // End tutorial
     }
   };
 

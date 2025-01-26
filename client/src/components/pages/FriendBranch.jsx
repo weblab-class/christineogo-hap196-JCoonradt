@@ -4,6 +4,7 @@ import { get } from "../../utilities";
 import Navbar from "../modules/Navbar";
 import "./Branch.css";
 import WoodenSign from "../modules/WoodenSign";
+import MusicButton from "../modules/MusicButton";
 
 import branchOneNoTwigs from "../../assets/branches/branchOne/branchOneNoTwigs.png";
 import branchOneTwigOne from "../../assets/branches/branchOne/branchOneTwigOne.png";
@@ -30,7 +31,7 @@ import branchSixTwigOne from "../../assets/branches/branchSix/branchSixTwigOne.p
 import branchSixTwigTwo from "../../assets/branches/branchSix/branchSixTwigTwo.png";
 import branchSixTwigThree from "../../assets/branches/branchSix/branchSixTwigThree.png";
 import chevronGrey from "../../assets/chevronGrey.png";
-import MusicButton from "../modules/MusicButton";
+import branchBackground from "../../assets/branchBackground.png";
 
 // component for displaying a friend's branch and its twigs (read-only)
 const FriendBranch = () => {
@@ -109,11 +110,15 @@ const FriendBranch = () => {
 
   // handler for hovering over a twig
   const handleTwigHover = (twig) => {
-    if (twig) {
-      setBranchName(twig.name);
-      setBranchDescription(twig.description);
-      setShowWoodenSign(true);
-    }
+    setBranchName(twig.name);
+    setBranchDescription(twig.description);
+    setShowWoodenSign(true);
+  };
+
+  const handleTwigHoverEnd = () => {
+    setBranchName(branch?.name || "");
+    setBranchDescription(branch?.description || "");
+    setShowWoodenSign(true);
   };
 
   // handler for clicking on a twig
@@ -130,55 +135,9 @@ const FriendBranch = () => {
   };
 
   return (
-    <div
-      className={`branch-type-${branchType}`}
-      style={{
-        backgroundColor: "#7bbfff",
-        minHeight: "100vh",
-        width: "100%",
-        position: "fixed",
-        top: 0,
-        left: 0,
-      }}
-    >
+    <div className={`branch-type-${branchType}`}>
       <Navbar />
-      <div className="wooden-sign-container">
-        {showWoodenSign && (
-          <WoodenSign
-            title={branchName}
-            description={branchDescription}
-            readOnly={true}
-            isLeft={isWoodenSignLeft()}
-          />
-        )}
-      </div>
-      <img
-        className="branch-image"
-        src={twigImages[currentTwigIndex]}
-        alt={`Branch type ${branchType} with ${currentTwigIndex} twigs`}
-        style={{ opacity: 1, zIndex: 0 }}
-      />
-      {twigs.map((twig, index) => (
-        <div
-          key={index}
-          className={`twig-hitbox twig-hitbox-${index + 1}`}
-          onMouseEnter={() => handleTwigHover(twig)}
-          onMouseLeave={() => setShowWoodenSign(false)}
-          onClick={() => handleTwigClick(twig._id, index + 1)}
-          style={{
-            zIndex: 1,
-            color: "white",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-            fontSize: "var(--l)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          {twig.name}
-        </div>
-      ))}
+      {/* back button to return to tree view */}
       <div
         className="back-to-tree"
         onClick={() =>
@@ -186,15 +145,50 @@ const FriendBranch = () => {
             state: { friendName: friendName, userId: userId },
           })
         }
-        style={{ position: "fixed", bottom: "80px", right: "130px", zIndex: 1000 }}
       >
         <img src={chevronGrey} alt="Back" className="back-chevron" />
         <span className="back-text">Back to Tree</span>
       </div>
-      <div className="friend-name-label" style={{ zIndex: 3 }}>
+      {/* background image */}
+      <img src={branchBackground} alt="Branch Background" className="branch-background-image" />
+
+      {/* wooden sign for displaying branch or twig info */}
+      {showWoodenSign && (
+        <div className={`wooden-sign-container ${isWoodenSignLeft() ? "left-sign" : "right-sign"}`}>
+          <WoodenSign
+            title={branchName}
+            description={branchDescription}
+            readOnly={true}
+            isLeft={isWoodenSignLeft()}
+          />
+        </div>
+      )}
+
+      {/* branch image showing current number of twigs */}
+      <img 
+        className="branch-image" 
+        src={twigImages[currentTwigIndex]} 
+        alt={`Branch type ${branchType} with ${currentTwigIndex} twigs`}
+      />
+
+      <MusicButton />
+
+      {/* twig hitboxes */}
+      {twigs.slice(0, 3).map((twig, index) => (
+        <div
+          key={index}
+          className={`twig-hitbox twig-hitbox-${index}`}
+          onMouseEnter={() => handleTwigHover(twig)}
+          onMouseLeave={handleTwigHoverEnd}
+          onClick={() => handleTwigClick(twig._id, index)}
+        >
+          {twig.name}
+        </div>
+      ))}
+
+      <div className="friend-name-label">
         {friendName}'s Tree
       </div>
-      <MusicButton />
     </div>
   );
 };

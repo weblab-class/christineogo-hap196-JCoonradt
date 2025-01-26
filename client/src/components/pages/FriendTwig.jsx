@@ -175,7 +175,7 @@ const FriendTwig = () => {
           {leaf.name}
         </div>
       ))}
-      <div
+      {/* <div
         className="back-to-tree"
         onClick={() =>
           navigate(`/friend/${userId}/tree`, {
@@ -186,7 +186,7 @@ const FriendTwig = () => {
       >
         <img src={chevronGrey} alt="Back" className="back-chevron" />
         <span className="back-text">Back to Tree</span>
-      </div>
+      </div> */}
       <div className="friend-name-label">{friendName}'s Tree</div>
       <MusicButton />
     </div>
