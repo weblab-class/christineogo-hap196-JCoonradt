@@ -4,6 +4,7 @@ import TreeVisualization from "../modules/TreeVisualization";
 import Navbar from "../modules/Navbar";
 import { get } from "../../utilities";
 import "./Stats.css";
+import background from "../../assets/treeBackground.png";
 
 const Stats = () => {
   const { userId } = useContext(UserContext);
@@ -88,8 +89,9 @@ const Stats = () => {
   return (
     <div className="stats-container">
       <Navbar />
+      <img className="background-image" src={background} alt="Background" />
       <div className="stats-content">
-        <h1>Your Skill Statistics</h1>
+        <h1>Stats</h1>
         <div className="stats-cards">
           <div className="stat-card">
             <h3>Branches</h3>
