@@ -24,12 +24,9 @@ body {
 }
 
 .twig-type-1 .wooden-sign-container {
-  position: absolute;
   left: 10px;
   top: 10%;
   z-index: 1000;
-  height: 600px;
-  width: 400px;
 }
 
 /* left side twig */
@@ -44,12 +41,9 @@ body {
 }
 
 .twig-type-2 .wooden-sign-container {
-  position: absolute;
   right: 10px;
   top: 35%;
-  height: 600px;
-  width: 400px;
-  z-index: 2;
+  z-index: 1000;
 }
 
 .back-to-branch {
