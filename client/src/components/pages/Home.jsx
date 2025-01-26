@@ -13,6 +13,7 @@ import fiveBranch from "../../assets/fiveBranch.png";
 import sixBranch from "../../assets/sixBranch.png";
 import background from "../../assets/treeBackground.png";
 import racoonImg from "../../assets/racoon.gif";
+import treeGrow from "../../assets/treeGrow1.mp3";
 
 // Lazy-loaded components
 const CustomButton = lazy(() => import("../modules/CustomButton"));
@@ -64,7 +65,7 @@ const Home = React.memo(() => {
       message:
         "Title and describe your branch. Branches are for general skills areas like finance, research, or website development",
       top: "50%",
-      left: "30%",
+      left: "40%",
     },
     {
       message:
@@ -103,6 +104,14 @@ const Home = React.memo(() => {
       setCurrentStep((prev) => prev + 1);
     } else {
       setTutorialActive = false; // End tutorial
+    }
+  };
+
+  const soundRef = useRef(null);
+  const playSound = () => {
+    if (soundRef.current) {
+      soundRef.current.currentTime = 0; // Reset the sound to the beginning
+      soundRef.current.play();
     }
   };
 
@@ -172,6 +181,7 @@ const Home = React.memo(() => {
           console.error("Failed to fetch updated tree data");
         }
         console.log("Current step" + currentStep);
+        playSound();
         setCurrentStep(2);
         setShowWoodenSign(false);
         setBranchName("");
@@ -266,6 +276,11 @@ const Home = React.memo(() => {
         </div>
       ))}
       <MusicButton />
+      {/* Hidden audio element for sound effect */}
+      <audio ref={soundRef}>
+        <source src={treeGrow} type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
 
       {/* Tutorial Overlay */}
       {tutorialActive && (

@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../modules/Navbar";
 import "./Twig.css";
@@ -21,6 +21,8 @@ import rightTwigFourLeaf from "../../assets/twigs/right/rightTwigFourLeaf.png";
 import rightTwigFiveLeaf from "../../assets/twigs/right/rightTwigFiveLeaf.png";
 import rightTwigSixLeaf from "../../assets/twigs/right/rightTwigSixLeaf.png";
 import MusicButton from "../modules/MusicButton";
+
+import treeGrow from "../../assets/LeafRustle.mp3";
 
 const Twig = () => {
   const { twigId } = useParams();
@@ -62,6 +64,14 @@ const Twig = () => {
       rightTwigFiveLeaf,
       rightTwigSixLeaf,
     ],
+  };
+
+  const soundRef = useRef(null);
+  const playSound = () => {
+    if (soundRef.current) {
+      soundRef.current.currentTime = 0; // Reset the sound to the beginning
+      soundRef.current.play();
+    }
   };
 
   const leafImages = twigImageSets[twigType] || twigImageSets[1];
@@ -130,6 +140,7 @@ const Twig = () => {
   // handler for submitting twig or leaf changes
   const handleSubmit = async (title, description, mode) => {
     try {
+      playSound();
       if (mode === "leaf") {
         const response = await fetch("/api/leaf", {
           method: "POST",
@@ -283,6 +294,11 @@ const Twig = () => {
         </div>
       ))}
       <MusicButton />
+      {/* Hidden audio element for sound effect */}
+      <audio ref={soundRef}>
+        <source src={treeGrow} type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
     </div>
   );
 };
