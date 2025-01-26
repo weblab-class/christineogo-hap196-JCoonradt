@@ -28,6 +28,7 @@ const FriendTwig = () => {
   const { userId, branchId, twigId } = useParams();
   const twigType = location.state?.twigType || 1;
   const originalBranchType = location.state?.branchType;
+
   const [twig, setTwig] = useState(null);
   const [showWoodenSign, setShowWoodenSign] = useState(true);
   const [twigName, setTwigName] = useState("");
@@ -39,6 +40,7 @@ const FriendTwig = () => {
   const [leafLink, setLeafLink] = useState("");
   const [friendName, setFriendName] = useState(location.state?.friendName || "");
   const [branchType, setBranchType] = useState(location.state?.branchType || 1);
+  const [isLeafMode, setIsLeafMode] = useState(false);
 
   // Image sets for different twig types (left and right side)
   const twigImageSets = {
@@ -74,16 +76,16 @@ const FriendTwig = () => {
     const fetchTwigAndUser = async () => {
       try {
         const [twigResponse, userResponse] = await Promise.all([
-          get(`/api/twig/${twigId}`), // Changed to use path parameter instead of query
+          get(`/api/twig/${twigId}`),
           !location.state?.friendName ? get("/api/user", { userId: userId }) : Promise.resolve(null)
         ]);
 
-        if (twigResponse.twig) {
-          setTwig(twigResponse.twig);
-          setTwigName(twigResponse.twig.name);
-          setTwigDescription(twigResponse.twig.description);
-          setLeaves(twigResponse.twig.leaves || []);
-          setCurrentLeafIndex(Math.min(twigResponse.twig.leaves?.length || 0, leafImages.length - 1));
+        if (twigResponse) {
+          setTwig(twigResponse);
+          setTwigName(twigResponse.name);
+          setTwigDescription(twigResponse.description);
+          setLeaves(twigResponse.leaves || []);
+          setCurrentLeafIndex(Math.min(twigResponse.leaves?.length || 0, leafImages.length - 1));
         }
 
         if (!location.state?.friendName && userResponse?.user) {
@@ -105,26 +107,74 @@ const FriendTwig = () => {
     setLeafDescription(leaf.description);
     setLeafLink(leaf.link);
     setShowWoodenSign(true);
+    setIsLeafMode(true);
   };
 
-  // handler for leaf click
-  const handleLeafClick = (leaf) => {
-    if (leaf.link) {
-      window.open(leaf.link, "_blank");
-    }
+  const handleLeafHoverEnd = () => {
+    setShowWoodenSign(true);
+    setLeafName("");
+    setLeafDescription("");
+    setLeafLink("");
+    setIsLeafMode(false);
   };
 
   return (
-    <div className="twig-container" style={{ backgroundColor: '#7bbfff' }}>
+    <div className={`twig-type-${twigType}`}>
       <Navbar />
-      <div className="wooden-sign-container" style={{ position: 'fixed', left: '10px', top: '0%', zIndex: 501 }}>
-        <WoodenSign
-          title={twigName}
-          description={leafDescription || twigDescription}
-          readOnly={true}
-          isLeft={isWoodenSignLeft()}
-        />
+      <div
+        className="back-to-branch"
+        onClick={() =>
+          navigate(`/friend/${userId}/tree/branch/${branchId}`, {
+            state: {
+              userId: userId,
+              branchType: originalBranchType,
+              friendName: friendName
+            },
+          })
+        }
+      >
+        <img src={chevronGrey} alt="Back" className="back-chevron" />
+        <span className="back-text">Back to Branch</span>
       </div>
+      {/* wooden sign*/}
+      {showWoodenSign && (
+        <div className={`wooden-sign-container ${isWoodenSignLeft() ? "left-sign" : "right-sign"}`}>
+          <WoodenSign
+            title={isLeafMode ? leafName : twigName}
+            description={isLeafMode ? leafDescription : twigDescription}
+            readOnly={true}
+            mode={isLeafMode ? "leaf" : "twig"}
+          />
+        </div>
+      )}
+      {/* twig image */}
+      <img className="twig-image" src={leafImages[currentLeafIndex]} alt="Twig" />
+
+      {/* leaf hitboxes */}
+      {leaves.slice(0, 6).map((leaf, index) => (
+        <div
+          key={index}
+          className={`leaf-hitbox leaf-hitbox-${index}`}
+          onMouseEnter={() => handleLeafHover(leaf)}
+          onMouseLeave={handleLeafHoverEnd}
+          onClick={() =>
+            navigate(
+              `/friend/${userId}/tree/branch/${branchId}/twig/${twigId}/leaf/${leaf._id}`,
+              {
+                state: {
+                  twigId: twigId,
+                  branchId: branchId,
+                  userId: userId,
+                  twigType: twigType,
+                  friendName: friendName
+                },
+              }
+            )
+          }
+        >
+          {leaf.name}
+        </div>
+      ))}
       <div
         className="back-to-tree"
         onClick={() =>
@@ -137,56 +187,6 @@ const FriendTwig = () => {
         <img src={chevronGrey} alt="Back" className="back-chevron" />
         <span className="back-text">Back to Tree</span>
       </div>
-      <div
-        className="back-to-branch"
-        onClick={() =>
-          navigate(`/friend/${userId}/tree/branch/${location.state?.branchId}`, {
-            state: {
-              branchType: branchType,
-              friendName: friendName,
-              userId: userId,
-              currentUserId: userId,
-              branchId: location.state?.branchId
-            },
-          })
-        }
-        style={{ position: 'fixed', bottom: '140px', right: '130px', zIndex: 1000 }}
-      >
-        <img src={chevronGrey} alt="Back" className="back-chevron" />
-        <span className="back-text">Back to Branch</span>
-      </div>
-      <img
-        className="twig-image"
-        src={leafImages[currentLeafIndex]}
-        alt={`Twig with ${currentLeafIndex} leaves`}
-      />
-      {leaves.map((leaf, index) => (
-        <div
-          key={index}
-          className={`leaf-hitbox leaf-hitbox-${index + 1}`}
-          onMouseEnter={() => handleLeafHover(leaf)}
-          onMouseLeave={() => {
-            setShowWoodenSign(true);
-            setLeafName("");
-            setLeafDescription("");
-            setLeafLink("");
-          }}
-          onClick={() => handleLeafClick(leaf)}
-        />
-      ))}
-      <img
-        className="back-button"
-        src={chevronGrey}
-        alt="Back"
-        onClick={() =>
-          navigate(`/friend/${userId}/tree/branch/${branchId}`, {
-            state: {
-              userId: userId,
-              branchType: originalBranchType,
-            },
-          })
-        }
-      />
       <div className="friend-name-label">
         {friendName}'s Tree
       </div>

@@ -12,6 +12,7 @@ import Leaf from "./components/pages/Leaf";
 import FriendTree from "./components/pages/FriendTree";
 import FriendBranch from "./components/pages/FriendBranch";
 import FriendTwig from "./components/pages/FriendTwig";
+import FriendLeaf from "./components/pages/FriendLeaf";
 
 import {
   createBrowserRouter,
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
       <Route path="/friend/:userId/tree" element={<FriendTree />} />
       <Route path="/friend/:userId/tree/branch/:branchId" element={<FriendBranch />} />
       <Route path="/friend/:userId/tree/branch/:branchId/twig/:twigId" element={<FriendTwig />} />
+      <Route path="/friend/:userId/tree/branch/:branchId/twig/:twigId/leaf/:leafId" element={<FriendLeaf />} />
       <Route path="/tree/:userId/branch/:branchId" element={<Branch />} />
       <Route path="/tree/:userId/branch/:branchId/twig/:twigId" element={<Twig />} />
       <Route path="/tree/:userId/branch/:branchId/twig/:twigId/leaf/:leafId" element={<Leaf />} />
