@@ -1,0 +1,25 @@
+.tree-visualization-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.tree-visualization-container svg {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.tree-visualization-container svg:active {
+  cursor: grabbing;
+}
+
+.node circle {
+  cursor: pointer;
+}
+
+.node text {
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+}

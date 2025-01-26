@@ -88,22 +88,14 @@ router.get("/tree/:userId", async (req, res) => {
           model: "twig",
           populate: {
             path: "leaves",
+            model: "leaf",
           },
         },
       },
-            path: "leaves",
-            model: "leaf"
-          }
-        }
-      }
     });
 
     if (!user || !user.tree) {
       return res.status(404).send({ error: "User or tree not found" });
-    }
-
-    if (!user.tree) {
-      return res.status(404).send({ error: "Tree not found" });
     }
 
     console.log("Sending tree data:", user.tree);
