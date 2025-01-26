@@ -188,3 +188,26 @@
   letter-spacing: 0.5px;
   border: 2px solid rgba(44, 62, 80, 0.1);
 }
+
+/* Keyframes to define the movement */
+@keyframes moveRabbit {
+  0% {
+    transform: translateX(100vw); /* Start off-screen on the right */
+  }
+  30% {
+    transform: translateX(100vw); /* Stay off-screen for 30% of the animation duration */
+  }
+  100% {
+    transform: translateX(-100%); /* Move off-screen to the left */
+  }
+}
+
+/* Rabbit class for animation */
+.rabbit {
+  position: absolute;
+  bottom: 2%; /* Adjust the vertical position as needed */
+  width: 100px; /* Rabbit size */
+  height: auto;
+  animation: moveRabbit 120s linear infinite; /* Total duration is 120s (60s on-screen + 60s off-screen) */
+  z-index: 10; /* Ensure it's above other elements */
+}

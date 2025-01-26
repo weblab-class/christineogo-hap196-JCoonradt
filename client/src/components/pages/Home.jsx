@@ -13,6 +13,7 @@ import fiveBranch from "../../assets/fiveBranch.png";
 import sixBranch from "../../assets/sixBranch.png";
 import background from "../../assets/treeBackground.png";
 import racoonImg from "../../assets/racoon.gif";
+import rabbitImg from "../../assets/rabbit.gif";
 import treeGrow from "../../assets/treeGrow1.mp3";
 
 // Lazy-loaded components
@@ -281,6 +282,13 @@ const Home = React.memo(() => {
         <source src={treeGrow} type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
+
+      <div>
+        {/* Rabbit */}
+        <img src={rabbitImg} alt="Rabbit" className="rabbit" />
+
+        {/* Other content */}
+      </div>
 
       {/* Tutorial Overlay */}
       {tutorialActive && (
