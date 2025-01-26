@@ -45,7 +45,7 @@ const Leaf = () => {
   }, [leafId]);
 
   // submit leaf changes
-  const handleSubmit = async (title, description) => {
+  const handleSubmit = async (title, description, link) => {
     try {
       const response = await fetch(`/api/leaf/${leafId}`, {
         method: "PUT",
@@ -56,7 +56,7 @@ const Leaf = () => {
         body: JSON.stringify({
           name: title,
           description: description,
-          link: leafLink,
+          link: link,
         }),
       });
 
@@ -121,6 +121,7 @@ const Leaf = () => {
         <WoodenSign
           title={leafName}
           description={leafDescription}
+          link={leafLink}
           onSubmit={handleSubmit}
           onDelete={handleDelete}
           onCancel={() => setIsEditMode(false)}
