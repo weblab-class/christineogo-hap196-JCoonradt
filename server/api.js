@@ -430,6 +430,20 @@ router.get("/user/:userId", async (req, res) => {
   }
 });
 
+// get user info by id
+router.get("/user/:userId", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
+    }
+    res.send({ _id: user._id, name: user.name });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
 // Send friend request
 router.post("/friend-request", auth.ensureLoggedIn, async (req, res) => {
   try {
