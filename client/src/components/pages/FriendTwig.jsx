@@ -5,6 +5,7 @@ import "./Twig.css";
 import Navbar from "../modules/Navbar";
 import WoodenSign from "../modules/WoodenSign";
 import chevronGrey from "../../assets/chevronGrey.png";
+import MusicButton from "../modules/MusicButton";
 
 import leftTwigNoLeaf from "../../assets/twigs/left/leftTwigNoLeaf.png";
 import leftTwigOneLeaf from "../../assets/twigs/left/leftTwigOneLeaf.png";
@@ -77,7 +78,9 @@ const FriendTwig = () => {
       try {
         const [twigResponse, userResponse] = await Promise.all([
           get(`/api/twig/${twigId}`),
-          !location.state?.friendName ? get("/api/user", { userId: userId }) : Promise.resolve(null)
+          !location.state?.friendName
+            ? get("/api/user", { userId: userId })
+            : Promise.resolve(null),
         ]);
 
         if (twigResponse) {
@@ -128,7 +131,7 @@ const FriendTwig = () => {
             state: {
               userId: userId,
               branchType: originalBranchType,
-              friendName: friendName
+              friendName: friendName,
             },
           })
         }
@@ -158,18 +161,15 @@ const FriendTwig = () => {
           onMouseEnter={() => handleLeafHover(leaf)}
           onMouseLeave={handleLeafHoverEnd}
           onClick={() =>
-            navigate(
-              `/friend/${userId}/tree/branch/${branchId}/twig/${twigId}/leaf/${leaf._id}`,
-              {
-                state: {
-                  twigId: twigId,
-                  branchId: branchId,
-                  userId: userId,
-                  twigType: twigType,
-                  friendName: friendName
-                },
-              }
-            )
+            navigate(`/friend/${userId}/tree/branch/${branchId}/twig/${twigId}/leaf/${leaf._id}`, {
+              state: {
+                twigId: twigId,
+                branchId: branchId,
+                userId: userId,
+                twigType: twigType,
+                friendName: friendName,
+              },
+            })
           }
         >
           {leaf.name}
@@ -182,14 +182,13 @@ const FriendTwig = () => {
             state: { friendName: friendName, userId: userId },
           })
         }
-        style={{ position: 'fixed', bottom: '80px', right: '130px', zIndex: 1000 }}
+        style={{ position: "fixed", bottom: "80px", right: "130px", zIndex: 1000 }}
       >
         <img src={chevronGrey} alt="Back" className="back-chevron" />
         <span className="back-text">Back to Tree</span>
       </div>
-      <div className="friend-name-label">
-        {friendName}'s Tree
-      </div>
+      <div className="friend-name-label">{friendName}'s Tree</div>
+      <MusicButton />
     </div>
   );
 };

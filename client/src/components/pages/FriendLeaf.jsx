@@ -5,6 +5,7 @@ import "./Leaf.css";
 import WoodenSign from "../modules/WoodenSign";
 import chevronGrey from "../../assets/chevronGrey.png";
 import leafBackground from "../../assets/leafBackground.png";
+import MusicButton from "../modules/MusicButton";
 
 const FriendLeaf = () => {
   const { leafId } = useParams();
@@ -57,7 +58,7 @@ const FriendLeaf = () => {
               twigType: twigType,
               branchId: branchId,
               userId: userId,
-              friendName: friendName
+              friendName: friendName,
             },
           })
         }
@@ -66,13 +67,9 @@ const FriendLeaf = () => {
         <span className="back-text">Back to Twig</span>
       </div>
       <div className="wooden-sign-container center-sign">
-        <WoodenSign
-          title={leafName}
-          description={leafDescription}
-          readOnly={true}
-          mode="leaf"
-        />
+        <WoodenSign title={leafName} description={leafDescription} readOnly={true} mode="leaf" />
       </div>
+      <MusicButton />
     </div>
   );
 };

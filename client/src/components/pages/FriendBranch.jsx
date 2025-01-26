@@ -30,6 +30,7 @@ import branchSixTwigOne from "../../assets/branches/branchSix/branchSixTwigOne.p
 import branchSixTwigTwo from "../../assets/branches/branchSix/branchSixTwigTwo.png";
 import branchSixTwigThree from "../../assets/branches/branchSix/branchSixTwigThree.png";
 import chevronGrey from "../../assets/chevronGrey.png";
+import MusicButton from "../modules/MusicButton";
 
 // component for displaying a friend's branch and its twigs (read-only)
 const FriendBranch = () => {
@@ -76,7 +77,7 @@ const FriendBranch = () => {
         // Use the get utility function instead of fetch
         const [branchData, userData] = await Promise.all([
           get("/api/branch/" + branchId),
-          !location.state?.friendName ? get("/api/user/" + currentUserId) : Promise.resolve(null)
+          !location.state?.friendName ? get("/api/user/" + currentUserId) : Promise.resolve(null),
         ]);
 
         console.log("Received branch data:", branchData);
@@ -123,20 +124,23 @@ const FriendBranch = () => {
         twigType: index % 2 === 0 ? 1 : 2,
         branchId: branchId,
         branchType: branchType,
-        friendName: friendName
+        friendName: friendName,
       },
     });
   };
 
   return (
-    <div className={`branch-type-${branchType}`} style={{
-      backgroundColor: '#7bbfff',
-      minHeight: '100vh',
-      width: '100%',
-      position: 'fixed',
-      top: 0,
-      left: 0
-    }}>
+    <div
+      className={`branch-type-${branchType}`}
+      style={{
+        backgroundColor: "#7bbfff",
+        minHeight: "100vh",
+        width: "100%",
+        position: "fixed",
+        top: 0,
+        left: 0,
+      }}
+    >
       <Navbar />
       <div className="wooden-sign-container">
         {showWoodenSign && (
@@ -163,13 +167,13 @@ const FriendBranch = () => {
           onClick={() => handleTwigClick(twig._id, index + 1)}
           style={{
             zIndex: 1,
-            color: 'white',
-            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-            fontSize: 'var(--l)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            textAlign: 'center'
+            color: "white",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            fontSize: "var(--l)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
           }}
         >
           {twig.name}
@@ -182,7 +186,7 @@ const FriendBranch = () => {
             state: { friendName: friendName, userId: userId },
           })
         }
-        style={{ position: 'fixed', bottom: '80px', right: '130px', zIndex: 1000 }}
+        style={{ position: "fixed", bottom: "80px", right: "130px", zIndex: 1000 }}
       >
         <img src={chevronGrey} alt="Back" className="back-chevron" />
         <span className="back-text">Back to Tree</span>
@@ -190,6 +194,7 @@ const FriendBranch = () => {
       <div className="friend-name-label" style={{ zIndex: 3 }}>
         {friendName}'s Tree
       </div>
+      <MusicButton />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../modules/Navbar";
 import "./Branch.css";
@@ -32,6 +32,7 @@ import chevronGrey from "../../assets/chevronGrey.png";
 import branchBackground from "../../assets/branchBackground.png";
 import racoonImg from "../../assets/racoon.gif";
 import MusicButton from "../modules/MusicButton";
+import treeGrow from "../../assets/twigGrow.mp3";
 
 // component for displaying a single branch and its twigs
 // goal is to have a branch component that can be used for both left and right side branches
@@ -53,6 +54,14 @@ const Branch = () => {
       setCurrentStep((prev) => prev + 1);
     } else {
       setTutorialActive(false); // End tutorial
+    }
+  };
+
+  const soundRef = useRef(null);
+  const playSound = () => {
+    if (soundRef.current) {
+      soundRef.current.currentTime = 0; // Reset the sound to the beginning
+      soundRef.current.play();
     }
   };
 
@@ -180,6 +189,7 @@ const Branch = () => {
   // handler for submitting branch or twig changes
   const handleSubmitBranch = async (title, description) => {
     try {
+      playSound();
       if (isTwigMode) {
         const response = await fetch("/api/twig", {
           method: "POST",
@@ -346,6 +356,11 @@ const Branch = () => {
       )}
       {/* branch image showing current number of twigs */}
       <img className="branch-image" src={twigImages[currentTwigIndex]} alt="Branch" />
+      {/* Hidden audio element for sound effect */}
+      <audio ref={soundRef}>
+        <source src={treeGrow} type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
       <MusicButton />
       {/* twig hitboxes */}
       {twigs.slice(0, 3).map((twig, index) => (

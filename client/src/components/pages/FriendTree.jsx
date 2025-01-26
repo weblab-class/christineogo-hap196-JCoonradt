@@ -13,6 +13,7 @@ import fourBranch from "../../assets/fourBranch.png";
 import fiveBranch from "../../assets/fiveBranch.png";
 import sixBranch from "../../assets/sixBranch.png";
 import background from "../../assets/treeBackground.png";
+import MusicButton from "../modules/MusicButton";
 
 // Lazy-loaded components
 const Navbar = lazy(() => import("../modules/Navbar"));
@@ -33,12 +34,12 @@ const branchTypeMapping = [1, 2, 3, 4, 5, 6];
 
 // Branch hitbox positions
 const branchHitboxPositions = [
-  { top: "50%", left: "25%" },    // Branch 1 (right side)
-  { top: "57%", left: "62%" },    // Branch 2 (left side)
-  { top: "27%", left: "23%" },    // Branch 3 (right side)
-  { top: "40%", left: "63%" },    // Branch 4 (left side)
-  { top: "8%", left: "26%" },     // Branch 5 (right side)
-  { top: "10%", left: "62%" },    // Branch 6 (left side)
+  { top: "50%", left: "25%" }, // Branch 1 (right side)
+  { top: "57%", left: "62%" }, // Branch 2 (left side)
+  { top: "27%", left: "23%" }, // Branch 3 (right side)
+  { top: "40%", left: "63%" }, // Branch 4 (left side)
+  { top: "8%", left: "26%" }, // Branch 5 (right side)
+  { top: "10%", left: "62%" }, // Branch 6 (left side)
 ];
 
 const FriendTree = React.memo(() => {
@@ -61,7 +62,7 @@ const FriendTree = React.memo(() => {
         console.log("Fetching tree data for user:", userId);
         const [treeData, userData] = await Promise.all([
           get("/api/tree/" + userId),
-          !location.state?.friendName ? get("/api/user/" + userId) : Promise.resolve(null)
+          !location.state?.friendName ? get("/api/user/" + userId) : Promise.resolve(null),
         ]);
 
         console.log("Received tree data:", treeData);
@@ -110,15 +111,15 @@ const FriendTree = React.memo(() => {
         state: {
           branchType: branchTypeMapping[index],
           friendName: friendName,
-          userId: userId
-        }
+          userId: userId,
+        },
       });
     },
     [navigate, userId, friendName]
   );
 
   return (
-    <div className="friend-tree" style={{ backgroundColor: '#7bbfff' }}>
+    <div className="friend-tree" style={{ backgroundColor: "#7bbfff" }}>
       <Suspense fallback={<div>Loading Navbar...</div>}>
         <Navbar />
       </Suspense>
@@ -126,11 +127,7 @@ const FriendTree = React.memo(() => {
       <div className="wooden-sign-container-home">
         {showWoodenSign && (
           <Suspense fallback={<div>Loading Wooden Sign...</div>}>
-            <WoodenSign
-              title={branchName}
-              description={branchDescription}
-              readOnly={true}
-            />
+            <WoodenSign title={branchName} description={branchDescription} readOnly={true} />
           </Suspense>
         )}
       </div>
@@ -143,18 +140,18 @@ const FriendTree = React.memo(() => {
           key={index}
           className="branch-hitbox"
           style={{
-            position: 'fixed',
+            position: "fixed",
             top: position.top,
             left: position.left,
-            width: '200px',
-            height: '200px',
-            cursor: 'pointer',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: 'white',
-            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-            fontSize: 'var(--l)',
+            width: "200px",
+            height: "200px",
+            cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "white",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            fontSize: "var(--l)",
             zIndex: 1,
           }}
           onMouseEnter={() => branches[index] && handleBranchHover(branches[index])}
@@ -165,9 +162,8 @@ const FriendTree = React.memo(() => {
         </div>
       ))}
 
-      <div className="friend-name-label">
-        {friendName}'s Tree
-      </div>
+      <div className="friend-name-label">{friendName}'s Tree</div>
+      <MusicButton />
     </div>
   );
 });
