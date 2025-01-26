@@ -216,7 +216,14 @@ const WoodenSign = memo(
                     disabled={disabled}
                   />
                 )}
-                {showAddLeaf && <CustomButton text="Add Leaf" color="green" onClick={onAddLeaf} />}
+                {showAddLeaf && (
+                  <CustomButton 
+                    text="Add Leaf" 
+                    color="green" 
+                    onClick={onAddLeaf}
+                    disabled={disabled}
+                  />
+                )}
               </>
             )}
           </div>

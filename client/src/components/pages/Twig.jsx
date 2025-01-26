@@ -336,6 +336,7 @@ const Twig = () => {
             initialEditMode={isEditMode}
             mode={isLeafMode ? "leaf" : "twig"}
             showAddLeaf={!isLeafMode && !isEditMode}
+            disabled={leaves.length >= 6}
           />
         </div>
       )}
