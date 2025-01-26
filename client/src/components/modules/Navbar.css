@@ -5,7 +5,7 @@
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
   cursor: pointer;
   transition: 0.3s ease-in-out; /* transition to slide menu in */
-  z-index: 2; /* put on top of other elements */
+  z-index: 5; /* put on top of other elements */
 }
 
 .navbar:hover {

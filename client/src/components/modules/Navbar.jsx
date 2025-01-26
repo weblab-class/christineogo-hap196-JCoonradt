@@ -68,6 +68,7 @@ const Navbar = ({ startTutorial }) => {
                   Tutorial
                 </Link>
                 <Link to="/">My Tree</Link>
+                <Link to="/stats">Stats</Link>
                 <Link to="/forest">Forest</Link>
                 {userId && (
                   <Link to="/" onClick={handleLogoutClick}>
