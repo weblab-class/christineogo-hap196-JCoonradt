@@ -5,18 +5,18 @@
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
   cursor: pointer;
   transition: 0.3s ease-in-out; /* transition to slide menu in */
-  z-index: 5; /* put on top of other elements */
+  z-index: 510; /* put on top of other elements */
 }
 
 .navbar:hover {
   /* height: 100vh; on hover, expand to full height */
   height: 85vh;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.75));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.75));
 }
 
 .menu {
   position: absolute;
-  top: 40px;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%); /* center the menu */
   padding: 10px;
@@ -32,14 +32,15 @@
 
 .menu-header h2 {
   margin: 0;
+  top: -40px;
   display: inline-block;
   width: 100%;
-  margin-top: var(--xxl);
-  margin-bottom: var(--xxxxl);
+  margin-top: var(--l);
+  margin-bottom: var(--l);
 }
 
 .menu-links-div {
-  margin-top: var(--xxxxl);
+  margin-top: var(--l);
   display: flex;
   flex-direction: column; /* stack links vertically */
   align-items: center;
@@ -48,7 +49,7 @@
 .menu a {
   color: white;
   text-decoration: none;
-  margin: 20px 0;
+  margin: 5px 0;
   padding: 5px;
 }
 
