@@ -117,7 +117,7 @@ const FriendBranch = () => {
 
   // handler for clicking on a twig
   const handleTwigClick = (twigId, index) => {
-    navigate(`/friend/${currentUserId}/tree/twig/${twigId}`, {
+    navigate(`/friend/${currentUserId}/tree/branch/${branchId}/twig/${twigId}`, {
       state: {
         userId: currentUserId,
         twigType: index % 2 === 0 ? 1 : 2,

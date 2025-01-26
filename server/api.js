@@ -82,18 +82,14 @@ router.get("/tree/:userId", async (req, res) => {
       path: "tree",
       populate: {
         path: "branches",
-<<<<<<< HEAD
-        populate: {
-          path: "twigs",
-          populate: {
-            path: "leaves"
-          }
-=======
         model: "branch",
         populate: {
           path: "twigs",
-          model: "twig"
->>>>>>> b0ff14bea3cdd01e011d34ca80e9425d3b3a0838
+          model: "twig",
+          populate: {
+            path: "leaves",
+            model: "leaf"
+          }
         }
       }
     });
