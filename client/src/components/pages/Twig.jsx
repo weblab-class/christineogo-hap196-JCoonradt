@@ -21,6 +21,7 @@ import rightTwigFourLeaf from "../../assets/twigs/right/rightTwigFourLeaf.png";
 import rightTwigFiveLeaf from "../../assets/twigs/right/rightTwigFiveLeaf.png";
 import rightTwigSixLeaf from "../../assets/twigs/right/rightTwigSixLeaf.png";
 import MusicButton from "../modules/MusicButton";
+import racoonImg from "../../assets/racoon.gif";
 
 import treeGrow from "../../assets/LeafRustle.mp3";
 
@@ -43,6 +44,74 @@ const Twig = () => {
   const [leafName, setLeafName] = useState("");
   const [leafDescription, setLeafDescription] = useState("");
   const [leafLink, setLeafLink] = useState("");
+
+  const tutorialActiveRef = useState(location.state?.tutorialActive || false);
+
+  const [tutorialActive, setTutorialActive] = useState(location.state?.tutorialActive || false);
+  const handleNext = () => {
+    if (currentStep < steps.length - 1) {
+      setCurrentStep((prev) => prev + 1);
+    } else {
+      setTutorialActive(false); // End tutorial
+    }
+  };
+  console.log("Tutorial Active:" + tutorialActive);
+  const [currentStep, setCurrentStep] = useState(location.state?.currentStep || 0);
+  const steps = [
+    {
+      message: "Click the add branch button above to create a new branch.",
+      top: "40%",
+      left: "75%",
+    },
+    {
+      message:
+        "Title and describe your branch. Branches are for general skills areas like finance, research, or website development",
+      top: "50%",
+      left: "30%",
+    },
+    {
+      message:
+        "Great! Now, click on the title of the branch you just created to zoom in and see your twigs",
+      top: "62%",
+      left: "33%",
+    },
+    {
+      message:
+        "Fantastic! Now, press the add twig button to add a twig to cover a more specific category of the general skill.",
+      top: "50%",
+      left: "40%",
+    },
+    {
+      message:
+        "Groovy! Now, now title and describe your twig. It should cover a more specific category of your branch's general skill area like options trading for finance, climate science research for research or MERN stack for website development.",
+      top: "30%",
+      left: "40%",
+    },
+    {
+      message:
+        "Awesome! Now press on the title of the twig you just created to zoom in and see your leaves.",
+      top: "30%",
+      left: "60%",
+    },
+    {
+      message:
+        "Awesome! Now add a leaf by pressing the add leaf button. Leafs are meant to represent specific projects within the twig. ",
+      top: "50%",
+      left: "30%",
+    },
+    {
+      message:
+        "Fantastic! Now title and describe your leaf. For example, on an options trading twig I could put an algorithm I made, on a climate science research twig I could put an energy analysis project I completed, and for a MERN Stack twig I could put this amazing website we created!",
+      top: "50%",
+      left: "30%",
+    },
+    {
+      message:
+        "You can always use the navigation bar up here to select forest and visit your friends' trees or stats to see metrics on your growth. You're all set! Hit finish to end the tutorial and have fun exploring.",
+      top: "25%",
+      left: "50%",
+    },
+  ];
 
   // Image sets for different twig types (left and right side)
   const twigImageSets = {
@@ -114,6 +183,7 @@ const Twig = () => {
     setLeafLink("");
     setIsLeafMode(true);
     setShowWoodenSign(true);
+    setCurrentStep(7);
   };
 
   // handlers for leaf hover events
@@ -140,6 +210,7 @@ const Twig = () => {
   // handler for submitting twig or leaf changes
   const handleSubmit = async (title, description, mode) => {
     try {
+      setCurrentStep(8);
       playSound();
       if (mode === "leaf") {
         const response = await fetch("/api/leaf", {
@@ -299,6 +370,32 @@ const Twig = () => {
         <source src={treeGrow} type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
+
+      {tutorialActive && (
+        <div className="tutorial-overlay">
+          <div
+            className="tutorial-animal"
+            style={{
+              top: steps[currentStep].top,
+              left: steps[currentStep].left,
+              position: "absolute",
+              transition: "all 0.5s ease-in-out",
+            }}
+          >
+            <img src={racoonImg} alt="Animal Guide" className="animal-image" />
+            <div className="tutorial-message">{steps[currentStep].message}</div>
+
+            {/* Conditional rendering for step 8 */}
+            {currentStep === 8 && (
+              <div>
+                <button className="tutorial-next" onClick={handleNext}>
+                  {currentStep < steps.length - 1 ? "Next" : "Finish"}
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
