@@ -54,6 +54,10 @@
   color: #39ff14; /* Highlight links on hover */
 }
 
+.menu a.active {
+  color: #39ff14;
+}
+
 /* Chevron icon */
 .chevron {
   height: 24px;
