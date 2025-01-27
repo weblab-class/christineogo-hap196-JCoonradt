@@ -436,6 +436,10 @@ const Branch = () => {
         <div
           key={index}
           className={`twig-hitbox twig-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
+          style={{
+            // during the tutorial, the hitbox should be above the navbar
+            zIndex: tutorialActive ? 1001 : 504,
+          }}
           onMouseEnter={() => handleTwigHover(twig)}
           onMouseLeave={handleTwigHoverEnd}
           onClick={() =>
@@ -444,9 +448,8 @@ const Branch = () => {
                 twigType: isWoodenSignLeft() ? 2 : 1,
                 branchId: branchId,
                 userId: currentUserId,
-                // need to pass in the original branch type so we can go back to it
                 branchType: branchType,
-                tutorialActive: tutorialActiveRef.current, // Ensure this value is correct
+                tutorialActive: tutorialActiveRef.current,
                 currentStep: 6,
               },
             })

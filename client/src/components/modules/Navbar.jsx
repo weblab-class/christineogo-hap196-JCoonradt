@@ -66,6 +66,7 @@ const Navbar = ({ startTutorial }) => {
             Tutorial
           </Link>
         </div>
+        <img src={chevronGrey} alt="Bottom Chevron" className="bottom-chevron" style={{filter: 'brightness(0) invert(1)'}} />
       </div>
     </div>
   );

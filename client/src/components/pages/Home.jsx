@@ -291,6 +291,10 @@ const Home = React.memo(() => {
         <div
           key={index}
           className={`branch-hitbox branch-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
+          style={{
+            // during the tutorial, the hitbox should be above the navbar
+            zIndex: tutorialActive ? 1001 : 504,
+          }}
           onMouseEnter={() => branches[index] && handleBranchHover(branches[index])}
           onMouseLeave={handleBranchHoverEnd}
           onClick={() => branches[index] && handleBranchClick(branches[index]._id, index)}
