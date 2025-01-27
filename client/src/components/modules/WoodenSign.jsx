@@ -42,6 +42,7 @@ const WoodenSign = memo(
     const [editLink, setEditLink] = useState(link || "");
     const [uploadedImage, setUploadedImage] = useState(null);
     const [linkError, setLinkError] = useState("");
+    const [formError, setFormError] = useState("");
 
     useEffect(() => {
       setIsEditing(initialEditMode);
@@ -82,10 +83,18 @@ const WoodenSign = memo(
     };
 
     const handleSubmit = () => {
+      setFormError("");
+
+      if (!editTitle?.trim() || !editDescription?.trim()) {
+        setFormError("Please enter both a title and description");
+        return;
+      }
+
       if (editLink && !editLink.startsWith("data:image") && !isValidUrl(editLink)) {
         setLinkError("Please enter a valid URL before submitting");
         return;
       }
+
       onSubmit(editTitle, editDescription, mode, editLink);
       setIsEditing(false);
     };
@@ -119,31 +128,41 @@ const WoodenSign = memo(
         <div className="wooden-sign-content">
           {isEditing ? (
             <>
-              <input
-                type="text"
-                defaultValue={editTitle}
-                onChange={(e) => debouncedSetEditTitle(e.target.value)}
-                placeholder={
-                  mode === "branch"
-                    ? "Enter branch name"
-                    : mode === "twig"
-                    ? "Enter twig name"
-                    : "Enter leaf name"
-                }
-                className="wooden-sign-title"
-              />
-              <textarea
-                defaultValue={editDescription}
-                onChange={(e) => debouncedSetEditDescription(e.target.value)}
-                placeholder={
-                  mode === "branch"
-                    ? "Enter branch description"
-                    : mode === "twig"
-                    ? "Enter twig description"
-                    : "Enter leaf description"
-                }
-                className="wooden-sign-description"
-              />
+              <div className="input-group">
+                <input
+                  type="text"
+                  defaultValue={editTitle}
+                  onChange={(e) => {
+                    debouncedSetEditTitle(e.target.value);
+                    setFormError("");
+                  }}
+                  placeholder={
+                    mode === "branch"
+                      ? "Enter branch name"
+                      : mode === "twig"
+                      ? "Enter twig name"
+                      : "Enter leaf name"
+                  }
+                  className="wooden-sign-title"
+                />
+              </div>
+              <div className="input-group">
+                <textarea
+                  defaultValue={editDescription}
+                  onChange={(e) => {
+                    debouncedSetEditDescription(e.target.value);
+                    setFormError("");
+                  }}
+                  placeholder={
+                    mode === "branch"
+                      ? "Enter branch description"
+                      : mode === "twig"
+                      ? "Enter twig description"
+                      : "Enter leaf description"
+                  }
+                  className="wooden-sign-description"
+                />
+              </div>
               {mode === "leaf" && (
                 <div className="wooden-sign-media">
                   <div className="wooden-sign-link-container">
@@ -201,25 +220,28 @@ const WoodenSign = memo(
           <div className="wooden-sign-buttons">
             {isEditing ? (
               <>
-                <CustomButton text="Submit" color="green" onClick={handleSubmit} />
-                <CustomButton text="Cancel" color="red" onClick={handleCancel} />
+                {formError && <div className="wooden-sign-form-error">{formError}</div>}
+                <div className="button-group">
+                  <CustomButton text="Submit" color="green" onClick={handleSubmit} />
+                  <CustomButton text="Cancel" color="red" onClick={handleCancel} />
+                </div>
               </>
             ) : (
               <>
                 <CustomButton text="Edit" color="white" onClick={() => setIsEditing(true)} />
                 <CustomButton text="Delete" color="red" onClick={handleDelete} />
                 {mode === "branch" && (
-                  <CustomButton 
-                    text="Add Twig" 
-                    color="green" 
+                  <CustomButton
+                    text="Add Twig"
+                    color="green"
                     onClick={onAddTwig}
                     disabled={disabled}
                   />
                 )}
                 {showAddLeaf && (
-                  <CustomButton 
-                    text="Add Leaf" 
-                    color="green" 
+                  <CustomButton
+                    text="Add Leaf"
+                    color="green"
                     onClick={onAddLeaf}
                     disabled={disabled}
                   />
