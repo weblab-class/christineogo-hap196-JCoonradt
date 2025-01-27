@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 import "../../utilities.css";
 import "./Home.css";
 import { UserContext } from "../App";
-import noBranch from "../../assets/noBranch.png";
-import oneBranch from "../../assets/oneBranch.png";
-import twoBranch from "../../assets/twoBranch.png";
-import threeBranch from "../../assets/threeBranch.png";
-import fourBranch from "../../assets/fourBranch.png";
-import fiveBranch from "../../assets/fiveBranch.png";
-import sixBranch from "../../assets/sixBranch.png";
+import noBranch from "../../assets/tree/noBranch.png";
+import oneBranch from "../../assets/tree/oneBranch.png";
+import twoBranch from "../../assets/tree/twoBranch.png";
+import threeBranch from "../../assets/tree/threeBranch.png";
+import fourBranch from "../../assets/tree/fourBranch.png";
+import fiveBranch from "../../assets/tree/fiveBranch.png";
+import sixBranch from "../../assets/tree/sixBranch.png";
 import background from "../../assets/treeBackground.png";
 import racoonImg from "../../assets/racoon.gif";
 import rabbitImg from "../../assets/rabbit.gif";
@@ -242,8 +242,11 @@ const Home = React.memo(() => {
         <Navbar startTutorial={startTutorial} />
       </Suspense>
 
-      <img className="background-image" src={background} alt="Background" />
-
+      <img
+        className="background-image"
+        src={branchImages[currentImageIndex]}
+        alt="Tree with branches"
+      />
       <div>
         {/* Rabbit */}
         <img src={rabbitImg} alt="Rabbit" className="rabbit" />
@@ -284,7 +287,6 @@ const Home = React.memo(() => {
         )}
       </div>
 
-      <img className="tree-image" src={branchImages[currentImageIndex]} alt="Tree with branches" />
       {branchHitboxes.slice(0, currentImageIndex).map((hitbox, index) => (
         <div
           key={index}

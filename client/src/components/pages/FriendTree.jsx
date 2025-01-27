@@ -5,14 +5,13 @@ import { get } from "../../utilities";
 import "../../utilities.css";
 import "./Home.css";
 import "./Branch.css";
-import noBranch from "../../assets/noBranch.png";
-import oneBranch from "../../assets/oneBranch.png";
-import twoBranch from "../../assets/twoBranch.png";
-import threeBranch from "../../assets/threeBranch.png";
-import fourBranch from "../../assets/fourBranch.png";
-import fiveBranch from "../../assets/fiveBranch.png";
-import sixBranch from "../../assets/sixBranch.png";
-import background from "../../assets/treeBackground.png";
+import noBranch from "../../assets/tree/noBranch.png";
+import oneBranch from "../../assets/tree/oneBranch.png";
+import twoBranch from "../../assets/tree/twoBranch.png";
+import threeBranch from "../../assets/tree/threeBranch.png";
+import fourBranch from "../../assets/tree/fourBranch.png";
+import fiveBranch from "../../assets/tree/fiveBranch.png";
+import sixBranch from "../../assets/tree/sixBranch.png";
 import MusicButton from "../modules/MusicButton";
 
 // Lazy-loaded components
@@ -123,7 +122,12 @@ const FriendTree = React.memo(() => {
       <Suspense fallback={<div>Loading Navbar...</div>}>
         <Navbar />
       </Suspense>
-      <img className="background-image" src={background} alt="Background" />
+
+      <img
+        className="background-image"
+        src={branchImages[currentImageIndex]}
+        alt="Tree with branches"
+      />
       <div className="wooden-sign-container-home">
         {showWoodenSign && (
           <Suspense fallback={<div>Loading Wooden Sign...</div>}>
@@ -131,9 +135,6 @@ const FriendTree = React.memo(() => {
           </Suspense>
         )}
       </div>
-
-      <img className="tree-image" src={branchImages[currentImageIndex]} alt="Tree with branches" />
-
       {/* Branch hitboxes */}
       {branchHitboxPositions.slice(0, currentImageIndex).map((position, index) => (
         <div
