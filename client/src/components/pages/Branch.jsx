@@ -33,6 +33,7 @@ import branchBackground from "../../assets/branchBackground.png";
 import racoonImg from "../../assets/racoon.gif";
 import MusicButton from "../modules/MusicButton";
 import treeGrow from "../../assets/twigGrow.mp3";
+import back from "../../assets/branches/branchOne/back.png";
 
 // component for displaying a single branch and its twigs
 // goal is to have a branch component that can be used for both left and right side branches
@@ -324,7 +325,7 @@ const Branch = () => {
         <span className="back-text">Back to Tree</span>
       </div>
       {/* background image */}
-      <img src={branchBackground} alt="Branch Background" className="branch-background-image" />
+      <img src={back} alt="Branch Background" className="branch-background-image" />
 
       {tutorialActive && (
         <div className="tutorial-overlay">
@@ -360,7 +361,7 @@ const Branch = () => {
         </div>
       )}
       {/* branch image showing current number of twigs */}
-      <img className="branch-image" src={twigImages[currentTwigIndex]} alt="Branch" />
+      {/* <img className="branch-image" src={twigImages[currentTwigIndex]} alt="Branch" /> */}
       {/* Hidden audio element for sound effect */}
       <audio ref={soundRef}>
         <source src={treeGrow} type="audio/mp3" />
