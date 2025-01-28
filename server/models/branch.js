@@ -9,6 +9,18 @@ const BranchSchema = new mongoose.Schema({
     // reference to the twig model
     ref: 'twig'
   }],
+  // list of users who endorsed this branch
+  endorsements: [{
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user'
+    },
+    name: String,
+    timestamp: {
+      type: Date,
+      default: Date.now
+    }
+  }],
   animalGifURL: String,
 });
 

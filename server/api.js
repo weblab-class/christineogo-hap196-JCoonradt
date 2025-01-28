@@ -185,6 +185,43 @@ router.delete("/branch/:branchId", async (req, res) => {
   }
 });
 
+// endorse a branch
+router.post("/branch/:branchId/endorse", auth.ensureLoggedIn, async (req, res) => {
+  try {
+    const branch = await Branch.findById(req.params.branchId);
+    if (!branch) {
+      return res.status(404).send({ error: "Branch not found" });
+    }
+
+    // Check if user has already endorsed
+    const existingEndorsement = branch.endorsements.find(
+      (e) => e.userId.toString() === req.user._id.toString()
+    );
+
+    if (existingEndorsement) {
+      // Remove endorsement if it exists (toggle functionality)
+      branch.endorsements = branch.endorsements.filter(
+        (e) => e.userId.toString() !== req.user._id.toString()
+      );
+      await branch.save();
+      return res.send({ endorsed: false, endorsements: branch.endorsements });
+    }
+
+    // Add new endorsement
+    branch.endorsements.push({
+      userId: req.user._id,
+      name: req.user.name,
+      timestamp: new Date(),
+    });
+
+    await branch.save();
+    res.send({ endorsed: true, endorsements: branch.endorsements });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: `Error: ${err}` });
+  }
+});
+
 // create a new twig
 router.post("/twig", async (req, res) => {
   if (!req.user) {
