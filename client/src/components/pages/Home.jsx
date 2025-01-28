@@ -4,18 +4,23 @@ import { useNavigate } from "react-router-dom";
 import "../../utilities.css";
 import "./Home.css";
 import { UserContext } from "../App";
-import noBranch from "../../assets/noBranch.png";
-import oneBranch from "../../assets/oneBranch.png";
-import twoBranch from "../../assets/twoBranch.png";
-import threeBranch from "../../assets/threeBranch.png";
-import fourBranch from "../../assets/fourBranch.png";
-import fiveBranch from "../../assets/fiveBranch.png";
-import sixBranch from "../../assets/sixBranch.png";
-import background from "../../assets/treeBackground.png";
+import noBranch from "../../assets/tree/noBranch.png";
+import oneBranch from "../../assets/tree/oneBranch.png";
+import twoBranch from "../../assets/tree/twoBranch.png";
+import threeBranch from "../../assets/tree/threeBranch.png";
+import fourBranch from "../../assets/tree/fourBranch.png";
+import fiveBranch from "../../assets/tree/fiveBranch.png";
+import sixBranch from "../../assets/tree/sixBranch.png";
 import racoonImg from "../../assets/racoon.gif";
 import rabbitImg from "../../assets/rabbit.gif";
 import owlImg from "../../assets/owl.gif";
 import treeGrow from "../../assets/treeGrow1.mp3";
+import smallOneBranch from "../../assets/tree/smallScreen/smallOneBranch.png";
+import smallTwoBranch from "../../assets/tree/smallScreen/smallTwoBranch.png";
+import smallThreeBranch from "../../assets/tree/smallScreen/smallThreeBranch.png";
+import smallFourBranch from "../../assets/tree/smallScreen/smallFourBranch.png";
+import smallFiveBranch from "../../assets/tree/smallScreen/smallFiveBranch.png";
+import smallSixBranch from "../../assets/tree/smallScreen/smallSixBranch.png";
 
 // Lazy-loaded components
 const CustomButton = lazy(() => import("../modules/CustomButton"));
@@ -34,14 +39,23 @@ const branchImages = [
   sixBranch,
 ];
 
-// Hitbox positions for branches
+const smallScreenBranchImages = [
+  noBranch,
+  smallOneBranch,
+  smallTwoBranch,
+  smallThreeBranch,
+  smallFourBranch,
+  smallFiveBranch,
+  smallSixBranch,
+];
+
 const branchHitboxes = [
-  { top: "500px", left: "400px" },
-  { top: "610px", left: "1100px" },
-  { top: "250px", left: "350px" },
-  { top: "400px", left: "1150px" },
-  { top: "40px", left: "400px" },
-  { top: "50px", left: "1100px" },
+  { top: "50%", left: "26%" }, // branch 0
+  { top: "57%", right: "26%" }, // branch 1
+  { top: "27%", left: "24%" }, // branch 2
+  { top: "40%", right: "26%" }, // branch 3
+  { top: "8%", left: "26%" }, // branch 4
+  { top: "10%", right: "26%" }, // branch 5
 ];
 
 const Home = React.memo(() => {
@@ -117,9 +131,27 @@ const Home = React.memo(() => {
     }
   };
 
-  // States to manage wooden sign content
   const [branchName, setBranchName] = useState("");
   const [branchDescription, setBranchDescription] = useState("");
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // window resize listener
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // get the correct image array given a screen size
+  const getCurrentBranchImage = () => {
+    return windowWidth <= 800
+      ? smallScreenBranchImages[currentImageIndex]
+      : branchImages[currentImageIndex];
+  };
 
   // Fetch the user's tree data
   useEffect(() => {
@@ -242,8 +274,11 @@ const Home = React.memo(() => {
         <Navbar startTutorial={startTutorial} />
       </Suspense>
 
-      <img className="background-image" src={background} alt="Background" />
-
+      <img
+        className={`background-image ${currentImageIndex}-branches`}
+        src={getCurrentBranchImage()}
+        alt="Tree with branches"
+      />
       <div>
         {/* Rabbit */}
         <img src={rabbitImg} alt="Rabbit" className="rabbit" />
@@ -284,11 +319,15 @@ const Home = React.memo(() => {
         )}
       </div>
 
-      <img className="tree-image" src={branchImages[currentImageIndex]} alt="Tree with branches" />
       {branchHitboxes.slice(0, currentImageIndex).map((hitbox, index) => (
         <div
           key={index}
           className={`branch-hitbox branch-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
+          style={{
+            zIndex: tutorialActive ? 1001 : 504,
+            top: hitbox.top,
+            ...(hitbox.left ? { left: hitbox.left } : { right: hitbox.right })
+          }}
           onMouseEnter={() => branches[index] && handleBranchHover(branches[index])}
           onMouseLeave={handleBranchHoverEnd}
           onClick={() => branches[index] && handleBranchClick(branches[index]._id, index)}

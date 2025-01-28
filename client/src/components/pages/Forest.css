@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Pixelify+Sans&display=swap");
 
-body{
+body {
   font-family: "Pixelify Sans", sans-serif;
 }
 
@@ -57,7 +57,7 @@ body{
 
 .search-button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 5px;
@@ -90,20 +90,27 @@ body{
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
   font-family: "Pixelify Sans", sans-serif;
+  position: relative;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
 }
 
 .tree-card h3 {
-  margin: 0 0 15px 0;
+  margin: 0;
   color: #333;
+  flex: 1;
 }
 
 .tree-card-actions {
-  margin-top: 15px;
+  margin-top: 10px;
+  padding-top: 10px;
+  width: 100%;
 }
 
 .friend-button {
   padding: 8px 16px;
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: white;
   border: none;
   border-radius: 4px;
@@ -114,17 +121,17 @@ body{
 }
 
 .friend-button:hover:not(:disabled) {
-  background-color: #1976D2;
+  background-color: #1976d2;
 }
 
 .friend-button:disabled {
-  background-color: #90CAF9;
+  background-color: #90caf9;
   cursor: default;
   opacity: 0.8;
 }
 
 .friend-button:not(:disabled):contains("Accept Request") {
-  background-color: #4CAF50;
+  background-color: #4caf50;
 }
 
 .friend-button:not(:disabled):contains("Accept Request"):hover {
@@ -132,7 +139,7 @@ body{
 }
 
 .accept-friend-button {
-  background-color: #4CAF50 !important;
+  background-color: #4caf50 !important;
 }
 
 .accept-friend-button:hover:not(:disabled) {
@@ -155,12 +162,12 @@ body{
   top: 80px;
   right: 20px;
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 100;
   font-family: "Pixelify Sans", sans-serif;
 }
 
@@ -223,7 +230,7 @@ body{
 
 .visit-tree-button {
   padding: 6px 12px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
@@ -244,7 +251,7 @@ body{
 
 .accept-button {
   padding: 5px 15px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
@@ -302,7 +309,7 @@ body{
 
 .Forest-searchButton {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 5px;
@@ -344,7 +351,7 @@ body{
 
 .Forest-acceptButton {
   padding: 5px 15px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
@@ -381,7 +388,7 @@ body{
 
 .Forest-friendButton {
   padding: 5px 15px;
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: white;
   border: none;
   border-radius: 4px;
@@ -389,7 +396,7 @@ body{
 }
 
 .Forest-friendButton:hover {
-  background-color: #1976D2;
+  background-color: #1976d2;
 }
 
 h3 {

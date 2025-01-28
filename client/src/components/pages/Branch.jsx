@@ -8,28 +8,45 @@ import branchOneNoTwigs from "../../assets/branches/branchOne/branchOneNoTwigs.p
 import branchOneTwigOne from "../../assets/branches/branchOne/branchOneTwigOne.png";
 import branchOneTwigTwo from "../../assets/branches/branchOne/branchOneTwigTwo.png";
 import branchOneTwigThree from "../../assets/branches/branchOne/branchOneTwigThree.png";
+import branchOneTwigFour from "../../assets/branches/branchOne/branchOneTwigFour.png";
+import branchOneTwigFive from "../../assets/branches/branchOne/branchOneTwigFive.png";
+import branchOneTwigSix from "../../assets/branches/branchOne/branchOneTwigSix.png";
 import branchTwoNoTwigs from "../../assets/branches/branchTwo/branchTwoNoTwigs.png";
 import branchTwoTwigOne from "../../assets/branches/branchTwo/branchTwoTwigOne.png";
 import branchTwoTwigTwo from "../../assets/branches/branchTwo/branchTwoTwigTwo.png";
 import branchTwoTwigThree from "../../assets/branches/branchTwo/branchTwoTwigThree.png";
+import branchTwoTwigFour from "../../assets/branches/branchTwo/branchTwoTwigFour.png";
+import branchTwoTwigFive from "../../assets/branches/branchTwo/branchTwoTwigFive.png";
+import branchTwoTwigSix from "../../assets/branches/branchTwo/branchTwoTwigSix.png";
 import branchThreeNoTwigs from "../../assets/branches/branchThree/branchThreeNoTwigs.png";
 import branchThreeTwigOne from "../../assets/branches/branchThree/branchThreeTwigOne.png";
 import branchThreeTwigTwo from "../../assets/branches/branchThree/branchThreeTwigTwo.png";
 import branchThreeTwigThree from "../../assets/branches/branchThree/branchThreeTwigThree.png";
+import branchThreeTwigFour from "../../assets/branches/branchThree/branchThreeTwigFour.png";
+import branchThreeTwigFive from "../../assets/branches/branchThree/branchThreeTwigFive.png";
+import branchThreeTwigSix from "../../assets/branches/branchThree/branchThreeTwigSix.png";
 import branchFourNoTwigs from "../../assets/branches/branchFour/branchFourNoTwigs.png";
 import branchFourTwigOne from "../../assets/branches/branchFour/branchFourTwigOne.png";
 import branchFourTwigTwo from "../../assets/branches/branchFour/branchFourTwigTwo.png";
 import branchFourTwigThree from "../../assets/branches/branchFour/branchFourTwigThree.png";
+import branchFourTwigFour from "../../assets/branches/branchFour/branchFourTwigFour.png";
+import branchFourTwigFive from "../../assets/branches/branchFour/branchFourTwigFive.png";
+import branchFourTwigSix from "../../assets/branches/branchFour/branchFourTwigSix.png";
 import branchFiveNoTwigs from "../../assets/branches/branchFive/branchFiveNoTwigs.png";
 import branchFiveTwigOne from "../../assets/branches/branchFive/branchFiveTwigOne.png";
 import branchFiveTwigTwo from "../../assets/branches/branchFive/branchFiveTwigTwo.png";
 import branchFiveTwigThree from "../../assets/branches/branchFive/branchFiveTwigThree.png";
+import branchFiveTwigFour from "../../assets/branches/branchFive/branchFiveTwigFour.png";
+import branchFiveTwigFive from "../../assets/branches/branchFive/branchFiveTwigFive.png";
+import branchFiveTwigSix from "../../assets/branches/branchFive/branchFiveTwigSix.png";
 import branchSixNoTwigs from "../../assets/branches/branchSix/branchSixNoTwigs.png";
 import branchSixTwigOne from "../../assets/branches/branchSix/branchSixTwigOne.png";
 import branchSixTwigTwo from "../../assets/branches/branchSix/branchSixTwigTwo.png";
 import branchSixTwigThree from "../../assets/branches/branchSix/branchSixTwigThree.png";
+import branchSixTwigFour from "../../assets/branches/branchSix/branchSixTwigFour.png";
+import branchSixTwigFive from "../../assets/branches/branchSix/branchSixTwigFive.png";
+import branchSixTwigSix from "../../assets/branches/branchSix/branchSixTwigSix.png";
 import chevronGrey from "../../assets/chevronGrey.png";
-import branchBackground from "../../assets/branchBackground.png";
 import racoonImg from "../../assets/racoon.gif";
 import MusicButton from "../modules/MusicButton";
 import treeGrow from "../../assets/twigGrow.mp3";
@@ -125,12 +142,60 @@ const Branch = () => {
 
   // image sets for different branch types
   const branchImageSets = {
-    1: [branchOneNoTwigs, branchOneTwigOne, branchOneTwigTwo, branchOneTwigThree],
-    2: [branchTwoNoTwigs, branchTwoTwigOne, branchTwoTwigTwo, branchTwoTwigThree],
-    3: [branchThreeNoTwigs, branchThreeTwigOne, branchThreeTwigTwo, branchThreeTwigThree],
-    4: [branchFourNoTwigs, branchFourTwigOne, branchFourTwigTwo, branchFourTwigThree],
-    5: [branchFiveNoTwigs, branchFiveTwigOne, branchFiveTwigTwo, branchFiveTwigThree],
-    6: [branchSixNoTwigs, branchSixTwigOne, branchSixTwigTwo, branchSixTwigThree],
+    1: [
+      branchOneNoTwigs,
+      branchOneTwigOne,
+      branchOneTwigTwo,
+      branchOneTwigThree,
+      branchOneTwigFour,
+      branchOneTwigFive,
+      branchOneTwigSix,
+    ],
+    2: [
+      branchTwoNoTwigs,
+      branchTwoTwigOne,
+      branchTwoTwigTwo,
+      branchTwoTwigThree,
+      branchTwoTwigFour,
+      branchTwoTwigFive,
+      branchTwoTwigSix,
+    ],
+    3: [
+      branchThreeNoTwigs,
+      branchThreeTwigOne,
+      branchThreeTwigTwo,
+      branchThreeTwigThree,
+      branchThreeTwigFour,
+      branchThreeTwigFive,
+      branchThreeTwigSix,
+    ],
+    4: [
+      branchFourNoTwigs,
+      branchFourTwigOne,
+      branchFourTwigTwo,
+      branchFourTwigThree,
+      branchFourTwigFour,
+      branchFourTwigFive,
+      branchFourTwigSix,
+    ],
+    5: [
+      branchFiveNoTwigs,
+      branchFiveTwigOne,
+      branchFiveTwigTwo,
+      branchFiveTwigThree,
+      branchFiveTwigFour,
+      branchFiveTwigFive,
+      branchFiveTwigSix,
+    ],
+    6: [
+      branchSixNoTwigs,
+      branchSixTwigOne,
+      branchSixTwigTwo,
+      branchSixTwigThree,
+      branchSixTwigFour,
+      branchSixTwigFive,
+      branchSixTwigSix,
+    ],
   };
 
   // get the correct image set based on branch type
@@ -324,7 +389,7 @@ const Branch = () => {
         <span className="back-text">Back to Tree</span>
       </div>
       {/* background image */}
-      <img src={branchBackground} alt="Branch Background" className="branch-background-image" />
+      <img className="branch-background-image" src={twigImages[currentTwigIndex]} alt="Branch" />
 
       {tutorialActive && (
         <div className="tutorial-overlay">
@@ -355,12 +420,10 @@ const Branch = () => {
             readOnly={!isEditMode && isTwigMode}
             initialEditMode={isEditMode}
             mode={isTwigMode ? "twig" : "branch"}
-            disabled={twigs.length >= 3}
+            disabled={twigs.length >= 6}
           />
         </div>
       )}
-      {/* branch image showing current number of twigs */}
-      <img className="branch-image" src={twigImages[currentTwigIndex]} alt="Branch" />
       {/* Hidden audio element for sound effect */}
       <audio ref={soundRef}>
         <source src={treeGrow} type="audio/mp3" />
@@ -369,10 +432,14 @@ const Branch = () => {
       <MusicButton />
 
       {/* twig hitboxes */}
-      {twigs.slice(0, 3).map((twig, index) => (
+      {twigs.slice(0, 6).map((twig, index) => (
         <div
           key={index}
           className={`twig-hitbox twig-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
+          style={{
+            // during the tutorial, the hitbox should be above the navbar
+            zIndex: tutorialActive ? 1001 : 504,
+          }}
           onMouseEnter={() => handleTwigHover(twig)}
           onMouseLeave={handleTwigHoverEnd}
           onClick={() =>
@@ -381,9 +448,8 @@ const Branch = () => {
                 twigType: isWoodenSignLeft() ? 2 : 1,
                 branchId: branchId,
                 userId: currentUserId,
-                // need to pass in the original branch type so we can go back to it
                 branchType: branchType,
-                tutorialActive: tutorialActiveRef.current, // Ensure this value is correct
+                tutorialActive: tutorialActiveRef.current,
                 currentStep: 6,
               },
             })

@@ -1,23 +1,28 @@
-/* Background image container */
-.background-image {
-  position: relative; /* Make this the reference for positioning children */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1; /* Place it behind other content */
-}
 
-.tree-image {
-  position: absolute;
-  bottom: 8%;
-  left: 50%; /* put in center of page */
-  width: 55%;
-  height: 85%;
-  object-fit: cover; /* keep aspect ratio */
-  z-index: -1;
-  transform: translateX(-50%); /* center horizontally */
+@media screen and (max-width: 800px) {
+  .background-image.five-branches {
+    content: url("../../assets/tree/smallScreen/smallFiveBranch.png");
+  }
+
+  .background-image.four-branches {
+    content: url("../../assets/tree/smallScreen/smallFourBranch.png");
+  }
+
+  .background-image.three-branches {
+    content: url("../../assets/tree/smallScreen/smallThreeBranch.png");
+  }
+
+  .background-image.two-branches {
+    content: url("../../assets/tree/smallScreen/smallTwoBranch.png");
+  }
+
+  .background-image.one-branch {
+    content: url("../../assets/tree/smallScreen/smallOneBranch.png");
+  }
+
+  .background-image.six-branches {
+    content: url("../../assets/tree/smallScreen/smallSixBranch.png");
+  }
 }
 
 .wooden-sign-container-home {
@@ -37,11 +42,18 @@
   z-index: 511;
 }
 
+@media screen and (max-width: 800px) {
+  .add-branch-container {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 .branch-hitbox {
   position: fixed;
   width: 200px;
   height: 200px;
-  /* background-color: rgba(255, 0, 0, 0.5); */
+  background-color: rgba(255, 0, 0, 0.5);
   border-radius: 50%;
   z-index: 506;
   display: flex;
@@ -63,33 +75,440 @@
 /* classes for each branch hitbox position */
 .branch-hitbox-0 {
   top: 50%;
-  left: 25%;
+  left: 26%;
   z-index: 506;
+  /* transition: left 0.3s ease; */
 }
+
+/* for branch hitbox 0 */
+@media screen and (max-width: 2000px) {
+  .branch-hitbox-0 {
+    left: 26%;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .branch-hitbox-0 {
+    left: 24%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .branch-hitbox-0 {
+    left: 20%;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .branch-hitbox-0 {
+    left: 18%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .branch-hitbox-0 {
+    left: 15%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .branch-hitbox-0 {
+    left: 12%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .branch-hitbox-0 {
+    left: 10%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .branch-hitbox-0 {
+    left: 5%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .branch-hitbox-0 {
+    left: 0%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .branch-hitbox-0 {
+    left: 8%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .branch-hitbox-0 {
+    left: 6%;
+  }
+}
+
 .branch-hitbox-1 {
   top: 57%;
-  left: 62%;
+  right: 26%;
   z-index: 506;
 }
+
+/* for branch hitbox 1 */
+@media screen and (max-width: 2000px) {
+  .branch-hitbox-1 {
+    right: 26%;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .branch-hitbox-1 {
+    right: 24%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .branch-hitbox-1 {
+    right: 20%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .branch-hitbox-1 {
+    right: 18%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .branch-hitbox-1 {
+    right: 15%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .branch-hitbox-1 {
+    right: 12%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .branch-hitbox-1 {
+    right: 10%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .branch-hitbox-1 {
+    right: 5%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .branch-hitbox-1 {
+    right: 0%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .branch-hitbox-1 {
+    right: 8%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .branch-hitbox-1 {
+    right: 6%;
+  }
+}
+
 .branch-hitbox-2 {
-  top: 20%;
+  top: 27%;
   left: 24%;
   z-index: 506;
 }
+
+/* for branch hitbox 2 */
+@media screen and (max-width: 2000px) {
+  .branch-hitbox-2 {
+    left: 24%;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .branch-hitbox-2 {
+    left: 22%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .branch-hitbox-2 {
+    left: 18%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .branch-hitbox-2 {
+    left: 16%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .branch-hitbox-2 {
+    left: 13%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .branch-hitbox-2 {
+    left: 10%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .branch-hitbox-2 {
+    left: 8%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .branch-hitbox-2 {
+    left: 3%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .branch-hitbox-2 {
+    left: 0%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .branch-hitbox-2 {
+    left: 6%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .branch-hitbox-2 {
+    left: 0%;
+  }
+}
+
 .branch-hitbox-3 {
   top: 40%;
-  left: 63%;
+  right: 26%;
   z-index: 506;
 }
+
+/* for branch hitbox 3 */
+@media screen and (max-width: 2000px) {
+  .branch-hitbox-3 {
+    right: 26%;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .branch-hitbox-3 {
+    right: 24%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .branch-hitbox-3 {
+    right: 20%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .branch-hitbox-3 {
+    right: 18%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .branch-hitbox-3 {
+    right: 15%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .branch-hitbox-3 {
+    right: 12%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .branch-hitbox-3 {
+    right: 10%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .branch-hitbox-3 {
+    right: 5%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .branch-hitbox-3 {
+    right: 0%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .branch-hitbox-3 {
+    right: 8%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .branch-hitbox-3 {
+    right: 6%;
+  }
+}
+
 .branch-hitbox-4 {
   top: 8%;
   left: 26%;
   z-index: 506;
 }
+
+/* for branch hitbox 4 */
+@media screen and (max-width: 2000px) {
+  .branch-hitbox-4 {
+    left: 26%;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .branch-hitbox-4 {
+    left: 24%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .branch-hitbox-4 {
+    left: 20%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .branch-hitbox-4 {
+    left: 18%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .branch-hitbox-4 {
+    left: 15%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .branch-hitbox-4 {
+    left: 12%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .branch-hitbox-4 {
+    left: 10%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .branch-hitbox-4 {
+    left: 5%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .branch-hitbox-4 {
+    left: 0%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .branch-hitbox-4 {
+    left: 8%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .branch-hitbox-4 {
+    left: 6%;
+  }
+}
+
 .branch-hitbox-5 {
   top: 10%;
-  left: 62%;
+  right: 26%;
   z-index: 506;
+}
+
+/* for branch hitbox 5 */
+@media screen and (max-width: 2000px) {
+  .branch-hitbox-5 {
+    right: 26%;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .branch-hitbox-5 {
+    right: 24%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .branch-hitbox-5 {
+    right: 20%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .branch-hitbox-5 {
+    right: 18%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .branch-hitbox-5 {
+    right: 15%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .branch-hitbox-5 {
+    right: 12%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .branch-hitbox-5 {
+    right: 10%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .branch-hitbox-5 {
+    right: 5%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .branch-hitbox-5 {
+    right: 0%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .branch-hitbox-5 {
+    right: 8%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .branch-hitbox-5 {
+    right: 6%;
+  }
 }
 
 .branch-hitbox:hover {
@@ -255,5 +674,5 @@
   width: 80px; /* Owl size */
   height: auto;
   animation: owlAnimation 120s ease-in-out infinite; /* Total animation duration */
-  z-index: 15; /* Ensure it’s above other elements */
+  z-index: 15; /* Ensure it's above other elements */
 }

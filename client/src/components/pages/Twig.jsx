@@ -350,6 +350,10 @@ const Twig = () => {
         <div
           key={index}
           className={`leaf-hitbox leaf-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
+          style={{
+            // during the tutorial, the hitbox should be above the navbar
+            zIndex: tutorialActive ? 1001 : 504,
+          }}
           onMouseEnter={() => handleLeafHover(leaf)}
           onMouseLeave={handleLeafHoverEnd}
           onClick={() =>

@@ -24,7 +24,7 @@
 /* Menu styles */
 .menu {
   position: absolute;
-  top: 60px; /* Position below navbar */
+  top: 60px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -33,25 +33,32 @@
   color: white;
   font-size: var(--xxxl);
   z-index: 1100;
+  height: calc(85vh - 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
 }
 
 .menu-links-div {
   display: flex;
-  flex-direction: column; /* Stack links vertically */
+  flex-direction: column;
   align-items: center;
-  margin-top: 20px;
 }
 
 .menu a {
   color: white;
   text-decoration: none;
-  margin: 5px 0;
-  padding: 5px;
+  margin: 12px 0;
+  padding: 10px;
   font-size: var(--xxl);
 }
 
 .menu a:hover {
   color: #39ff14; /* Highlight links on hover */
+}
+
+.menu a.active {
+  color: #39ff14;
 }
 
 /* Chevron icon */
@@ -68,4 +75,19 @@
 /* Chevron hidden when navbar expands */
 .navbar:hover .chevron {
   opacity: 0;
+}
+/* Bottom chevron */
+.bottom-chevron {
+  position: absolute;
+  bottom: 85px; /* Moved up from 20px */
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  height: var(--l);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Show bottom chevron when navbar is expanded */
+.navbar:hover .bottom-chevron {
+  opacity: 1;
 }
