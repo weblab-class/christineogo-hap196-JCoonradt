@@ -53,7 +53,7 @@ const smallScreenBranchImages = [
 const branchHitboxes = [
   { top: "500px", left: "400px" },
   { top: "610px", left: "1100px" },
-  { top: "250px", left: "350px" },
+  { top: "350px", left: "350px" },
   { top: "400px", left: "1150px" },
   { top: "40px", left: "400px" },
   { top: "50px", left: "1100px" },
