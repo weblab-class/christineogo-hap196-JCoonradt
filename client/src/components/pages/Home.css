@@ -1,13 +1,3 @@
-/* Background image container */
-.background-image {
-  position: relative; /* Make this the reference for positioning children */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1; /* Place it behind other content */
-}
 
 @media screen and (max-width: 800px) {
   .background-image.five-branches {

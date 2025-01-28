@@ -49,14 +49,13 @@ const smallScreenBranchImages = [
   smallSixBranch,
 ];
 
-// Hitbox positions for branches
 const branchHitboxes = [
-  { top: "500px", left: "400px" },
-  { top: "610px", left: "1100px" },
-  { top: "350px", left: "350px" },
-  { top: "400px", left: "1150px" },
-  { top: "40px", left: "400px" },
-  { top: "50px", left: "1100px" },
+  { top: "50%", left: "26%" }, // branch 0
+  { top: "57%", right: "26%" }, // branch 1
+  { top: "27%", left: "24%" }, // branch 2
+  { top: "40%", right: "26%" }, // branch 3
+  { top: "8%", left: "26%" }, // branch 4
+  { top: "10%", right: "26%" }, // branch 5
 ];
 
 const Home = React.memo(() => {
@@ -325,8 +324,9 @@ const Home = React.memo(() => {
           key={index}
           className={`branch-hitbox branch-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
           style={{
-            // during the tutorial, the hitbox should be above the navbar
             zIndex: tutorialActive ? 1001 : 504,
+            top: hitbox.top,
+            ...(hitbox.left ? { left: hitbox.left } : { right: hitbox.right })
           }}
           onMouseEnter={() => branches[index] && handleBranchHover(branches[index])}
           onMouseLeave={handleBranchHoverEnd}
