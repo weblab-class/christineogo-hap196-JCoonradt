@@ -76,13 +76,12 @@
 .navbar:hover .chevron {
   opacity: 0;
 }
-
 /* Bottom chevron */
 .bottom-chevron {
   position: absolute;
   bottom: 85px; /* Moved up from 20px */
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) rotate(180deg);
   height: var(--l);
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
