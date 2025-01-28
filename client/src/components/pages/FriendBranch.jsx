@@ -64,6 +64,8 @@ const FriendBranch = () => {
   const [currentTwigIndex, setCurrentTwigIndex] = useState(0);
   const [friendName, setFriendName] = useState(location.state?.friendName || "");
   const [twigs, setTwigs] = useState([]);
+  const [endorsements, setEndorsements] = useState([]);
+  const [isEndorsed, setIsEndorsed] = useState(false);
 
   // userId from either params or location state
   const currentUserId = userId || location.state?.userId;
@@ -173,6 +175,34 @@ const FriendBranch = () => {
     }
   }, [branchId, currentUserId, location.state?.friendName, branchType, twigImages.length]);
 
+  // Check if current user has endorsed this branch
+  useEffect(() => {
+    if (branch?.endorsements) {
+      setEndorsements(branch.endorsements);
+      setIsEndorsed(branch.endorsements.some((e) => e.userId === currentUserId));
+    }
+  }, [branch, currentUserId]);
+
+  const handleEndorse = async () => {
+    try {
+      const response = await fetch(`/api/branch/${branchId}/endorse`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setEndorsements(data.endorsements);
+        setIsEndorsed(data.endorsed);
+      }
+    } catch (error) {
+      console.error("Failed to endorse branch:", error);
+    }
+  };
+
   // handler for hovering over a twig
   const handleTwigHover = (twig) => {
     setBranchName(twig.name);
@@ -202,18 +232,41 @@ const FriendBranch = () => {
   return (
     <div className={`branch-type-${branchType}`}>
       <Navbar />
-      {/* back button to return to tree view */}
       <div
         className="back-to-tree"
         onClick={() =>
-          navigate(`/friend/${userId}/tree`, {
-            state: { friendName: friendName, userId: userId },
+          navigate(`/friend/${currentUserId}/tree`, {
+            state: { friendName: friendName },
           })
         }
       >
         <img src={chevronGrey} alt="Back" className="back-chevron" />
         <span className="back-text">Back to Tree</span>
       </div>
+
+      {/* Endorsement Section */}
+      <div className="endorsement-section">
+        <button 
+          className={`endorse-button ${isEndorsed ? 'endorsed' : ''}`}
+          onClick={handleEndorse}
+        >
+          {isEndorsed ? "Endorsed!" : "Endorse"}
+        </button>
+        {endorsements.length > 0 && (
+          <div className="endorsements-list">
+            <h3>Endorsed by:</h3>
+            <div className="endorsers">
+              {endorsements.map((endorsement, index) => (
+                <span key={endorsement.userId} className="endorser-name">
+                  {endorsement.name}
+                  {index < endorsements.length - 1 ? ", " : ""}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* background image */}
       <img
         className="branch-background-image"
