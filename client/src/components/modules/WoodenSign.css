@@ -1,6 +1,6 @@
 .wooden-sign-container {
   position: fixed;
-  width: 400px;
+  width: 300px;
   z-index: 501;
 }
 
@@ -33,7 +33,7 @@
 .wooden-sign-title {
   color: white;
   font-family: "Pixelify Sans", sans-serif;
-  font-size: var(--xxl);
+  font-size: var(--l);
   margin-bottom: var(--xs);
   max-width: 100%; /* prevent title from overflowing */
   overflow: hidden;
@@ -64,7 +64,7 @@
 
 /* override CustomButton styles for smaller font size */
 .wooden-sign-buttons .custom-button span {
-  font-size: var(--l);
+  font-size: var(--m);
 }
 
 .wooden-sign-content input.wooden-sign-title,
@@ -81,12 +81,12 @@
 }
 
 .wooden-sign-content input.wooden-sign-title {
-  font-size: var(--xxl);
+  font-size: var(--l);
   margin-bottom: var(--xs);
 }
 
 .wooden-sign-content textarea.wooden-sign-description {
-  font-size: var(--m);
+  font-size: var(--s);
   min-height: 80px;
   resize: vertical;
   margin-bottom: var(--m);
@@ -98,7 +98,7 @@
 }
 
 .wooden-sign-content input.wooden-sign-title::placeholder {
-  font-size: var(--xl);
+  font-size: var(--m);
 }
 
 .wooden-sign-media {

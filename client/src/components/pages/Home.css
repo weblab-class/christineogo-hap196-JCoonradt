@@ -41,16 +41,6 @@
   z-index: 505;
 }
 
-/* Add responsive sizing for smaller screens */
-@media screen and (max-width: 800px) {
-  .wooden-sign-container-home {
-    width: 35%;
-    height: 30%;
-    top: 20%;
-    left: 20%;
-  }
-}
-
 .add-branch-container {
   position: absolute;
   bottom: 5%;
@@ -808,4 +798,22 @@
   height: auto;
   animation: owlAnimation 120s ease-in-out infinite; /* Total animation duration */
   z-index: 15; /* Ensure it's above other elements */
+}
+
+@media screen and (max-width: 1400px) {
+  .wooden-sign-container-home {
+    position: fixed !important;
+    width: 200px !important;
+    height: auto !important;
+    top: 10px !important;
+    left: 45% !important;
+    transform: translateX(-60%) !important;
+  }
+
+  .wooden-sign-container-home .wooden-sign-container {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+  }
 }
