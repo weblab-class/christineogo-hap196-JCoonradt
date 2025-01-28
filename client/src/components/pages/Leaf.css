@@ -3,6 +3,9 @@
   height: 100vh;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .leaf-background {
@@ -17,9 +20,12 @@
 
 .center-sign {
   position: absolute;
-  top: 0%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  z-index: 2;
 }
 
 .back-to-twig {
@@ -29,20 +35,168 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  z-index: 1;
+  z-index: 3;
+  transition: all 0.3s ease;
 }
 
 .back-chevron {
   width: var(--xxl);
   transform: rotate(90deg);
   margin-right: 8px;
+  transition: transform 0.3s ease;
 }
 
 .back-text {
   color: rgb(71, 68, 68);
   font-size: var(--xl);
+  transition: color 0.3s ease;
 }
 
 .back-to-twig:hover .back-text {
   color: #39ff14;
+}
+
+.back-to-twig:hover .back-chevron {
+  transform: rotate(90deg) translateX(-3px);
+}
+
+/* Media queries for responsive design */
+@media screen and (max-width: 1024px) {
+  .center-sign {
+    width: 85%;
+    max-width: 450px;
+  }
+
+  .back-to-twig {
+    left: 100px;
+    bottom: 70px;
+  }
+
+  .back-chevron {
+    width: var(--xl);
+  }
+
+  .back-text {
+    font-size: var(--l);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .center-sign {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .back-to-twig {
+    left: 80px;
+    bottom: 60px;
+  }
+
+  .back-chevron {
+    width: var(--l);
+  }
+
+  .back-text {
+    font-size: var(--m);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .leaf-page {
+    justify-content: center;
+  }
+
+  .center-sign {
+    width: 95%;
+    max-width: none;
+    top: 45%;
+  }
+
+  .back-to-twig {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 16px;
+    border-radius: 20px;
+  }
+
+  .back-chevron {
+    width: var(--m);
+    margin-right: 6px;
+  }
+
+  .back-text {
+    font-size: var(--s);
+    color: white;
+  }
+
+  .back-to-twig:hover .back-text {
+    color: #39ff14;
+  }
+}
+
+/* Handle very small screens */
+@media screen and (max-width: 320px) {
+  .center-sign {
+    width: 98%;
+    top: 40%;
+  }
+
+  .back-to-twig {
+    bottom: 15px;
+    padding: 6px 12px;
+  }
+
+  .back-chevron {
+    width: var(--s);
+    margin-right: 4px;
+  }
+
+  .back-text {
+    font-size: var(--xs);
+  }
+}
+
+/* Handle landscape orientation */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .center-sign {
+    top: 50%;
+    width: 80%;
+    max-width: 400px;
+  }
+
+  .back-to-twig {
+    bottom: 10px;
+    padding: 6px 12px;
+  }
+
+  /* Adjust wooden sign container for landscape */
+  .wooden-sign-container {
+    max-height: 80vh;
+  }
+
+  /* Ensure content fits in the limited vertical space */
+  .wooden-sign-content {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+}
+
+/* Ensure proper spacing with Navbar */
+@media screen and (max-height: 600px) {
+  .center-sign {
+    top: 55%;
+  }
+}
+
+/* Dark mode considerations */
+@media (prefers-color-scheme: dark) {
+  .back-text {
+    color: rgb(200, 200, 200);
+  }
+
+  .back-to-twig:hover .back-text {
+    color: #39ff14;
+  }
 }

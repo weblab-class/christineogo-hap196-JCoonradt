@@ -576,3 +576,172 @@ body {
 .endorser-name {
   color: #2E7D32;
 }
+
+/* Media queries for responsive design */
+@media screen and (max-width: 1024px) {
+  /* Adjust branch image size and position */
+  [class^="branch-type-"] .branch-image {
+    width: 65%;
+  }
+
+  /* Adjust twig hitbox size */
+  .twig-hitbox {
+    width: 120px;
+    height: 120px;
+    font-size: var(--l);
+  }
+
+  /* Adjust back to tree button */
+  .back-to-tree {
+    bottom: 60px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* Adjust branch image size and position */
+  [class^="branch-type-"] .branch-image {
+    width: 75%;
+  }
+
+  /* Center branch images */
+  .branch-type-1 .branch-image,
+  .branch-type-3 .branch-image,
+  .branch-type-5 .branch-image {
+    right: -10%;
+  }
+
+  .branch-type-2 .branch-image,
+  .branch-type-4 .branch-image,
+  .branch-type-6 .branch-image {
+    left: -10%;
+  }
+
+  /* Adjust twig hitbox size */
+  .twig-hitbox {
+    width: 100px;
+    height: 100px;
+    font-size: var(--m);
+  }
+
+  /* Adjust back to tree button */
+  .back-to-tree {
+    bottom: 40px;
+  }
+
+  .back-chevron {
+    width: var(--xl);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Make branch image larger on mobile */
+  [class^="branch-type-"] .branch-image {
+    width: 95%;
+    top: 12%;
+  }
+
+  /* Center branch images */
+  .branch-type-1 .branch-image,
+  .branch-type-3 .branch-image,
+  .branch-type-5 .branch-image {
+    right: -15%;
+  }
+
+  .branch-type-2 .branch-image,
+  .branch-type-4 .branch-image,
+  .branch-type-6 .branch-image {
+    left: -15%;
+  }
+
+  /* Adjust twig hitbox size and text */
+  .twig-hitbox {
+    width: 80px;
+    height: 80px;
+    font-size: var(--s);
+  }
+
+  /* Adjust back to tree button for mobile */
+  .back-to-tree {
+    bottom: 20px;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 16px;
+    border-radius: 20px;
+  }
+
+  .back-text {
+    font-size: var(--s);
+    color: white;
+  }
+
+  .back-chevron {
+    width: var(--l);
+  }
+
+  /* Adjust twig hitbox positions for better mobile touch targets */
+  [class^="branch-type-"] [class^="twig-hitbox-"] {
+    transform: scale(1.2);
+  }
+}
+
+/* Handle very small screens */
+@media screen and (max-width: 320px) {
+  [class^="branch-type-"] .branch-image {
+    width: 100%;
+    top: 15%;
+  }
+
+  .twig-hitbox {
+    width: 70px;
+    height: 70px;
+    font-size: var(--xs);
+  }
+
+  .back-to-tree {
+    bottom: 15px;
+    padding: 6px 12px;
+  }
+}
+
+/* Handle landscape orientation */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  [class^="branch-type-"] .branch-image {
+    width: 60%;
+    top: 5%;
+  }
+
+  .twig-hitbox {
+    width: 70px;
+    height: 70px;
+    font-size: var(--xs);
+  }
+
+  .back-to-tree {
+    bottom: 10px;
+  }
+
+  /* Adjust twig hitbox positions for landscape */
+  [class^="branch-type-"] [class^="twig-hitbox-"] {
+    transform: scale(0.9);
+  }
+}
+
+/* Ensure wooden sign is properly positioned on all screen sizes */
+@media screen and (max-width: 768px) {
+  [class^="branch-type-"] .wooden-sign-container {
+    width: 90%;
+    max-width: 350px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  [class^="branch-type-"] .wooden-sign-container {
+    width: 95%;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+    top: 0;
+  }
+}
