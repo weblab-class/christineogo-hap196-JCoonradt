@@ -9,6 +9,32 @@
   z-index: -1; /* Place it behind other content */
 }
 
+@media screen and (max-width: 800px) {
+  .background-image.five-branches {
+    content: url("../../assets/tree/smallScreen/smallFiveBranch.png");
+  }
+
+  .background-image.four-branches {
+    content: url("../../assets/tree/smallScreen/smallFourBranch.png");
+  }
+
+  .background-image.three-branches {
+    content: url("../../assets/tree/smallScreen/smallThreeBranch.png");
+  }
+
+  .background-image.two-branches {
+    content: url("../../assets/tree/smallScreen/smallTwoBranch.png");
+  }
+
+  .background-image.one-branch {
+    content: url("../../assets/tree/smallScreen/smallOneBranch.png");
+  }
+
+  .background-image.six-branches {
+    content: url("../../assets/tree/smallScreen/smallSixBranch.png");
+  }
+}
+
 .tree-image {
   position: absolute;
   bottom: 8%;
@@ -35,6 +61,13 @@
   top: 10%;
   left: 80%;
   z-index: 511;
+}
+
+@media screen and (max-width: 800px) {
+  .add-branch-container {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .branch-hitbox {
@@ -255,5 +288,5 @@
   width: 80px; /* Owl size */
   height: auto;
   animation: owlAnimation 120s ease-in-out infinite; /* Total animation duration */
-  z-index: 15; /* Ensure it’s above other elements */
+  z-index: 15; /* Ensure it's above other elements */
 }

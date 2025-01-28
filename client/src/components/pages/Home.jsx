@@ -11,11 +11,16 @@ import threeBranch from "../../assets/tree/threeBranch.png";
 import fourBranch from "../../assets/tree/fourBranch.png";
 import fiveBranch from "../../assets/tree/fiveBranch.png";
 import sixBranch from "../../assets/tree/sixBranch.png";
-import background from "../../assets/treeBackground.png";
 import racoonImg from "../../assets/racoon.gif";
 import rabbitImg from "../../assets/rabbit.gif";
 import owlImg from "../../assets/owl.gif";
 import treeGrow from "../../assets/treeGrow1.mp3";
+import smallOneBranch from "../../assets/tree/smallScreen/smallOneBranch.png";
+import smallTwoBranch from "../../assets/tree/smallScreen/smallTwoBranch.png";
+import smallThreeBranch from "../../assets/tree/smallScreen/smallThreeBranch.png";
+import smallFourBranch from "../../assets/tree/smallScreen/smallFourBranch.png";
+import smallFiveBranch from "../../assets/tree/smallScreen/smallFiveBranch.png";
+import smallSixBranch from "../../assets/tree/smallScreen/smallSixBranch.png";
 
 // Lazy-loaded components
 const CustomButton = lazy(() => import("../modules/CustomButton"));
@@ -32,6 +37,16 @@ const branchImages = [
   fourBranch,
   fiveBranch,
   sixBranch,
+];
+
+const smallScreenBranchImages = [
+  noBranch,
+  smallOneBranch,
+  smallTwoBranch,
+  smallThreeBranch,
+  smallFourBranch,
+  smallFiveBranch,
+  smallSixBranch,
 ];
 
 // Hitbox positions for branches
@@ -117,9 +132,27 @@ const Home = React.memo(() => {
     }
   };
 
-  // States to manage wooden sign content
   const [branchName, setBranchName] = useState("");
   const [branchDescription, setBranchDescription] = useState("");
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // window resize listener
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // get the correct image array given a screen size
+  const getCurrentBranchImage = () => {
+    return windowWidth <= 800
+      ? smallScreenBranchImages[currentImageIndex]
+      : branchImages[currentImageIndex];
+  };
 
   // Fetch the user's tree data
   useEffect(() => {
@@ -243,8 +276,8 @@ const Home = React.memo(() => {
       </Suspense>
 
       <img
-        className="background-image"
-        src={branchImages[currentImageIndex]}
+        className={`background-image ${currentImageIndex}-branches`}
+        src={getCurrentBranchImage()}
         alt="Tree with branches"
       />
       <div>
