@@ -325,8 +325,6 @@ const Home = React.memo(() => {
           className={`branch-hitbox branch-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
           style={{
             zIndex: tutorialActive ? 1001 : 504,
-            top: hitbox.top,
-            ...(hitbox.left ? { left: hitbox.left } : { right: hitbox.right })
           }}
           onMouseEnter={() => branches[index] && handleBranchHover(branches[index])}
           onMouseLeave={handleBranchHoverEnd}
