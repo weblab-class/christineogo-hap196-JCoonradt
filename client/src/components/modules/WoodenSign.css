@@ -48,7 +48,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   flex-shrink: 0;
-  margin-top: 0;
+  margin-top: 20px;
 }
 
 .wooden-sign-description {
@@ -64,7 +64,7 @@
 
 .wooden-sign-buttons {
   position: absolute;
-  bottom: -20px;
+  bottom: 0px;
   left: 49%;
   transform: translateX(-50%);
   display: flex;
@@ -96,7 +96,7 @@
   width: 100%;
   padding: 6px;
   position: relative;
-  top: 50px;
+  top: 70px;
 }
 
 .wooden-sign-content input.wooden-sign-title {
