@@ -191,7 +191,7 @@ const Home = React.memo(() => {
     setShowWoodenSign(true);
   }, []);
 
-  // Handle submitting a branch
+  //Handle submitting a branch
   const handleSubmitBranch = useCallback(
     async (title, description) => {
       try {
@@ -214,7 +214,6 @@ const Home = React.memo(() => {
         if (treeResponse.ok) {
           const treeData = await treeResponse.json();
           const numBranches = treeData.branches.length;
-          setNoBranches(False);
           setCurrentImageIndex(Math.min(numBranches, 6));
           setBranches(treeData.branches);
         } else {

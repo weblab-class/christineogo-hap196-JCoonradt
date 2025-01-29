@@ -1,18 +1,16 @@
-/* Base styles (mobile first) */
 .wooden-sign-container {
   position: fixed;
-  width: 90%;
-  max-width: 400px;
+  width: 300px;
   z-index: 501;
 }
 
 .left-sign {
-  left: 5px;
+  left: 10px;
   top: 0%;
 }
 
 .right-sign {
-  right: 5px;
+  right: 10px;
   top: 0%;
 }
 
@@ -23,7 +21,7 @@
 
 .wooden-sign-content {
   position: absolute;
-  top: 30%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, 0);
   text-align: center;
@@ -48,7 +46,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   flex-shrink: 0;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .wooden-sign-description {
@@ -64,7 +62,7 @@
 
 .wooden-sign-buttons {
   position: absolute;
-  bottom: 0px;
+  bottom: 40px;
   left: 49%;
   transform: translateX(-50%);
   display: flex;
@@ -94,15 +92,14 @@
   color: white;
   font-family: "Pixelify Sans", sans-serif;
   width: 100%;
-  padding: 6px;
+  padding: 8px;
   position: relative;
-  top: 70px;
+  top: 30px;
 }
 
 .wooden-sign-content input.wooden-sign-title {
   font-size: var(--l);
   margin-bottom: var(--xs);
-  top: 5px;
 }
 
 .wooden-sign-content textarea.wooden-sign-description {
@@ -112,7 +109,6 @@
   resize: none;
   margin-bottom: var(--m);
   overflow-y: auto;
-  top: 20px;
 }
 
 .wooden-sign-content input.wooden-sign-title::placeholder,
@@ -138,6 +134,7 @@
 
 .wooden-sign-link {
   width: 100%;
+  margin-top: 10px;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -153,15 +150,15 @@
 
 .wooden-sign-link-error {
   color: #ff4444;
+  font-size: 1rem;
   font-family: "Pixelify Sans", sans-serif;
-  font-size: var(--m);
-  margin-bottom: var(0px);
-  margin-left: var(--s);
-  margin-right: var(--s);
-  text-align: center;
+  margin-top: 0.25rem;
+  position: absolute;
+  bottom: -1.8rem;
+  text-shadow: 2px 2px 0 #000, /* Black outline */ -2px 2px 0 #000, 2px -2px 0 #000,
+    -2px -2px 0 #000, 2px 0px 0 #000, -2px 0px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000; /* Ensures complete outline */
+  left: 0;
   width: 100%;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  font-weight: bold;
 }
 
 .wooden-sign-content-link {
@@ -201,22 +198,23 @@
   padding: 0.5rem;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 4px;
+  margin-top: 15px;
 }
 
 .wooden-sign-image-preview,
 .wooden-sign-content-image {
   max-width: 100%;
-  max-height: 150px;
+  max-height: 200px;
   object-fit: contain;
   border-radius: 4px;
-  margin-top: 0rem;
+  margin-top: 0.5rem;
 }
 
 .wooden-sign-form-error {
   color: #ff4444;
   font-family: "Pixelify Sans", sans-serif;
   font-size: var(--l);
-  margin-bottom: 0px;
+  margin-bottom: var(--s);
   margin-left: var(--s);
   margin-right: var(--s);
   text-align: center;
@@ -227,7 +225,7 @@
 
 .character-counter {
   position: absolute;
-  bottom: -23px;
+  bottom: -50px;
   left: 10px;
   color: white;
   font-family: "Pixelify Sans", sans-serif;
