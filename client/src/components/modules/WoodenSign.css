@@ -46,7 +46,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   flex-shrink: 0;
-  margin-top: 35px;
+  margin-top: 50px;
+  font-size: 250%;
 }
 
 .wooden-sign-description {
@@ -58,6 +59,7 @@
   white-space: pre-wrap;
   overflow-y: visible;
   flex-grow: 1;
+  font-size: 100%;
 }
 
 .wooden-sign-buttons {
