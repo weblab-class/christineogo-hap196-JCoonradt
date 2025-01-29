@@ -86,6 +86,15 @@
   height: 40%;
   transform: translate(-50%, -50%);
   z-index: 505;
+  pointer-events: none;
+}
+
+/* Enable pointer events for the wooden sign content */
+.wooden-sign-container-home .wooden-sign-content,
+.wooden-sign-container-home input,
+.wooden-sign-container-home textarea,
+.wooden-sign-container-home button {
+  pointer-events: auto;
 }
 
 .add-branch-container {
@@ -109,7 +118,7 @@
   position: fixed;
   width: 200px;
   height: 200px;
-  background-color: rgba(255, 0, 0, 0.5);
+  /* background-color: rgba(255, 0, 0, 0.5); */ /* Comment out the red background */
   border-radius: 50%;
   z-index: 506;
   display: flex;
@@ -119,7 +128,7 @@
   text-align: center;
   font-size: var(--xl);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
   pointer-events: auto;
   word-wrap: break-word;

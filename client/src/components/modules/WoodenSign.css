@@ -1,16 +1,18 @@
+/* Base styles (mobile first) */
 .wooden-sign-container {
   position: fixed;
-  width: 300px;
+  width: 90%;
+  max-width: 400px;
   z-index: 501;
 }
 
 .left-sign {
-  left: 10px;
+  left: 5px;
   top: 0%;
 }
 
 .right-sign {
-  right: 10px;
+  right: 5px;
   top: 0%;
 }
 
@@ -92,7 +94,7 @@
   color: white;
   font-family: "Pixelify Sans", sans-serif;
   width: 100%;
-  padding: 8px;
+  padding: 6px;
   position: relative;
   top: 30px;
 }
@@ -199,7 +201,7 @@
 .wooden-sign-image-preview,
 .wooden-sign-content-image {
   max-width: 100%;
-  max-height: 200px;
+  max-height: 150px;
   object-fit: contain;
   border-radius: 4px;
   margin-top: 0.5rem;
