@@ -5,7 +5,7 @@
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
   cursor: pointer;
   transition: height 0.3s ease-in-out, background 0.3s ease-in-out; /* Smooth height and background transitions */
-  z-index: 505; /* Place it above other elements */
+  z-index: 1290; /* Place it above other elements */
   overflow: hidden; /* Prevent menu content from showing when collapsed */
 }
 
@@ -51,6 +51,20 @@
   margin: 0px 0;
   padding: 10px;
   font-size: var(--xxl);
+}
+
+.closed-title {
+  color: rgb(112, 112, 112);
+  position: absolute;
+  text-decoration: none;
+  margin: 0px 0;
+  padding: 10px;
+  left: 35%;
+  font-size: var(--xxl);
+}
+
+.navbar:hover .closed-title {
+  opacity: 0;
 }
 
 .menu a:hover {
