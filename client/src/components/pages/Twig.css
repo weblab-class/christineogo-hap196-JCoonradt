@@ -44,9 +44,10 @@ body {
 }
 
 .twig-type-2 .wooden-sign-container {
-  position: absolute;
-  right: 10px;
-  top: 35%;
+  position: absolute !important;
+  right: 10px !important;
+  left: auto !important;
+  top: 0% !important;
   height: 600px;
   width: 400px;
   z-index: 2;
