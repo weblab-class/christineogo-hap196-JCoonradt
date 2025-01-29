@@ -274,113 +274,117 @@ const Home = React.memo(() => {
 
   // Render the home page
   return (
-    <div>
-      <Suspense fallback={<div>Loading Navbar...</div>}>
-        <Navbar startTutorial={startTutorial} />
-      </Suspense>
-
-      <img
-        className={`background-image ${currentImageIndex}-branches`}
-        src={getCurrentBranchImage()}
-        alt="Tree with branches"
-      />
+    <Suspense fallback={<div>Loading...</div>}>
       <div>
-        {/* Rabbit */}
-        <img src={rabbitImg} alt="Rabbit" className="rabbit" />
-
-        {/* Other content */}
-      </div>
-
-      <div>
-        {/* Owl */}
-
-        {noBranches && (
-          <div>
-            <img src={owlImg} alt="Owl" className="owl" />
-            <div className="tutorial-start-message">
-              It looks like you are yet to start branching out your tree. If you need help getting
-              started, go to the menu to start our tutorial. Hoot Hoot!
-            </div>
-          </div>
-        )}
-
-        {!noBranches && <img src={owlImg} alt="Owl" className="owl" />}
-
-        {/* Other content */}
-      </div>
-      <div className="add-branch-container">
-        <Suspense fallback={<div>Loading Button...</div>}>
-          <CustomButton
-            text="Add Branch"
-            onClick={handleAddBranch}
-            disabled={currentImageIndex >= 6}
-          />
+        <Suspense fallback={<div>Loading Navbar...</div>}>
+          <Navbar startTutorial={startTutorial} />
         </Suspense>
-      </div>
-      <div className="wooden-sign-container-home">
-        {showWoodenSign && (
-          <Suspense fallback={<div>Loading Wooden Sign...</div>}>
-            <WoodenSign
-              title={branchName}
-              description={branchDescription}
-              onSubmit={handleSubmitBranch}
-              onCancel={() => {
-                setShowWoodenSign(false);
-                setIsEditMode(false);
-              }}
-              readOnly={!isEditMode}
-              initialEditMode={isEditMode}
+
+        <img
+          className={`background-image ${currentImageIndex}-branches`}
+          src={getCurrentBranchImage()}
+          alt="Tree with branches"
+        />
+        <div>
+          {/* Rabbit */}
+          <img src={rabbitImg} alt="Rabbit" className="rabbit" />
+
+          {/* Other content */}
+        </div>
+
+        <div>
+          {/* Owl */}
+
+          {noBranches && (
+            <div>
+              <img src={owlImg} alt="Owl" className="owl" />
+              <div className="tutorial-start-message">
+                It looks like you are yet to start branching out your tree. If you need help getting
+                started, go to the menu to start our tutorial. Hoot Hoot!
+              </div>
+            </div>
+          )}
+
+          {!noBranches && <img src={owlImg} alt="Owl" className="owl" />}
+
+          {/* Other content */}
+        </div>
+        <div className="add-branch-container">
+          <Suspense fallback={<div>Loading Button...</div>}>
+            <CustomButton
+              text="Add Branch"
+              onClick={handleAddBranch}
+              disabled={currentImageIndex >= 6}
             />
           </Suspense>
-        )}
-      </div>
-
-      {branchHitboxes.slice(0, currentImageIndex).map((hitbox, index) => (
-        <div
-          key={index}
-          className={`branch-hitbox branch-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
-          style={{
-            zIndex: tutorialActive ? 1001 : 504,
-          }}
-          onMouseEnter={() => branches[index] && handleBranchHover(branches[index])}
-          onMouseLeave={handleBranchHoverEnd}
-          onClick={() => branches[index] && handleBranchClick(branches[index]._id, index)}
-        >
-          {branches[index]?.name}
         </div>
-      ))}
-      <MusicButton />
-      {/* Hidden audio element for sound effect */}
-      <audio ref={soundRef}>
-        <source src={treeGrow} type="audio/mp3" />
-        Your browser does not support the audio element.
-      </audio>
+        <div className="wooden-sign-container-home">
+          {showWoodenSign && (
+            <Suspense fallback={<div>Loading Wooden Sign...</div>}>
+              <WoodenSign
+                title={branchName}
+                description={branchDescription}
+                onSubmit={handleSubmitBranch}
+                onCancel={() => {
+                  setShowWoodenSign(false);
+                  setIsEditMode(false);
+                }}
+                readOnly={!isEditMode}
+                initialEditMode={isEditMode}
+              />
+            </Suspense>
+          )}
+        </div>
 
-      {/* Tutorial Overlay */}
-      {tutorialActive && (
-        <div className="tutorial-overlay">
+        {branchHitboxes.slice(0, currentImageIndex).map((hitbox, index) => (
           <div
-            className="tutorial-animal"
+            key={index}
+            className={`branch-hitbox branch-hitbox-${index} ${isEditMode ? "edit-mode" : ""}`}
             style={{
-              top: steps[currentStep].top,
-              left: steps[currentStep].left,
-              position: "absolute",
-              transition: "all 0.5s ease-in-out",
+              zIndex: tutorialActive ? 1001 : 504,
             }}
+            onMouseEnter={() => branches[index] && handleBranchHover(branches[index])}
+            onMouseLeave={handleBranchHoverEnd}
+            onClick={() => branches[index] && handleBranchClick(branches[index]._id, index)}
           >
-            <img
-              src={racoonImg}
-              style={{ zIndex: 1000 }}
-              alt="Animal Guide"
-              className="animal-image"
-            />
-            <div className="tutorial-message" style={{ zIndex: 1000 }}>
-              {steps[currentStep].message}
+            {branches[index]?.name}
+          </div>
+        ))}
+        <Suspense fallback={<div>Loading Music Button...</div>}>
+          <MusicButton />
+        </Suspense>
+        {/* Hidden audio element for sound effect */}
+        <audio ref={soundRef}>
+          <source src={treeGrow} type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
+
+        {/* Tutorial Overlay */}
+        {tutorialActive && (
+          <div className="tutorial-overlay">
+            <div
+              className="tutorial-animal"
+              style={{
+                top: steps[currentStep].top,
+                left: steps[currentStep].left,
+                position: "absolute",
+                transition: "all 0.5s ease-in-out",
+              }}
+            >
+              <img
+                src={racoonImg}
+                style={{ zIndex: 1000 }}
+                alt="Animal Guide"
+                className="animal-image"
+              />
+              <div className="tutorial-message" style={{ zIndex: 1000 }}>
+                {steps[currentStep].message}
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </Suspense>
   );
 });
 
