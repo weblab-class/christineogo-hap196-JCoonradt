@@ -103,20 +103,20 @@ const Branch = () => {
     {
       message:
         "Fantastic! Now, press the add twig button to add a twig to cover a more specific category of the general skill.",
-      top: "50%",
-      left: "40%",
+      top: "40%",
+      left: "27%",
     },
     {
       message:
         "Groovy! Now, now title and describe your twig. It should cover a more specific category of your branch's general skill area like options trading for finance, climate science research for research or MERN stack for website development.",
       top: "30%",
-      left: "40%",
+      left: "30%",
     },
     {
       message:
         "Awesome! Now press on the title of the twig you just created to zoom in and see your leaves.",
       top: "30%",
-      left: "60%",
+      left: "50%",
     },
     {
       message: "Awesome! Now add a leaf by pressing the add leaf button.",

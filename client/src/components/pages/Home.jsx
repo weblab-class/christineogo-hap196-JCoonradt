@@ -82,13 +82,13 @@ const Home = React.memo(() => {
       message:
         "Title and describe your branch. Branches are for general skills areas like finance, research, or website development",
       top: "50%",
-      left: "40%",
+      left: "60%",
     },
     {
       message:
         "Great! Now, click on the title of the branch you just created to zoom in and see your twigs",
       top: "62%",
-      left: "33%",
+      left: "0%",
     },
     {
       message:
