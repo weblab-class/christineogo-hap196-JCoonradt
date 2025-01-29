@@ -56,7 +56,7 @@ import smallThreeBranch from "../../assets/branches/smallScreen/smallThreeBranch
 import smallFourBranch from "../../assets/branches/smallScreen/smallFourBranch.png";
 import smallFiveBranch from "../../assets/branches/smallScreen/smallFiveBranch.png";
 import smallSixBranch from "../../assets/branches/smallScreen/smallSixBranch.png";
-
+import smallNoBranch from "../../assets/branches/smallScreen/smallNoBranch.png";
 // component for displaying a single branch and its twigs
 // goal is to have a branch component that can be used for both left and right side branches
 const Branch = () => {
@@ -159,13 +159,13 @@ const Branch = () => {
         branchOneTwigSix,
       ],
       small: [
+        smallNoBranch,
         smallOneBranch,
-        smallOneBranch,
-        smallOneBranch,
-        smallOneBranch,
-        smallOneBranch,
-        smallOneBranch,
-        smallOneBranch,
+        smallTwoBranch,
+        smallThreeBranch,
+        smallFourBranch,
+        smallFiveBranch,
+        smallSixBranch,
       ],
     },
     2: {
@@ -179,13 +179,13 @@ const Branch = () => {
         branchTwoTwigSix,
       ],
       small: [
+        smallNoBranch,
+        smallOneBranch,
         smallTwoBranch,
-        smallTwoBranch,
-        smallTwoBranch,
-        smallTwoBranch,
-        smallTwoBranch,
-        smallTwoBranch,
-        smallTwoBranch,
+        smallThreeBranch,
+        smallFourBranch,
+        smallFiveBranch,
+        smallSixBranch,
       ],
     },
     3: {
@@ -199,13 +199,13 @@ const Branch = () => {
         branchThreeTwigSix,
       ],
       small: [
+        smallNoBranch,
+        smallOneBranch,
+        smallTwoBranch,
         smallThreeBranch,
-        smallThreeBranch,
-        smallThreeBranch,
-        smallThreeBranch,
-        smallThreeBranch,
-        smallThreeBranch,
-        smallThreeBranch,
+        smallFourBranch,
+        smallFiveBranch,
+        smallSixBranch,
       ],
     },
     4: {
@@ -219,13 +219,13 @@ const Branch = () => {
         branchFourTwigSix,
       ],
       small: [
+        smallNoBranch,
+        smallOneBranch,
+        smallTwoBranch,
+        smallThreeBranch,
         smallFourBranch,
-        smallFourBranch,
-        smallFourBranch,
-        smallFourBranch,
-        smallFourBranch,
-        smallFourBranch,
-        smallFourBranch,
+        smallFiveBranch,
+        smallSixBranch,
       ],
     },
     5: {
@@ -239,13 +239,13 @@ const Branch = () => {
         branchFiveTwigSix,
       ],
       small: [
+        smallNoBranch,
+        smallOneBranch,
+        smallTwoBranch,
+        smallThreeBranch,
+        smallFourBranch,
         smallFiveBranch,
-        smallFiveBranch,
-        smallFiveBranch,
-        smallFiveBranch,
-        smallFiveBranch,
-        smallFiveBranch,
-        smallFiveBranch,
+        smallSixBranch,
       ],
     },
     6: {
@@ -259,12 +259,12 @@ const Branch = () => {
         branchSixTwigSix,
       ],
       small: [
-        smallSixBranch,
-        smallSixBranch,
-        smallSixBranch,
-        smallSixBranch,
-        smallSixBranch,
-        smallSixBranch,
+        smallNoBranch,
+        smallOneBranch,
+        smallTwoBranch,
+        smallThreeBranch,
+        smallFourBranch,
+        smallFiveBranch,
         smallSixBranch,
       ],
     },

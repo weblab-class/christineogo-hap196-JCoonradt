@@ -626,8 +626,8 @@ body {
 }
 
 .branch-type-1 .twig-hitbox-5 {
-  top: 65%;
-  right: 35%;
+  top: 44%;
+  right: 20%;
 }
 
 /* Media queries for branch-type-1 twig-hitbox-5 */
@@ -639,19 +639,19 @@ body {
 
 @media screen and (max-width: 1800px) {
   .branch-type-1 .twig-hitbox-5 {
-    right: 33%;
+    right: 28%;
   }
 }
 
 @media screen and (max-width: 1600px) {
   .branch-type-1 .twig-hitbox-5 {
-    right: 31%;
+    right: 26%;
   }
 }
 
 @media screen and (max-width: 1400px) {
   .branch-type-1 .twig-hitbox-5 {
-    right: 29%;
+    right: 24%;
   }
 }
 
@@ -1908,31 +1908,5 @@ body {
     right: auto !important;
     transform: translateX(-50%);
     top: 0;
-  }
-}
-
-@media screen and (max-width: 1300px) {
-  .branch-type-1 .branch-background-image {
-    content: url("../../assets/branches/smallScreen/smallOneBranch.png");
-  }
-
-  .branch-type-2 .branch-background-image {
-    content: url("../../assets/branches/smallScreen/smallTwoBranch.png");
-  }
-
-  .branch-type-3 .branch-background-image {
-    content: url("../../assets/branches/smallScreen/smallThreeBranch.png");
-  }
-
-  .branch-type-4 .branch-background-image {
-    content: url("../../assets/branches/smallScreen/smallFourBranch.png");
-  }
-
-  .branch-type-5 .branch-background-image {
-    content: url("../../assets/branches/smallScreen/smallFiveBranch.png");
-  }
-
-  .branch-type-6 .branch-background-image {
-    content: url("../../assets/branches/smallScreen/smallSixBranch.png");
   }
 }
