@@ -346,9 +346,7 @@ const Home = React.memo(() => {
             {branches[index]?.name}
           </div>
         ))}
-        <Suspense fallback={<div>Loading Music Button...</div>}>
-          <MusicButton />
-        </Suspense>
+
         {/* Hidden audio element for sound effect */}
         <audio ref={soundRef}>
           <source src={treeGrow} type="audio/mp3" />

@@ -506,7 +506,6 @@ const Branch = () => {
         <source src={treeGrow} type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
-      <MusicButton />
 
       {/* twig hitboxes */}
       {twigs.slice(0, 6).map((twig, index) => (

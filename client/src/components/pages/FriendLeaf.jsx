@@ -67,15 +67,14 @@ const FriendLeaf = () => {
         <span className="back-text">Back to Twig</span>
       </div>
       <div className="wooden-sign-container center-sign">
-        <WoodenSign 
-          title={leafName} 
-          description={leafDescription} 
+        <WoodenSign
+          title={leafName}
+          description={leafDescription}
           link={leafLink}
-          readOnly={true} 
-          mode="leaf" 
+          readOnly={true}
+          mode="leaf"
         />
       </div>
-      <MusicButton />
     </div>
   );
 };

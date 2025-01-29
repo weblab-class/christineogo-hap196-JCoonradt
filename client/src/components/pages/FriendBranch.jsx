@@ -282,8 +282,6 @@ const FriendBranch = () => {
         </div>
       )}
 
-      <MusicButton />
-
       {/* twig hitboxes */}
       {twigs.slice(0, 6).map((twig, index) => (
         <div

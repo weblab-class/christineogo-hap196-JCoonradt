@@ -372,7 +372,7 @@ const Twig = () => {
           {leaf.name}
         </div>
       ))}
-      <MusicButton />
+
       {/* Hidden audio element for sound effect */}
       <audio ref={soundRef}>
         <source src={treeGrow} type="audio/mp3" />
