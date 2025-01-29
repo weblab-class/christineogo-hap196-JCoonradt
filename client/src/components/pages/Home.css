@@ -42,6 +42,14 @@
   pointer-events: none;
 }
 
+/* Enable pointer events for the wooden sign content */
+.wooden-sign-container-home .wooden-sign-content,
+.wooden-sign-container-home input,
+.wooden-sign-container-home textarea,
+.wooden-sign-container-home button {
+  pointer-events: auto;
+}
+
 .add-branch-container {
   position: absolute;
   bottom: 5%;
