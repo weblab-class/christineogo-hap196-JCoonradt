@@ -958,6 +958,12 @@ body {
   [class^="branch-type-"] [class^="twig-hitbox-"] {
     transform: scale(1.2);
   }
+
+  /* Ensure wooden sign is properly positioned on all screen sizes */
+  [class^="branch-type-"] .wooden-sign-container {
+    width: 250px;
+    top: -40px; /* Move it up even more on mobile */
+  }
 }
 
 /* Handle very small screens */
@@ -1003,20 +1009,21 @@ body {
 }
 
 /* Ensure wooden sign is properly positioned on all screen sizes */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1300px) {
   [class^="branch-type-"] .wooden-sign-container {
-    width: 90%;
-    max-width: 350px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  [class^="branch-type-"] .wooden-sign-container {
-    width: 95%;
+    width: 300px;
+    max-width: 300px;
     left: 50% !important;
     right: auto !important;
     transform: translateX(-50%);
-    top: 0;
+    top: -25px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  [class^="branch-type-"] .wooden-sign-container {
+    width: 300px;
+    top: -25px;
   }
 }
 
