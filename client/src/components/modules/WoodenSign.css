@@ -21,7 +21,7 @@
 
 .wooden-sign-content {
   position: absolute;
-  top: 23%;
+  top: 22%;
   left: 50%;
   transform: translate(-50%, 0);
   text-align: center;
@@ -177,6 +177,8 @@
   font-size: 1rem;
   margin-bottom: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: -30px;
 }
 
 .wooden-sign-content-link:hover {
