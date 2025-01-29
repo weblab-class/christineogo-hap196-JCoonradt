@@ -74,7 +74,7 @@ const Home = React.memo(() => {
 
   const steps = [
     {
-      message: "Click the add branch button above to create a new branch.",
+      message: "Click the add branch button below to create a new branch.",
       top: "65%",
       left: "35%",
     },
