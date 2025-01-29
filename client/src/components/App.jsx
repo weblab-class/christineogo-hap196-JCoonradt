@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext, Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
 import jwt_decode from "jwt-decode";
@@ -8,6 +8,7 @@ import "../utilities.css";
 import { socket } from "../client-socket";
 
 import { get, post } from "../utilities";
+import MusicButton from "./modules/MusicButton";
 
 export const UserContext = createContext(null);
 
@@ -50,6 +51,9 @@ const App = () => {
   return (
     <UserContext.Provider value={authContextValue}>
       <Outlet />
+      <Suspense fallback={<div>Loading Music Button...</div>}>
+        <MusicButton />
+      </Suspense>
     </UserContext.Provider>
   );
 };

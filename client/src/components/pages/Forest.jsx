@@ -245,7 +245,6 @@ const Forest = () => {
           </div>
         </div>
         <FriendStatusModal />
-        <MusicButton />
       </div>
     </>
   );

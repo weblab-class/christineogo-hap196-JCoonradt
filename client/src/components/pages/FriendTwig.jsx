@@ -188,7 +188,6 @@ const FriendTwig = () => {
         <span className="back-text">Back to Tree</span>
       </div> */}
       <div className="friend-name-label">{friendName}'s Tree</div>
-      <MusicButton />
     </div>
   );
 };

@@ -160,7 +160,6 @@ const FriendTree = React.memo(() => {
       ))}
 
       <div className="friend-name-label">{friendName}'s Tree</div>
-      <MusicButton />
     </div>
   );
 });
