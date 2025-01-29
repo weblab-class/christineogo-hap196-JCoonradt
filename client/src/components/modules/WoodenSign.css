@@ -25,7 +25,7 @@
   left: 50%;
   transform: translate(-50%, 0);
   text-align: center;
-  width: 80%;
+  width: 100%;
   word-wrap: break-word;
   overflow-wrap: break-word;
   overflow-y: visible;
@@ -178,7 +178,7 @@
   margin-bottom: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
-  top: -600%;
+  top: -500%;
 }
 
 .wooden-sign-content-link:hover {
