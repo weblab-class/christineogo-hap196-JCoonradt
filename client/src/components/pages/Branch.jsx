@@ -208,7 +208,7 @@ const Branch = () => {
   const tutorialActiveRef = useRef(location.state?.tutorialActive || false);
 
   const [tutorialActive, setTutorialActive] = useState(location.state?.tutorialActive || false);
-  console.log(tutorialActive);
+
   const [currentStep, setCurrentStep] = useState(location.state?.currentStep || 0);
   // function to determine if wooden sign should be on the left
   const isWoodenSignLeft = () => {
@@ -217,10 +217,6 @@ const Branch = () => {
 
   // grab the branch info when we load the page
   useEffect(() => {
-    console.log("Branch Component Mounted");
-    console.log("Tutorial Active:", tutorialActive);
-    console.log("Current Step:", currentStep);
-
     const fetchBranch = async () => {
       try {
         // get the api to get branch details
@@ -228,7 +224,6 @@ const Branch = () => {
         if (response.ok) {
           const branchData = await response.json();
           // update all our state with the branch info
-          console.log(tutorialActive);
           setBranch(branchData);
           setBranchName(branchData.name);
           setBranchDescription(branchData.description);

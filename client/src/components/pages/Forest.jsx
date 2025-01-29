@@ -21,13 +21,11 @@ const Forest = () => {
   const navigate = useNavigate();
 
   const fetchTrees = async (query = "") => {
-    console.log("Fetching trees with query:", query);
     try {
       const response = await get("/api/trees", { search: query });
-      console.log("API response data:", JSON.stringify(response, null, 2));
+
       if (response) {
         setTrees(response);
-        console.log("Updated trees state:", response);
       }
     } catch (err) {
       console.error("Failed to fetch trees:", err);
@@ -70,13 +68,11 @@ const Forest = () => {
   }, []);
 
   const handleSearch = async () => {
-    console.log("Search triggered with query:", searchQuery);
     await fetchTrees(searchQuery);
   };
 
   const handleKeyPress = async (e) => {
     if (e.key === "Enter") {
-      console.log("Enter key pressed");
       e.preventDefault();
       await handleSearch();
     }

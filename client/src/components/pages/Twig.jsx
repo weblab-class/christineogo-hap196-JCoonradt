@@ -55,7 +55,7 @@ const Twig = () => {
       setTutorialActive(false); // End tutorial
     }
   };
-  console.log("Tutorial Active:" + tutorialActive);
+
   const [currentStep, setCurrentStep] = useState(location.state?.currentStep || 0);
   const steps = [
     {
@@ -304,7 +304,6 @@ const Twig = () => {
   };
 
   // log this so we know that we're going back to the correct branch
-  console.log("original branch type:", originalBranchType);
 
   return (
     <div className={`twig-type-${twigType}`}>

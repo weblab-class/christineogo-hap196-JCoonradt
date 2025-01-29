@@ -58,18 +58,14 @@ const FriendTree = React.memo(() => {
   useEffect(() => {
     const fetchTreeAndUser = async () => {
       try {
-        console.log("Fetching tree data for user:", userId);
         const [treeData, userData] = await Promise.all([
           get("/api/tree/" + userId),
           !location.state?.friendName ? get("/api/user/" + userId) : Promise.resolve(null),
         ]);
 
-        console.log("Received tree data:", treeData);
-
         if (treeData) {
           const numBranches = treeData.branches.length;
-          console.log("Number of branches:", numBranches);
-          console.log("Branch data:", treeData.branches);
+
           setCurrentImageIndex(Math.min(numBranches, 6));
           setBranches(treeData.branches);
         } else {
