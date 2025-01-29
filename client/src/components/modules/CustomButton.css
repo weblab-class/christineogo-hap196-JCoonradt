@@ -17,21 +17,29 @@
 .text-green {
   color: #00ff00;
   font-family: "Pixelify Sans", sans-serif;
-  font-size: var(--xl);
+  font-size: var(--l);
 }
 
 .text-red {
   color: #ff0000;
   font-family: "Pixelify Sans", sans-serif;
-  font-size: var(--xl);
+  font-size: var(--l);
 }
 
 .text-white {
   color: #ffffff;
   font-family: "Pixelify Sans", sans-serif;
-  font-size: var(--xl);
+  font-size: var(--l);
 }
 
 .custom-button:hover:not(:disabled) {
   background-color: rgba(0, 0, 0, 0.8); /* more opaque black */
+}
+
+@media screen and (max-width: 800px) {
+  .text-green,
+  .text-red,
+  .text-white {
+    font-size: var(--l);
+  }
 }

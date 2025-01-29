@@ -43,6 +43,7 @@ const WoodenSign = memo(
     const [uploadedImage, setUploadedImage] = useState(null);
     const [linkError, setLinkError] = useState("");
     const [formError, setFormError] = useState("");
+    const [activeInput, setActiveInput] = useState(null);
 
     useEffect(() => {
       setIsEditing(initialEditMode);
@@ -133,9 +134,14 @@ const WoodenSign = memo(
                   type="text"
                   defaultValue={editTitle}
                   onChange={(e) => {
-                    debouncedSetEditTitle(e.target.value);
-                    setFormError("");
+                    if (e.target.value.length <= 19) {
+                      debouncedSetEditTitle(e.target.value);
+                      setFormError("");
+                    }
                   }}
+                  onFocus={() => setActiveInput("title")}
+                  onBlur={() => setActiveInput(null)}
+                  maxLength={19}
                   placeholder={
                     mode === "branch"
                       ? "Enter branch name"
@@ -145,14 +151,22 @@ const WoodenSign = memo(
                   }
                   className="wooden-sign-title"
                 />
+                {activeInput === "title" && (
+                  <div className="character-counter">{editTitle?.length || 0}/19</div>
+                )}
               </div>
               <div className="input-group">
                 <textarea
                   defaultValue={editDescription}
                   onChange={(e) => {
-                    debouncedSetEditDescription(e.target.value);
-                    setFormError("");
+                    if (e.target.value.length <= 290) {
+                      debouncedSetEditDescription(e.target.value);
+                      setFormError("");
+                    }
                   }}
+                  onFocus={() => setActiveInput("description")}
+                  onBlur={() => setActiveInput(null)}
+                  maxLength={290}
                   placeholder={
                     mode === "branch"
                       ? "Enter branch description"
@@ -162,6 +176,9 @@ const WoodenSign = memo(
                   }
                   className="wooden-sign-description"
                 />
+                {activeInput === "description" && (
+                  <div className="character-counter">{editDescription?.length || 0}/290</div>
+                )}
               </div>
               {mode === "leaf" && (
                 <div className="wooden-sign-media">
