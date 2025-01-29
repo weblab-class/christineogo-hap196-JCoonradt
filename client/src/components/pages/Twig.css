@@ -28,8 +28,9 @@ body {
   left: 10px;
   top: 10%;
   z-index: 1000;
-  height: 600px;
-  width: 400px;
+  height: 300px;
+  width: 300px;
+  transition: all 0.3s ease;
 }
 
 /* left side twig */
@@ -48,9 +49,21 @@ body {
   right: 10px !important;
   left: auto !important;
   top: 0% !important;
-  height: 600px;
-  width: 400px;
+  height: 300px;
+  width: 300px;
   z-index: 2;
+  transition: all 0.3s ease;
+}
+
+/* center for small screens */
+@media screen and (max-width: 1300px) {
+  .twig-type-1 .wooden-sign-container,
+  .twig-type-2 .wooden-sign-container {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+    top: -20px !important;
+  }
 }
 
 .back-to-branch {
@@ -61,6 +74,7 @@ body {
   align-items: center;
   cursor: pointer;
   z-index: 1;
+  transition: all 0.3s ease;
 }
 
 .back-chevron {
@@ -89,6 +103,18 @@ body {
   transform: rotate(90deg);
 }
 
+/* Adjust back-to-branch position for smaller screens */
+@media screen and (max-width: 1300px) {
+  .back-to-branch {
+    bottom: 40px;
+  }
+
+  .twig-type-2 .back-to-branch {
+    left: 130px;
+    bottom: 40px;
+  }
+}
+
 /* leaf hitbox styles */
 .leaf-hitbox {
   position: absolute;
@@ -103,7 +129,7 @@ body {
   text-align: center;
   font-size: var(--m);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
   pointer-events: auto;
 }
@@ -115,69 +141,225 @@ body {
 .leaf-hitbox:hover {
   color: #39ff14;
 }
-/* leaf hitbox positions for right side twig */
-.twig-type-1 .leaf-hitbox-0 {
-  top: 50%;
-  right: 5%;
+
+/* Base positions for leaf hitboxes */
+.leaf-hitbox-0 {
+  top: 85%;
+  right: 36%;
   font-size: var(--xl);
 }
-.twig-type-1 .leaf-hitbox-1 {
-  top: 80%;
+
+@media screen and (max-width: 2000px) {
+  .leaf-hitbox-0 {
+    right: 36%;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .leaf-hitbox-0 {
+    right: 34%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .leaf-hitbox-0 {
+    right: 32%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .leaf-hitbox-0 {
+    right: 30%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .leaf-hitbox-0 {
+    right: 28%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .leaf-hitbox-0 {
+    right: 14%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .leaf-hitbox-0 {
+    right: 10%;
+  }
+}
+
+.leaf-hitbox-1 {
+  top: 85%;
+  right: 56%;
+  font-size: var(--xl);
+}
+
+@media screen and (max-width: 2000px) {
+  .leaf-hitbox-1 {
+    right: 58%;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .leaf-hitbox-1 {
+    right: 56%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .leaf-hitbox-1 {
+    right: 58%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .leaf-hitbox-1 {
+    right: 60%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .leaf-hitbox-1 {
+    right: 62%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .leaf-hitbox-1 {
+    right: 64%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .leaf-hitbox-1 {
+    right: 68%;
+  }
+}
+
+.leaf-hitbox-2 {
+  top: 60%;
   right: 34%;
   font-size: var(--xl);
 }
 
-.twig-type-1 .leaf-hitbox-2 {
-  top: 35%;
-  right: 25%;
-  font-size: var(--xl);
-}
-.twig-type-1 .leaf-hitbox-3 {
+.leaf-hitbox-3 {
   top: 60%;
-  right: 48%;
-  font-size: var(--xl);
-}
-.twig-type-1 .leaf-hitbox-4 {
-  top: 12%;
-  right: 50%;
-  font-size: var(--xl);
-}
-.twig-type-1 .leaf-hitbox-5 {
-  top: 40%;
-  right: 61%;
+  right: 56%;
   font-size: var(--xl);
 }
 
-/* leaf hitbox positions for left side twig */
-.twig-type-2 .leaf-hitbox-0 {
-  top: 45%;
-  left: 5%;
+.leaf-hitbox-4 {
+  top: 32%;
+  right: 34%;
   font-size: var(--xl);
 }
-.twig-type-2 .leaf-hitbox-1 {
-  top: 70%;
-  left: 35%;
+
+.leaf-hitbox-5 {
+  top: 32%;
+  right: 56%;
   font-size: var(--xl);
 }
-.twig-type-2 .leaf-hitbox-2 {
-  top: 20%;
-  left: 30%;
-  font-size: var(--xl);
+
+@media screen and (max-width: 2000px) {
+  .leaf-hitbox-2,
+  .leaf-hitbox-4 {
+    right: 36%;
+  }
 }
-.twig-type-2 .leaf-hitbox-3 {
-  top: 45%;
-  left: 55%;
-  font-size: var(--xl);
+
+@media screen and (max-width: 1800px) {
+  .leaf-hitbox-2,
+  .leaf-hitbox-4 {
+    right: 34%;
+  }
 }
-.twig-type-2 .leaf-hitbox-4 {
-  top: 5%;
-  left: 60%;
-  font-size: var(--xl);
+
+@media screen and (max-width: 1600px) {
+  .leaf-hitbox-2,
+  .leaf-hitbox-4 {
+    right: 32%;
+  }
 }
-.twig-type-2 .leaf-hitbox-5 {
-  top: 22%;
-  left: 80%;
-  font-size: var(--xl);
+
+@media screen and (max-width: 1400px) {
+  .leaf-hitbox-2,
+  .leaf-hitbox-4 {
+    right: 30%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .leaf-hitbox-2,
+  .leaf-hitbox-4 {
+    right: 28%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .leaf-hitbox-2,
+  .leaf-hitbox-4 {
+    right: 14%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .leaf-hitbox-2,
+  .leaf-hitbox-4 {
+    right: 10%;
+  }
+}
+
+/* Copy hitbox-1 media queries for hitbox-3 and hitbox-5 */
+@media screen and (max-width: 2000px) {
+  .leaf-hitbox-3,
+  .leaf-hitbox-5 {
+    right: 58%;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .leaf-hitbox-3,
+  .leaf-hitbox-5 {
+    right: 56%;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .leaf-hitbox-3,
+  .leaf-hitbox-5 {
+    right: 58%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .leaf-hitbox-3,
+  .leaf-hitbox-5 {
+    right: 60%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .leaf-hitbox-3,
+  .leaf-hitbox-5 {
+    right: 62%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .leaf-hitbox-3,
+  .leaf-hitbox-5 {
+    right: 64%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .leaf-hitbox-3,
+  .leaf-hitbox-5 {
+    right: 68%;
+  }
 }
 
 .tutorial-next {

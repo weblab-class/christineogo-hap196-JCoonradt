@@ -5,21 +5,14 @@ import "./Twig.css";
 import WoodenSign from "../modules/WoodenSign";
 import chevronGrey from "../../assets/chevronGrey.png";
 
-import leftTwigNoLeaf from "../../assets/twigs/left/leftTwigNoLeaf.png";
-import leftTwigOneLeaf from "../../assets/twigs/left/leftTwigOneLeaf.png";
-import leftTwigTwoLeaf from "../../assets/twigs/left/leftTwigTwoLeaf.png";
-import leftTwigThreeLeaf from "../../assets/twigs/left/leftTwigThreeLeaf.png";
-import leftTwigFourLeaf from "../../assets/twigs/left/leftTwigFourLeaf.png";
-import leftTwigFiveLeaf from "../../assets/twigs/left/leftTwigFiveLeaf.png";
-import leftTwigSixLeaf from "../../assets/twigs/left/leftTwigSixLeaf.png";
+import twigNoLeaf from "../../assets/twigs/new/smallNoLeaf.png";
+import twigOneLeaf from "../../assets/twigs/new/smallOneLeaf.png";
+import twigTwoLeaf from "../../assets/twigs/new/smallTwoLeaf.png";
+import twigThreeLeaf from "../../assets/twigs/new/smallThreeLeaf.png";
+import twigFourLeaf from "../../assets/twigs/new/smallFourLeaf.png";
+import twigFiveLeaf from "../../assets/twigs/new/smallFiveLeaf.png";
+import twigSixLeaf from "../../assets/twigs/new/smallSixLeaf.png";
 
-import rightTwigNoLeaf from "../../assets/twigs/right/rightTwigNoLeaf.png";
-import rightTwigOneLeaf from "../../assets/twigs/right/rightTwigOneLeaf.png";
-import rightTwigTwoLeaf from "../../assets/twigs/right/rightTwigTwoLeaf.png";
-import rightTwigThreeLeaf from "../../assets/twigs/right/rightTwigThreeLeaf.png";
-import rightTwigFourLeaf from "../../assets/twigs/right/rightTwigFourLeaf.png";
-import rightTwigFiveLeaf from "../../assets/twigs/right/rightTwigFiveLeaf.png";
-import rightTwigSixLeaf from "../../assets/twigs/right/rightTwigSixLeaf.png";
 import MusicButton from "../modules/MusicButton";
 import racoonImg from "../../assets/racoon.gif";
 
@@ -116,22 +109,22 @@ const Twig = () => {
   // Image sets for different twig types (left and right side)
   const twigImageSets = {
     1: [
-      leftTwigNoLeaf,
-      leftTwigOneLeaf,
-      leftTwigTwoLeaf,
-      leftTwigThreeLeaf,
-      leftTwigFourLeaf,
-      leftTwigFiveLeaf,
-      leftTwigSixLeaf,
+      twigNoLeaf,
+      twigOneLeaf,
+      twigTwoLeaf,
+      twigThreeLeaf,
+      twigFourLeaf,
+      twigFiveLeaf,
+      twigSixLeaf,
     ],
     2: [
-      rightTwigNoLeaf,
-      rightTwigOneLeaf,
-      rightTwigTwoLeaf,
-      rightTwigThreeLeaf,
-      rightTwigFourLeaf,
-      rightTwigFiveLeaf,
-      rightTwigSixLeaf,
+      twigNoLeaf,
+      twigOneLeaf,
+      twigTwoLeaf,
+      twigThreeLeaf,
+      twigFourLeaf,
+      twigFiveLeaf,
+      twigSixLeaf,
     ],
   };
 
