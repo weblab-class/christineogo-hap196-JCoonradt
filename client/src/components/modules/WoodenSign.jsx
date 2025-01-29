@@ -44,6 +44,7 @@ const WoodenSign = memo(
     const [linkError, setLinkError] = useState("");
     const [formError, setFormError] = useState("");
     const [activeInput, setActiveInput] = useState(null);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
       setIsEditing(initialEditMode);
@@ -123,10 +124,17 @@ const WoodenSign = memo(
       }
     };
 
+    const truncateDescription = (text, maxLength = 100) => {
+      if (text?.length > maxLength) {
+        return text.substring(0, maxLength) + "...";
+      }
+      return text;
+    };
+
     return (
       <div className="wooden-sign-container">
         <img src={woodenSign} alt="Wooden Sign" className="wooden-sign-image" />
-        <div className="wooden-sign-content">
+        <div className={`wooden-sign-content ${mode === 'tree' && isExpanded ? 'expanded' : ''}`}>
           {isEditing ? (
             <>
               <div className="input-group">
@@ -192,7 +200,6 @@ const WoodenSign = memo(
                     />
                     {linkError && <div className="wooden-sign-link-error">{linkError}</div>}
                   </div>
-                  {/*
                   <div className="wooden-sign-image-upload">
                     <input
                       type="file"
@@ -207,7 +214,7 @@ const WoodenSign = memo(
                         className="wooden-sign-image-preview"
                       />
                     )}
-                  </div> */}
+                  </div>
                 </div>
               )}
             </>

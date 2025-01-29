@@ -32,7 +32,7 @@
 
   .wooden-sign-container-home {
     position: fixed !important;
-    width: 200px !important;
+    width: 300px !important;
     height: auto !important;
     top: 0% !important;
     left: 50% !important;
@@ -46,8 +46,8 @@
     left: 0 !important;
     transform: none !important;
     width: 100% !important;
-    max-height: 150px !important;
-    overflow: hidden !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
 
   .wooden-sign-container-home .wooden-sign-container .wooden-sign-content {
@@ -55,21 +55,11 @@
   }
 
   .wooden-sign-container-home .wooden-sign-container .wooden-sign-description {
-    display: none !important; /* Hide the description completely */
+    display: block !important;
   }
 
   .wooden-sign-container-home .wooden-sign-container::after {
-    content: "click to see description";
-    display: block;
-    text-align: center;
-    padding: 5px;
-    background-color: rgba(255, 255, 255, 0.9);
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    font-size: 14px;
-    color: #333;
+    display: none;
   }
 
   .owl,
@@ -919,7 +909,7 @@
 @media screen and (max-width: 800px) {
   .wooden-sign-container-home {
     position: fixed !important;
-    width: 200px !important;
+    width: 300px !important;
     height: auto !important;
     top: 0% !important;
     left: 50% !important;
@@ -933,29 +923,19 @@
     left: 0 !important;
     transform: none !important;
     width: 100% !important;
-    max-height: 150px !important;
-    overflow: hidden !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
 
   .wooden-sign-container-home .wooden-sign-container .wooden-sign-content {
-    top: 30% !important; /* Keep the original top position */
+    top: 30% !important;
   }
 
   .wooden-sign-container-home .wooden-sign-container .wooden-sign-description {
-    display: none !important; /* Hide the description completely */
+    display: block !important;
   }
 
   .wooden-sign-container-home .wooden-sign-container::after {
-    content: "click to see description";
-    display: block;
-    text-align: center;
-    padding: 5px;
-    background-color: rgba(255, 255, 255, 0.9);
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    font-size: 14px;
-    color: #333;
+    display: none;
   }
 }
