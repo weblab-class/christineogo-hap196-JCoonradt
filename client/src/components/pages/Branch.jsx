@@ -272,7 +272,7 @@ const Branch = () => {
 
   // get the correct image set based on branch type
   const imageSet = branchImageSets[branchType] || branchImageSets[1];
-  const twigImages = windowWidth <= 800 ? imageSet.small : imageSet.regular;
+  const twigImages = windowWidth <= 1300 ? imageSet.small : imageSet.regular;
   const [isTwigMode, setIsTwigMode] = useState(false);
   const [twigs, setTwigs] = useState([]);
   const [twigName, setTwigName] = useState("");

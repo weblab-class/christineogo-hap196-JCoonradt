@@ -207,26 +207,26 @@ body {
 
 /* twig hitboxes for branch 1 */
 .branch-type-1 .twig-hitbox-0 {
-  top: 35%;
+  top: 30%;
   right: 10%;
 }
 
 /* media queries for branch-type-1 twig-hitbox-0 */
 @media screen and (max-width: 2000px) {
   .branch-type-1 .twig-hitbox-0 {
-    right: 10%;
+    right: 9%;
   }
 }
 
 @media screen and (max-width: 1800px) {
   .branch-type-1 .twig-hitbox-0 {
-    right: 8%;
+    right: 10%;
   }
 }
 
 @media screen and (max-width: 1600px) {
   .branch-type-1 .twig-hitbox-0 {
-    right: 6%;
+    right: 5%;
   }
 }
 
@@ -236,22 +236,10 @@ body {
   }
 }
 
-@media screen and (max-width: 1200px) {
-  .branch-type-1 .twig-hitbox-0 {
-    right: 2%;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .branch-type-1 .twig-hitbox-0 {
-    right: 0%;
-  }
-}
-
 @media screen and (max-width: 1300px) {
   .branch-type-1 .twig-hitbox-0 {
     right: 30%;
-    top: 65%;
+    top: 70%;
   }
 }
 
@@ -287,31 +275,37 @@ body {
 
 @media screen and (max-width: 600px) {
   .branch-type-1 .twig-hitbox-0 {
-    right: 10%;
+    right: 5%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .branch-type-1 .twig-hitbox-0 {
+    right: 2%;
   }
 }
 
 @media screen and (max-width: 400px) {
   .branch-type-1 .twig-hitbox-0 {
-    right: 0%;
+    right: -3%;
   }
 }
 
 .branch-type-1 .twig-hitbox-1 {
-  top: 55%;
-  right: 20%;
+  top: 50%;
+  right: 27%;
 }
 
 /* Media queries for branch-type-1 twig-hitbox-1 */
 @media screen and (max-width: 2000px) {
   .branch-type-1 .twig-hitbox-1 {
-    right: 20%;
+    right: 25%;
   }
 }
 
 @media screen and (max-width: 1800px) {
   .branch-type-1 .twig-hitbox-1 {
-    right: 18%;
+    right: 23%;
   }
 }
 
@@ -327,69 +321,57 @@ body {
   }
 }
 
-@media screen and (max-width: 1200px) {
-  .branch-type-1 .twig-hitbox-1 {
-    right: 12%;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .branch-type-1 .twig-hitbox-1 {
-    right: 10%;
-  }
-}
-
 @media screen and (max-width: 1300px) {
   .branch-type-1 .twig-hitbox-1 {
-    right: 25%;
-    top: 55%;
+    right: 48%;
+    top: 70%;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .branch-type-1 .twig-hitbox-1 {
-    right: 22%;
+    right: 50%;
   }
 }
 
 @media screen and (max-width: 1100px) {
   .branch-type-1 .twig-hitbox-1 {
-    right: 19%;
+    right: 52%;
   }
 }
 
 @media screen and (max-width: 1000px) {
   .branch-type-1 .twig-hitbox-1 {
-    right: 16%;
+    right: 53%;
   }
 }
 
 @media screen and (max-width: 900px) {
   .branch-type-1 .twig-hitbox-1 {
-    right: 13%;
+    right: 50%;
   }
 }
 
 @media screen and (max-width: 800px) {
   .branch-type-1 .twig-hitbox-1 {
-    right: 10%;
+    right: 45%;
   }
 }
 
 @media screen and (max-width: 600px) {
   .branch-type-1 .twig-hitbox-1 {
-    right: 5%;
+    right: 45%;
   }
 }
 
 @media screen and (max-width: 400px) {
   .branch-type-1 .twig-hitbox-1 {
-    right: 0%;
+    right: 50%;
   }
 }
 
 .branch-type-1 .twig-hitbox-2 {
-  top: 27%;
+  top: 23%;
   right: 23%;
 }
 
@@ -418,64 +400,58 @@ body {
   }
 }
 
-@media screen and (max-width: 1200px) {
-  .branch-type-1 .twig-hitbox-2 {
-    right: 15%;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .branch-type-1 .twig-hitbox-2 {
-    right: 13%;
-  }
-}
-
 @media screen and (max-width: 1300px) {
   .branch-type-1 .twig-hitbox-2 {
-    right: 20%;
-    top: 45%;
+    right: 25%;
+    top: 58%;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .branch-type-1 .twig-hitbox-2 {
-    right: 17%;
+    right: 23%;
   }
 }
 
 @media screen and (max-width: 1100px) {
   .branch-type-1 .twig-hitbox-2 {
-    right: 14%;
+    right: 20%;
   }
 }
 
 @media screen and (max-width: 1000px) {
   .branch-type-1 .twig-hitbox-2 {
-    right: 11%;
+    right: 17%;
   }
 }
 
 @media screen and (max-width: 900px) {
   .branch-type-1 .twig-hitbox-2 {
-    right: 8%;
+    right: 15%;
   }
 }
 
 @media screen and (max-width: 800px) {
   .branch-type-1 .twig-hitbox-2 {
-    right: 5%;
+    right: 12%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .branch-type-1 .twig-hitbox-2 {
+    right: 8%;
   }
 }
 
 @media screen and (max-width: 600px) {
   .branch-type-1 .twig-hitbox-2 {
-    right: 0%;
+    right: -3%;
   }
 }
 
 .branch-type-1 .twig-hitbox-3 {
-  top: 15%;
-  right: 35%;
+  top: 41%;
+  right: 37%;
 }
 
 /* Media queries for branch-type-1 twig-hitbox-3 */
@@ -487,111 +463,99 @@ body {
 
 @media screen and (max-width: 1800px) {
   .branch-type-1 .twig-hitbox-3 {
-    right: 33%;
+    right: 28%;
   }
 }
 
 @media screen and (max-width: 1600px) {
   .branch-type-1 .twig-hitbox-3 {
-    right: 31%;
+    right: 26%;
   }
 }
 
 @media screen and (max-width: 1400px) {
   .branch-type-1 .twig-hitbox-3 {
-    right: 29%;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .branch-type-1 .twig-hitbox-3 {
-    right: 27%;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .branch-type-1 .twig-hitbox-3 {
-    right: 25%;
+    right: 24%;
   }
 }
 
 @media screen and (max-width: 1300px) {
   .branch-type-1 .twig-hitbox-3 {
-    right: 15%;
-    top: 35%;
+    right: 48%;
+    top: 58%;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .branch-type-1 .twig-hitbox-3 {
-    right: 12%;
+    right: 50%;
   }
 }
 
 @media screen and (max-width: 1100px) {
   .branch-type-1 .twig-hitbox-3 {
-    right: 9%;
+    right: 51%;
   }
 }
 
 @media screen and (max-width: 1000px) {
   .branch-type-1 .twig-hitbox-3 {
-    right: 6%;
+    right: 52%;
   }
 }
 
 @media screen and (max-width: 900px) {
   .branch-type-1 .twig-hitbox-3 {
-    right: 3%;
+    right: 53%;
   }
 }
 
 @media screen and (max-width: 800px) {
   .branch-type-1 .twig-hitbox-3 {
-    right: 0%;
+    right: 46%;
   }
 }
 
 .branch-type-1 .twig-hitbox-4 {
-  top: 35%;
+  top: 18%;
   right: 40%;
 }
 
 /* Media queries for branch-type-1 twig-hitbox-4 */
 @media screen and (max-width: 2000px) {
   .branch-type-1 .twig-hitbox-4 {
-    right: 40%;
+    right: 34%;
   }
 }
 
 @media screen and (max-width: 1800px) {
   .branch-type-1 .twig-hitbox-4 {
-    right: 37%;
+    right: 32%;
   }
 }
 
 @media screen and (max-width: 1600px) {
   .branch-type-1 .twig-hitbox-4 {
-    right: 34%;
+    right: 30%;
   }
 }
 
 @media screen and (max-width: 1400px) {
   .branch-type-1 .twig-hitbox-4 {
-    right: 31%;
+    right: 28%;
   }
 }
 
 @media screen and (max-width: 1300px) {
   .branch-type-1 .twig-hitbox-4 {
-    right: 30%;
-    top: 70%;
+    right: 25%;
+    top: 45%;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .branch-type-1 .twig-hitbox-4 {
-    right: 27%;
+    right: 26%;
   }
 }
 
@@ -626,7 +590,7 @@ body {
 }
 
 .branch-type-1 .twig-hitbox-5 {
-  top: 44%;
+  top: 20%;
   right: 20%;
 }
 
