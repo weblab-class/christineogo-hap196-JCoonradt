@@ -21,7 +21,7 @@
 
 .wooden-sign-content {
   position: absolute;
-  top: 25%;
+  top: 22%;
   left: 50%;
   transform: translate(-50%, 0);
   text-align: center;
@@ -46,7 +46,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   flex-shrink: 0;
-  margin-top: 10px;
+  margin-top: 35px;
 }
 
 .wooden-sign-description {
@@ -62,7 +62,7 @@
 
 .wooden-sign-buttons {
   position: absolute;
-  bottom: 40px;
+  margin-top: 10px;
   left: 49%;
   transform: translateX(-50%);
   display: flex;
@@ -198,7 +198,6 @@
   padding: 0.5rem;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 4px;
-  margin-top: 15px;
 }
 
 .wooden-sign-image-preview,

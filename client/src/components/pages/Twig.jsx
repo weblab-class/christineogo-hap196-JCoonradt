@@ -108,7 +108,7 @@ const Twig = () => {
     {
       message:
         "You can always use the navigation bar up here to select forest and visit your friends' trees or stats to see metrics on your growth. You're all set! Hit finish to end the tutorial and have fun exploring.",
-      top: "25%",
+      top: "35%",
       left: "50%",
     },
   ];
