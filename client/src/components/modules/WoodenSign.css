@@ -131,7 +131,8 @@
 
 .wooden-sign-link-container {
   position: relative;
-  width: 100%;
+  width: 170%;
+  left: -38%;
 }
 
 .wooden-sign-link {

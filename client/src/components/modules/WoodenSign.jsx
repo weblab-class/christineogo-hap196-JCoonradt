@@ -192,6 +192,7 @@ const WoodenSign = memo(
                     />
                     {linkError && <div className="wooden-sign-link-error">{linkError}</div>}
                   </div>
+                  {/*
                   <div className="wooden-sign-image-upload">
                     <input
                       type="file"
@@ -206,7 +207,7 @@ const WoodenSign = memo(
                         className="wooden-sign-image-preview"
                       />
                     )}
-                  </div>
+                  </div> */}
                 </div>
               )}
             </>
