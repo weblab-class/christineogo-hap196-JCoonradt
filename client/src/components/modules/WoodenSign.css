@@ -2,14 +2,13 @@
   position: fixed;
   width: clamp(150px, 25vw, 300px);
   z-index: 501;
-  transform: scale(0.7);
   transform-origin: top left;
-  top: 5%; /* Shifted up */
+  top: 5%;
 }
 
 .wooden-sign-container.different-view {
-  transform: scale(1.2); /* Adjust the scale as needed */
-  transition: transform 0.3s ease; /* Smooth transition */
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
 }
 
 .left-sign {
@@ -285,7 +284,8 @@
     margin-top: 2vh;
   }
 
-  .left-sign, .right-sign {
+  .left-sign,
+  .right-sign {
     margin-top: 150px;
   }
 
