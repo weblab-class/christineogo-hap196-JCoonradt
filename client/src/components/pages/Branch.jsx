@@ -50,13 +50,18 @@ import chevronGrey from "../../assets/chevronGrey.png";
 import racoonImg from "../../assets/racoon.gif";
 import MusicButton from "../modules/MusicButton";
 import treeGrow from "../../assets/twigGrow.mp3";
+import smallOneBranch from "../../assets/branches/smallScreen/smallOneBranch.png";
+import smallTwoBranch from "../../assets/branches/smallScreen/smallTwoBranch.png";
+import smallThreeBranch from "../../assets/branches/smallScreen/smallThreeBranch.png";
+import smallFourBranch from "../../assets/branches/smallScreen/smallFourBranch.png";
+import smallFiveBranch from "../../assets/branches/smallScreen/smallFiveBranch.png";
+import smallSixBranch from "../../assets/branches/smallScreen/smallSixBranch.png";
 
 // component for displaying a single branch and its twigs
 // goal is to have a branch component that can be used for both left and right side branches
 const Branch = () => {
   const { branchId, userId } = useParams();
   const location = useLocation();
-  // default to 1 if not specified
   const branchType = location.state?.branchType || 1;
   const [branch, setBranch] = useState(null);
   const [showWoodenSign, setShowWoodenSign] = useState(true);
@@ -65,6 +70,7 @@ const Branch = () => {
   const [branchDescription, setBranchDescription] = useState("");
   const navigate = useNavigate();
   const [currentTwigIndex, setCurrentTwigIndex] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
@@ -142,64 +148,131 @@ const Branch = () => {
 
   // image sets for different branch types
   const branchImageSets = {
-    1: [
-      branchOneNoTwigs,
-      branchOneTwigOne,
-      branchOneTwigTwo,
-      branchOneTwigThree,
-      branchOneTwigFour,
-      branchOneTwigFive,
-      branchOneTwigSix,
-    ],
-    2: [
-      branchTwoNoTwigs,
-      branchTwoTwigOne,
-      branchTwoTwigTwo,
-      branchTwoTwigThree,
-      branchTwoTwigFour,
-      branchTwoTwigFive,
-      branchTwoTwigSix,
-    ],
-    3: [
-      branchThreeNoTwigs,
-      branchThreeTwigOne,
-      branchThreeTwigTwo,
-      branchThreeTwigThree,
-      branchThreeTwigFour,
-      branchThreeTwigFive,
-      branchThreeTwigSix,
-    ],
-    4: [
-      branchFourNoTwigs,
-      branchFourTwigOne,
-      branchFourTwigTwo,
-      branchFourTwigThree,
-      branchFourTwigFour,
-      branchFourTwigFive,
-      branchFourTwigSix,
-    ],
-    5: [
-      branchFiveNoTwigs,
-      branchFiveTwigOne,
-      branchFiveTwigTwo,
-      branchFiveTwigThree,
-      branchFiveTwigFour,
-      branchFiveTwigFive,
-      branchFiveTwigSix,
-    ],
-    6: [
-      branchSixNoTwigs,
-      branchSixTwigOne,
-      branchSixTwigTwo,
-      branchSixTwigThree,
-      branchSixTwigFour,
-      branchSixTwigFive,
-      branchSixTwigSix,
-    ],
+    1: {
+      regular: [
+        branchOneNoTwigs,
+        branchOneTwigOne,
+        branchOneTwigTwo,
+        branchOneTwigThree,
+        branchOneTwigFour,
+        branchOneTwigFive,
+        branchOneTwigSix,
+      ],
+      small: [
+        smallOneBranch,
+        smallOneBranch,
+        smallOneBranch,
+        smallOneBranch,
+        smallOneBranch,
+        smallOneBranch,
+        smallOneBranch,
+      ],
+    },
+    2: {
+      regular: [
+        branchTwoNoTwigs,
+        branchTwoTwigOne,
+        branchTwoTwigTwo,
+        branchTwoTwigThree,
+        branchTwoTwigFour,
+        branchTwoTwigFive,
+        branchTwoTwigSix,
+      ],
+      small: [
+        smallTwoBranch,
+        smallTwoBranch,
+        smallTwoBranch,
+        smallTwoBranch,
+        smallTwoBranch,
+        smallTwoBranch,
+        smallTwoBranch,
+      ],
+    },
+    3: {
+      regular: [
+        branchThreeNoTwigs,
+        branchThreeTwigOne,
+        branchThreeTwigTwo,
+        branchThreeTwigThree,
+        branchThreeTwigFour,
+        branchThreeTwigFive,
+        branchThreeTwigSix,
+      ],
+      small: [
+        smallThreeBranch,
+        smallThreeBranch,
+        smallThreeBranch,
+        smallThreeBranch,
+        smallThreeBranch,
+        smallThreeBranch,
+        smallThreeBranch,
+      ],
+    },
+    4: {
+      regular: [
+        branchFourNoTwigs,
+        branchFourTwigOne,
+        branchFourTwigTwo,
+        branchFourTwigThree,
+        branchFourTwigFour,
+        branchFourTwigFive,
+        branchFourTwigSix,
+      ],
+      small: [
+        smallFourBranch,
+        smallFourBranch,
+        smallFourBranch,
+        smallFourBranch,
+        smallFourBranch,
+        smallFourBranch,
+        smallFourBranch,
+      ],
+    },
+    5: {
+      regular: [
+        branchFiveNoTwigs,
+        branchFiveTwigOne,
+        branchFiveTwigTwo,
+        branchFiveTwigThree,
+        branchFiveTwigFour,
+        branchFiveTwigFive,
+        branchFiveTwigSix,
+      ],
+      small: [
+        smallFiveBranch,
+        smallFiveBranch,
+        smallFiveBranch,
+        smallFiveBranch,
+        smallFiveBranch,
+        smallFiveBranch,
+        smallFiveBranch,
+      ],
+    },
+    6: {
+      regular: [
+        branchSixNoTwigs,
+        branchSixTwigOne,
+        branchSixTwigTwo,
+        branchSixTwigThree,
+        branchSixTwigFour,
+        branchSixTwigFive,
+        branchSixTwigSix,
+      ],
+      small: [
+        smallSixBranch,
+        smallSixBranch,
+        smallSixBranch,
+        smallSixBranch,
+        smallSixBranch,
+        smallSixBranch,
+        smallSixBranch,
+      ],
+    },
   };
 
   // get the correct image set based on branch type
-  const twigImages = branchImageSets[branchType] || branchImageSets[1];
+  const imageSet = branchImageSets[branchType] || branchImageSets[1];
+  const twigImages = windowWidth <= 800 ? imageSet.small : imageSet.regular;
   const [isTwigMode, setIsTwigMode] = useState(false);
   const [twigs, setTwigs] = useState([]);
   const [twigName, setTwigName] = useState("");
@@ -366,6 +439,15 @@ const Branch = () => {
       setBranchDescription(branch?.description || "");
     }
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // render component
   return (
