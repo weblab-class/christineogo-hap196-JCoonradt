@@ -43,6 +43,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 0px;
+  padding-top: 0px;
 }
 
 .menu a {
@@ -90,4 +92,8 @@
 /* Show bottom chevron when navbar is expanded */
 .navbar:hover .bottom-chevron {
   opacity: 1;
+}
+
+.menu h2 {
+  margin-bottom: 0px;
 }
