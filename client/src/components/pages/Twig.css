@@ -28,8 +28,8 @@ body {
   left: 10px;
   top: 10%;
   z-index: 1000;
-  height: 300px;
   width: 300px;
+  transform: none;
   transition: all 0.3s ease;
 }
 
@@ -49,7 +49,6 @@ body {
   right: 10px !important;
   left: auto !important;
   top: 0% !important;
-  height: 300px;
   width: 300px;
   z-index: 2;
   transition: all 0.3s ease;
@@ -59,10 +58,46 @@ body {
 @media screen and (max-width: 1300px) {
   .twig-type-1 .wooden-sign-container,
   .twig-type-2 .wooden-sign-container {
+    width: 300px;
     left: 50% !important;
     right: auto !important;
     transform: translateX(-50%);
     top: -20px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .twig-type-1 .wooden-sign-container,
+  .twig-type-2 .wooden-sign-container {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .twig-type-1 .wooden-sign-container,
+  .twig-type-2 .wooden-sign-container {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .twig-type-1 .wooden-sign-container,
+  .twig-type-2 .wooden-sign-container {
+    width: 300px;
+  }
+}
+
+/* Handle landscape orientation */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .twig-type-1 .wooden-sign-container,
+  .twig-type-2 .wooden-sign-container {
+    width: 300px;
+    max-height: 80vh;
+  }
+
+  .wooden-sign-content {
+    max-height: 70vh;
+    overflow-y: auto;
   }
 }
 
