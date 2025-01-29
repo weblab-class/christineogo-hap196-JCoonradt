@@ -134,7 +134,7 @@ const WoodenSign = memo(
     return (
       <div className="wooden-sign-container">
         <img src={woodenSign} alt="Wooden Sign" className="wooden-sign-image" />
-        <div className={`wooden-sign-content ${mode === 'tree' && isExpanded ? 'expanded' : ''}`}>
+        <div className={`wooden-sign-content ${mode === "tree" && isExpanded ? "expanded" : ""}`}>
           {isEditing ? (
             <>
               <div className="input-group">
@@ -200,7 +200,7 @@ const WoodenSign = memo(
                     />
                     {linkError && <div className="wooden-sign-link-error">{linkError}</div>}
                   </div>
-                  <div className="wooden-sign-image-upload">
+                  {/*} <div className="wooden-sign-image-upload">
                     <input
                       type="file"
                       accept="image/*"
@@ -214,7 +214,7 @@ const WoodenSign = memo(
                         className="wooden-sign-image-preview"
                       />
                     )}
-                  </div>
+                  </div>*/}
                 </div>
               )}
             </>

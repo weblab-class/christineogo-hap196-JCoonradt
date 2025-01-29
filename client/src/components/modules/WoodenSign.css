@@ -75,7 +75,7 @@
 
 .wooden-sign-buttons {
   position: absolute;
-  margin-top: -5px; /* Shifted up */
+  margin-top: 15px; /* Shifted up */
   left: 49%;
   transform: translateX(-50%);
   display: flex;
