@@ -110,11 +110,9 @@ const Home = React.memo(() => {
     },
   ];
   const startTutorial = () => {
-    console.log("Starting tutorial...");
     setTutorialActive(true);
     tutorialActiveRef.current = true; // Set tutorialActive to true
     setCurrentStep(0); // Reset tutorial step
-    console.log("Tutorial active:", tutorialActiveRef.current);
   };
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
@@ -164,7 +162,6 @@ const Home = React.memo(() => {
           const numBranches = treeData.branches.length;
           if (numBranches == 0) {
             setNoBranches(true);
-            console.log("this kit got no branches");
           }
           setCurrentImageIndex(Math.min(numBranches, 6));
           setBranches(treeData.branches);
@@ -186,7 +183,7 @@ const Home = React.memo(() => {
     setIsEditMode(true);
     setBranchName("");
     setBranchDescription("");
-    console.log("Current step" + currentStep);
+
     setCurrentStep(1);
     setShowWoodenSign(true);
   }, []);
@@ -219,7 +216,7 @@ const Home = React.memo(() => {
         } else {
           console.error("Failed to fetch updated tree data");
         }
-        console.log("Current step" + currentStep);
+
         playSound();
         setCurrentStep(2);
         setShowWoodenSign(false);
@@ -251,7 +248,6 @@ const Home = React.memo(() => {
   // Handle branch click
   const handleBranchClick = useCallback(
     (branchId, index) => {
-      console.log("Navigating with tutorialActive:", tutorialActive);
       navigate(`/tree/${userId}/branch/${branchId}`, {
         state: {
           branchType: index + 1,

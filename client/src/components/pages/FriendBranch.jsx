@@ -140,15 +140,11 @@ const FriendBranch = () => {
   useEffect(() => {
     const fetchBranchAndUser = async () => {
       try {
-        console.log("Fetching branch with ID:", branchId, "and branch type:", branchType);
-
         // Use the get utility function instead of fetch
         const [branchData, userData] = await Promise.all([
           get("/api/branch/" + branchId),
           !location.state?.friendName ? get("/api/user/" + currentUserId) : Promise.resolve(null),
         ]);
-
-        console.log("Received branch data:", branchData);
 
         if (branchData) {
           setBranch(branchData);
@@ -246,8 +242,8 @@ const FriendBranch = () => {
 
       {/* Endorsement Section */}
       <div className="endorsement-section">
-        <button 
-          className={`endorse-button ${isEndorsed ? 'endorsed' : ''}`}
+        <button
+          className={`endorse-button ${isEndorsed ? "endorsed" : ""}`}
           onClick={handleEndorse}
         >
           {isEndorsed ? "Endorsed!" : "Endorse"}
