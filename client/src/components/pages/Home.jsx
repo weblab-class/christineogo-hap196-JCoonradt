@@ -65,6 +65,7 @@ const Home = React.memo(() => {
   const [showWoodenSign, setShowWoodenSign] = useState(false);
   const [branches, setBranches] = useState([]);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [noBranches, setNoBranches] = useState(false);
 
   //Tutorial state variables and steps
   const [tutorialActive, setTutorialActive] = useState(false);
@@ -74,8 +75,8 @@ const Home = React.memo(() => {
   const steps = [
     {
       message: "Click the add branch button above to create a new branch.",
-      top: "40%",
-      left: "75%",
+      top: "65%",
+      left: "35%",
     },
     {
       message:
@@ -161,6 +162,10 @@ const Home = React.memo(() => {
         if (response.ok) {
           const treeData = await response.json();
           const numBranches = treeData.branches.length;
+          if (numBranches == 0) {
+            setNoBranches(true);
+            console.log("this kit got no branches");
+          }
           setCurrentImageIndex(Math.min(numBranches, 6));
           setBranches(treeData.branches);
         } else {
@@ -186,7 +191,7 @@ const Home = React.memo(() => {
     setShowWoodenSign(true);
   }, []);
 
-  // Handle submitting a branch
+  //Handle submitting a branch
   const handleSubmitBranch = useCallback(
     async (title, description) => {
       try {
@@ -288,7 +293,18 @@ const Home = React.memo(() => {
 
       <div>
         {/* Owl */}
-        <img src={owlImg} alt="Owl" className="owl" />
+
+        {noBranches && (
+          <div>
+            <img src={owlImg} alt="Owl" className="owl" />
+            <div className="tutorial-start-message">
+              It looks like you are yet to start branching out your tree. If you need help getting
+              started, go to the menu to start our tutorial. Hoot Hoot!
+            </div>
+          </div>
+        )}
+
+        {!noBranches && <img src={owlImg} alt="Owl" className="owl" />}
 
         {/* Other content */}
       </div>

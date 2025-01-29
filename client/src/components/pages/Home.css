@@ -29,12 +29,59 @@
     width: 150px !important;
     height: 150px !important;
   }
+
+  .wooden-sign-container-home {
+    position: fixed !important;
+    width: 200px !important;
+    height: auto !important;
+    top: 0% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 504 !important;
+  }
+
+  .wooden-sign-container-home .wooden-sign-container {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    max-height: 150px !important;
+    overflow: hidden !important;
+  }
+
+  .wooden-sign-container-home .wooden-sign-container .wooden-sign-content {
+    top: 30% !important;
+  }
+
+  .wooden-sign-container-home .wooden-sign-container .wooden-sign-description {
+    display: none !important; /* Hide the description completely */
+  }
+
+  .wooden-sign-container-home .wooden-sign-container::after {
+    content: "click to see description";
+    display: block;
+    text-align: center;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .owl,
+  .rabbit {
+    display: none !important;
+  }
 }
 
 .wooden-sign-container-home {
   position: absolute;
-  top: 24%;
-  left: 17%;
+  top: 19%;
+  left: 14%;
   width: 25%;
   height: 40%;
   transform: translate(-50%, -50%);
@@ -62,7 +109,7 @@
 @media screen and (max-width: 800px) {
   .add-branch-container {
     font-size: var(--md);
-    bottom: 2%;
+    bottom: 5%;
     transform: translateX(-50%) scale(0.9);
   }
 }
@@ -84,10 +131,13 @@
   transition: all 0.3s ease;
   cursor: pointer;
   pointer-events: auto;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  hyphens: auto;
 }
 
 .branch-hitbox.edit-mode {
@@ -761,11 +811,11 @@
 /* Rabbit class for animation */
 .rabbit {
   position: fixed;
-  bottom: 2%; /* Adjust the vertical position as needed */
-  width: 100px; /* Rabbit size */
+  bottom: 5%;
+  width: 100px;
   height: auto;
-  animation: moveRabbit 120s linear infinite; /* Total duration is 120s (60s on-screen + 60s off-screen) */
-  z-index: 15; /* Ensure it's above other elements */
+  animation: moveRabbit 120s linear infinite;
+  z-index: 15;
 }
 
 @keyframes owlAnimation {
@@ -773,7 +823,7 @@
     transform: translate(0, 0) scale(0); /* Start hidden at Position 1 */
     opacity: 0;
   }
-  10% {
+  4% {
     transform: translate(0, 0) scale(1); /* Appear at Position 1 */
     opacity: 1;
   }
@@ -810,16 +860,51 @@
   width: 80px; /* Owl size */
   height: auto;
   animation: owlAnimation 120s ease-in-out infinite; /* Total animation duration */
+
   z-index: 15; /* Ensure it's above other elements */
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1600px) {
+/* Speech bubble styling */
+.tutorial-start-message {
+  position: absolute;
+  bottom: 360px; /* Ensure it's above the owl */
+  right: 50px; /* Align horizontally with owl */
+  width: 250px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 14px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+
+  /* Attach speech bubble to owl animation */
+  animation: owlAnimation 120s ease-in-out infinite;
+}
+
+/* Speech bubble tail */
+.tutorial-start-message::after {
+  content: "";
+  position: absolute;
+  bottom: -10px; /* Position below the bubble */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgba(255, 255, 255, 0.9); /* Tail pointing to owl */
+}
+
   .wooden-sign-container-home {
     position: fixed !important;
     width: 200px !important;
     height: auto !important;
-    top: 10px !important;
-    left: 45% !important;
+    top: 25% !important;
+    left: 47% !important;
     transform: translateX(-60%) !important;
   }
 
@@ -828,15 +913,49 @@
     top: 0 !important;
     left: 0 !important;
     transform: none !important;
-    transition: opacity 0.2s ease-in-out;
-    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .wooden-sign-container-home {
+    position: fixed !important;
+    width: 200px !important;
+    height: auto !important;
+    top: 0% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 504 !important;
   }
 
-  .wooden-sign-container-home:hover {
-    z-index: 507;
+  .wooden-sign-container-home .wooden-sign-container {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    max-height: 150px !important;
+    overflow: hidden !important;
   }
 
-  .wooden-sign-container-home .wooden-sign-container:not(:hover) {
-    opacity: 0.95;
+  .wooden-sign-container-home .wooden-sign-container .wooden-sign-content {
+    top: 30% !important; /* Keep the original top position */
+  }
+
+  .wooden-sign-container-home .wooden-sign-container .wooden-sign-description {
+    display: none !important; /* Hide the description completely */
+  }
+
+  .wooden-sign-container-home .wooden-sign-container::after {
+    content: "click to see description";
+    display: block;
+    text-align: center;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    font-size: 14px;
+    color: #333;
   }
 }

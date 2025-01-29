@@ -1,18 +1,16 @@
-/* Base styles (mobile first) */
 .wooden-sign-container {
   position: fixed;
-  width: 90%;
-  max-width: 400px;
+  width: 300px;
   z-index: 501;
 }
 
 .left-sign {
-  left: 5px;
+  left: 10px;
   top: 0%;
 }
 
 .right-sign {
-  right: 5px;
+  right: 10px;
   top: 0%;
 }
 
@@ -23,45 +21,62 @@
 
 .wooden-sign-content {
   position: absolute;
-  top: 50%;
+  top: 25%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   text-align: center;
   width: 80%;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  overflow-y: visible;
+  padding-right: 10px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .wooden-sign-title {
+  position: relative;
   color: white;
   font-family: "Pixelify Sans", sans-serif;
   font-size: var(--l);
   margin-bottom: var(--xs);
-  max-width: 100%; /* prevent title from overflowing */
+  max-width: 100%;
   overflow: hidden;
-  text-overflow: ellipsis; /* add ellipsis for overflowing text */
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  margin-top: 10px;
 }
 
 .wooden-sign-description {
   color: white;
   font-family: "Pixelify Sans", sans-serif;
-  font-size: var(--s);
-  margin-bottom: var(--s);
-  max-width: 100%; /* ensure description doesn't overflow */
-  white-space: pre-wrap; /* preserve line breaks while wrapping */
+  font-size: var(--m);
+  margin-bottom: var(--m);
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-y: visible;
+  flex-grow: 1;
 }
 
 .wooden-sign-buttons {
   position: absolute;
-  bottom: 10px;
-  left: 49%; /* center the buttons */
+  bottom: 40px;
+  left: 49%;
   transform: translateX(-50%);
   display: flex;
-  flex-direction: row; /* put in a row */
+  flex-direction: row;
   gap: var(--xs);
   justify-content: center;
-  width: 95%; /* reduced from 100% to prevent button overflow */
-  flex-wrap: wrap; /* allow buttons to wrap if needed */
+  width: 90%;
+  flex-wrap: wrap;
+}
+
+.button-group {
+  display: flex;
+  gap: var(--m);
+  justify-content: center;
 }
 
 /* override CustomButton styles for smaller font size */
@@ -77,7 +92,7 @@
   color: white;
   font-family: "Pixelify Sans", sans-serif;
   width: 100%;
-  padding: 6px;
+  padding: 8px;
   position: relative;
   top: 30px;
 }
@@ -88,10 +103,12 @@
 }
 
 .wooden-sign-content textarea.wooden-sign-description {
-  font-size: var(--s);
-  min-height: 60px;
-  resize: vertical;
-  margin-bottom: var(--s);
+  font-size: var(--m);
+  height: 120px;
+  min-height: 120px;
+  resize: none;
+  margin-bottom: var(--m);
+  overflow-y: auto;
 }
 
 .wooden-sign-content input.wooden-sign-title::placeholder,
@@ -117,6 +134,7 @@
 
 .wooden-sign-link {
   width: 100%;
+  margin-top: 10px;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -132,12 +150,15 @@
 
 .wooden-sign-link-error {
   color: #ff4444;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-family: "Pixelify Sans", sans-serif;
   margin-top: 0.25rem;
   position: absolute;
-  bottom: -1.5rem;
+  bottom: -1.8rem;
+  text-shadow: 2px 2px 0 #000, /* Black outline */ -2px 2px 0 #000, 2px -2px 0 #000,
+    -2px -2px 0 #000, 2px 0px 0 #000, -2px 0px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000; /* Ensures complete outline */
   left: 0;
+  width: 100%;
 }
 
 .wooden-sign-content-link {
@@ -177,12 +198,13 @@
   padding: 0.5rem;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 4px;
+  margin-top: 15px;
 }
 
 .wooden-sign-image-preview,
 .wooden-sign-content-image {
   max-width: 100%;
-  max-height: 150px;
+  max-height: 200px;
   object-fit: contain;
   border-radius: 4px;
   margin-top: 0.5rem;
@@ -201,288 +223,16 @@
   font-weight: bold;
 }
 
-/* Media queries for different screen sizes */
-@media screen and (max-width: 768px) {
-  .wooden-sign-container {
-    width: 90%;
-    max-width: 350px;
-  }
-
-  .wooden-sign-content {
-    width: 85%;
-  }
-
-  .wooden-sign-title {
-    font-size: var(--l);
-  }
-
-  .wooden-sign-description {
-    font-size: var(--s);
-  }
-
-  .wooden-sign-buttons {
-    bottom: 25px;
-  }
-
-  .wooden-sign-buttons .custom-button span {
-    font-size: var(--m);
-  }
+.character-counter {
+  position: absolute;
+  bottom: -50px;
+  left: 10px;
+  color: white;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: var(--m);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (max-width: 480px) {
-  .wooden-sign-container {
-    position: fixed;
-    width: 100%;
-    max-width: none;
-    left: 0 !important;
-    right: 0 !important;
-    transform: none;
-    top: 0;
-    height: calc(100% - 70px); /* Leave space for buttons */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  .wooden-sign-image {
-    max-height: 90vh;
-    width: auto;
-    object-fit: contain;
-  }
-
-  .wooden-sign-content {
-    width: 85%;
-    transform: translate(-50%, -52%);
-    max-height: calc(100vh - 140px);
-    overflow-y: auto;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  .wooden-sign-title {
-    font-size: var(--m);
-    margin-bottom: var(--xs);
-  }
-
-  .wooden-sign-description {
-    font-size: var(--s);
-    margin-bottom: var(--s);
-    max-height: 30vh;
-    overflow-y: auto;
-  }
-
-  .wooden-sign-buttons {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transform: none;
-    background: rgba(0, 0, 0, 0.9);
-    padding: 15px;
-    margin: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: var(--m);
-    box-sizing: border-box;
-    z-index: 502;
-  }
-
-  .wooden-sign-buttons .custom-button {
-    flex: 0 1 auto;
-    min-width: 120px;
-    max-width: 160px;
-  }
-
-  .wooden-sign-buttons .custom-button span {
-    font-size: var(--s);
-    white-space: nowrap;
-  }
-
-  .wooden-sign-content input.wooden-sign-title {
-    font-size: var(--m);
-    padding: 8px;
-    margin-bottom: var(--xs);
-  }
-
-  .wooden-sign-content textarea.wooden-sign-description {
-    font-size: var(--s);
-    min-height: 80px;
-    max-height: 25vh;
-    padding: 8px;
-    margin-bottom: var(--m);
-  }
-
-  .wooden-sign-image-preview,
-  .wooden-sign-content-image {
-    max-height: 25vh;
-    width: auto;
-    margin: 10px auto;
-  }
-
-  .wooden-sign-link {
-    font-size: var(--s);
-    padding: 8px;
-    width: 90%;
-    margin: 0 auto;
-  }
-
-  /* Adjust form elements positioning */
-  .wooden-sign-content input.wooden-sign-title,
-  .wooden-sign-content textarea.wooden-sign-description {
-    position: relative;
-    top: 0;
-    margin-bottom: var(--m);
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .wooden-sign-container {
-    padding: 5px;
-  }
-
-  .wooden-sign-content {
-    width: 90%;
-  }
-
-  .wooden-sign-buttons {
-    padding: 10px;
-    gap: var(--s);
-  }
-
-  .wooden-sign-buttons .custom-button {
-    min-width: 100px;
-  }
-
-  .wooden-sign-title {
-    font-size: var(--s);
-  }
-
-  .wooden-sign-description {
-    font-size: var(--xs);
-  }
-}
-
-@media screen and (max-height: 500px) and (orientation: landscape) {
-  .wooden-sign-container {
-    height: calc(100vh - 60px);
-    padding: 5px;
-    top: 0;
-  }
-
-  .wooden-sign-content {
-    transform: translate(-50%, -50%);
-    max-height: calc(100vh - 100px);
-  }
-
-  .wooden-sign-buttons {
-    height: 50px;
-    padding: 5px;
-  }
-
-  .wooden-sign-image-preview,
-  .wooden-sign-content-image {
-    max-height: 20vh;
-  }
-
-  .wooden-sign-description {
-    max-height: 20vh;
-  }
-}
-
-/* Tablet styles */
-@media screen and (min-width: 768px) {
-  .wooden-sign-container {
-    width: 350px;
-  }
-
-  .left-sign {
-    left: 10px;
-  }
-
-  .right-sign {
-    right: 10px;
-  }
-
-  .wooden-sign-title {
-    font-size: var(--xl);
-  }
-
-  .wooden-sign-description {
-    font-size: var(--m);
-  }
-
-  .wooden-sign-buttons {
-    bottom: 15px;
-    width: 90%;
-  }
-
-  .wooden-sign-buttons .custom-button span {
-    font-size: var(--l);
-  }
-
-  .wooden-sign-content input.wooden-sign-title {
-    font-size: var(--xl);
-    padding: 8px;
-  }
-
-  .wooden-sign-content textarea.wooden-sign-description {
-    font-size: var(--m);
-    min-height: 80px;
-  }
-
-  .wooden-sign-image-preview,
-  .wooden-sign-content-image {
-    max-height: 175px;
-  }
-}
-
-/* Desktop styles */
-@media screen and (min-width: 1024px) {
-  .wooden-sign-container {
-    width: 400px;
-  }
-
-  .wooden-sign-title {
-    font-size: var(--xxl);
-  }
-
-  .wooden-sign-description {
-    font-size: var(--m);
-    margin-bottom: var(--m);
-  }
-
-  .wooden-sign-buttons {
-    width: 90%;
-  }
-
-  .wooden-sign-buttons .custom-button span {
-    font-size: var(--l);
-  }
-
-  .wooden-sign-content input.wooden-sign-title {
-    font-size: var(--xxl);
-  }
-
-  .wooden-sign-image-preview,
-  .wooden-sign-content-image {
-    max-height: 200px;
-  }
-}
-
-/* Large desktop styles */
-@media screen and (min-width: 1440px) {
-  .wooden-sign-container {
-    width: 450px;
-  }
-
-  .left-sign {
-    left: 20px;
-  }
-
-  .right-sign {
-    right: 20px;
-  }
+.wooden-sign-content .input-group {
+  width: 100%;
 }
