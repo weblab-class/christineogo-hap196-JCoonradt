@@ -773,7 +773,7 @@
     transform: translate(0, 0) scale(0); /* Start hidden at Position 1 */
     opacity: 0;
   }
-  10% {
+  4% {
     transform: translate(0, 0) scale(1); /* Appear at Position 1 */
     opacity: 1;
   }
@@ -810,7 +810,42 @@
   width: 80px; /* Owl size */
   height: auto;
   animation: owlAnimation 120s ease-in-out infinite; /* Total animation duration */
+
   z-index: 15; /* Ensure it's above other elements */
+}
+
+/* Speech bubble styling */
+.tutorial-start-message {
+  position: absolute;
+  bottom: 360px; /* Ensure it's above the owl */
+  right: 50px; /* Align horizontally with owl */
+  width: 250px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 14px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+
+  /* Attach speech bubble to owl animation */
+  animation: owlAnimation 120s ease-in-out infinite;
+}
+
+/* Speech bubble tail */
+.tutorial-start-message::after {
+  content: "";
+  position: absolute;
+  bottom: -10px; /* Position below the bubble */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgba(255, 255, 255, 0.9); /* Tail pointing to owl */
 }
 
 @media screen and (max-width: 1400px) {

@@ -44,6 +44,7 @@ const Navbar = ({ startTutorial }) => {
 
   return (
     <div className={`navbar ${tutorialStarted ? "navbar-no-hover" : ""}`}>
+      <h2 className="closed-title">MENU</h2>
       <img src={chevronGrey} alt="Chevron Icon" className="chevron" />
       <div className="menu">
         <h2>MENU</h2>
@@ -66,7 +67,12 @@ const Navbar = ({ startTutorial }) => {
             Tutorial
           </Link>
         </div>
-        <img src={chevronGrey} alt="Bottom Chevron" className="bottom-chevron" style={{filter: 'brightness(0) invert(1)'}} />
+        <img
+          src={chevronGrey}
+          alt="Bottom Chevron"
+          className="bottom-chevron"
+          style={{ filter: "brightness(0) invert(1)" }}
+        />
       </div>
     </div>
   );

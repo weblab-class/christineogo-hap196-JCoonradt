@@ -132,12 +132,15 @@
 
 .wooden-sign-link-error {
   color: #ff4444;
-  font-size: 0.875rem;
   font-family: "Pixelify Sans", sans-serif;
-  margin-top: 0.25rem;
-  position: absolute;
-  bottom: -1.5rem;
-  left: 0;
+  font-size: var(--m);
+  margin-bottom: var(0px);
+  margin-left: var(--s);
+  margin-right: var(--s);
+  text-align: center;
+  width: 100%;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
 }
 
 .wooden-sign-content-link {
