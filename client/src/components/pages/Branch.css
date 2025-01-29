@@ -590,8 +590,8 @@ body {
 }
 
 .branch-type-1 .twig-hitbox-5 {
-  top: 20%;
-  right: 20%;
+  top: 33%;
+  right: 25%;
 }
 
 /* Media queries for branch-type-1 twig-hitbox-5 */
@@ -603,50 +603,32 @@ body {
 
 @media screen and (max-width: 1800px) {
   .branch-type-1 .twig-hitbox-5 {
-    right: 28%;
+    right: 35%;
   }
 }
 
 @media screen and (max-width: 1600px) {
   .branch-type-1 .twig-hitbox-5 {
-    right: 26%;
+    right: 34%;
   }
 }
 
 @media screen and (max-width: 1400px) {
   .branch-type-1 .twig-hitbox-5 {
-    right: 24%;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .branch-type-1 .twig-hitbox-5 {
-    right: 27%;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .branch-type-1 .twig-hitbox-5 {
-    right: 25%;
+    right: 32%;
   }
 }
 
 @media screen and (max-width: 1300px) {
   .branch-type-1 .twig-hitbox-5 {
-    right: 5%;
-    top: 75%;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .branch-type-1 .twig-hitbox-5 {
-    right: 2%;
+    right: 45%;
+    top: 45%;
   }
 }
 
 @media screen and (max-width: 1100px) {
   .branch-type-1 .twig-hitbox-5 {
-    right: 0%;
+    right: 43%;
   }
 }
 
